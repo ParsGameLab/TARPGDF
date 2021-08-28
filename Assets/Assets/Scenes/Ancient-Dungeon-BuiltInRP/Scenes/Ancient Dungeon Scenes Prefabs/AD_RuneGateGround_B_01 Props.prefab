@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5775263946623791914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5775263946623791913}
+  m_Layer: 0
+  m_Name: AD_RuneGateGround_B_01 Props
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5775263946623791913
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5775263946623791914}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 308.6, y: 56.1, z: 364.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3724042434930849423}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5775263946545891981
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5775263946623791913}
+    m_Modifications:
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 77.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.330002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -52.44998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868669955, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: mainRenderableMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868670012, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868670013, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868670014, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868670015, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_Name
+      value: AD_RuneGateGround_B_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173019421868670015, guid: 782235bf2b67e764194facd690e15533, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 782235bf2b67e764194facd690e15533, type: 3}
+--- !u!4 &3724042434930849423 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7173019421868669954, guid: 782235bf2b67e764194facd690e15533, type: 3}
+  m_PrefabInstance: {fileID: 5775263946545891981}
+  m_PrefabAsset: {fileID: 0}
