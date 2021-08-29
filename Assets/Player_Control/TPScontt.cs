@@ -26,6 +26,7 @@ public class TPScontt : MonoBehaviour
     private Vector3 mHorizontalV;
     public float rotateSensitivity=6.0f;
     public LayerMask mCheckLayer;
+    float upV;
     void Start()
     {
         Vector3 vDir = mLookAtPoint.position - transform.position;
@@ -68,7 +69,7 @@ public class TPScontt : MonoBehaviour
         RaycastHit nwrh;
         Ray r = new Ray(mLookAtPoint.position, -vDir);
         Vector3 vHit;
-        float upV;
+        
         Vector3 newpoint;
 
 
@@ -85,7 +86,7 @@ public class TPScontt : MonoBehaviour
             {
 
                 upV = Mathf.Sqrt(mMaxFollowDistance * mMaxFollowDistance - rh.distance * rh.distance);//+= Vector3.up*upV;
-                newpoint = rh.point + new Vector3(0, upV, 0);//加的對
+                newpoint = rh.point + Vector3.up * upV;//加的對new Vector3(0, upV, 0)
                 newdis = Vector3.Distance(mLookAtPoint.position, newpoint);
                 vDir = mLookAtPoint.position - newpoint;//只是之前都在原本看的方向，現在要把從新的點看的方向設定好
                 vDir.Normalize();
@@ -93,19 +94,21 @@ public class TPScontt : MonoBehaviour
                 vFinalPos = vHit;
 
                 Debug.Log("here");
-                Ray newr = new Ray(mLookAtPoint.position, -vHit.normalized);
+                Ray newr = new Ray(mLookAtPoint.position, -vDir);
                 if (!Physics.SphereCast(newr, 0.1f, out nwrh, mFollowDistance, mCheckLayer))
                 {
 
 
                     //vFinalPos = mLookAtPoint.position - vHit * (nwrh.distance - 0.1f);
-                    vFinalPos = mLookAtPoint.position + vDir * mFollowDistance;
+                    vFinalPos = mLookAtPoint.position - vDir * mFollowDistance;
                     //vDir = - vHit;
 
                     //vDir.Normalize();
 
 
                 }
+                
+                
 
 
             }

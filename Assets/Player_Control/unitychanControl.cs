@@ -18,6 +18,7 @@ public class unitychanControl : MonoBehaviour
     [SerializeField] private float jumpHeight=1;
     [SerializeField] private float fgravity=-9.8f;
     private bool injump;
+    public float fowardspeed=1.0f;
 
 
 
@@ -49,9 +50,11 @@ public class unitychanControl : MonoBehaviour
         fspeed = 5.0f;
         Vector3 vCamDir = tpsCamera.forward;
         vCamDir.y = 0;
-        transform.forward= vCamDir;
-        
-        
+
+        //transform.forward= vCamDir;
+        transform.forward = Vector3.Lerp(transform.forward, vCamDir, Time.deltaTime*fowardspeed);
+
+
         Vector2 Mxy = new Vector2(fH, fV);
         //Mxy.x=Mathf.Clamp(fH,)
 
