@@ -25,6 +25,7 @@ public class TPScontt : MonoBehaviour
 
     private Vector3 mHorizontalV;
     public float rotateSensitivity=6.0f;
+    public float fcamrecaverspeed=20.0f;
     public LayerMask mCheckLayer;
     float upV;
     void Start()
@@ -71,7 +72,7 @@ public class TPScontt : MonoBehaviour
         Vector3 vHit;
         
         Vector3 newpoint;
-
+        bool lerpcheck = false;
 
         float newdis;
 
@@ -91,8 +92,8 @@ public class TPScontt : MonoBehaviour
                 vDir = mLookAtPoint.position - newpoint;//只是之前都在原本看的方向，現在要把從新的點看的方向設定好
                 vDir.Normalize();
                 vHit = mLookAtPoint.position - vDir * (newdis - 0.1f);
-                vFinalPos = vHit;
-
+                vFinalPos =vHit;//Vector3.Lerp(vFinalPos ,vHit, Time.deltaTime *fcamrecaverspeed)
+                lerpcheck = true;
                 Debug.Log("here");
                 Ray newr = new Ray(mLookAtPoint.position, -vDir);
                 if (!Physics.SphereCast(newr, 0.1f, out nwrh, mFollowDistance, mCheckLayer))
@@ -116,7 +117,17 @@ public class TPScontt : MonoBehaviour
 
 
         }
-        transform.position = vFinalPos;
+        if (lerpcheck) 
+        { 
+            transform.position = Vector3.Lerp(transform.position, vFinalPos, Time.deltaTime * fcamrecaverspeed);
+        }
+        else
+        {
+            transform.position = vFinalPos;
+
+        }
+        
+        //transform.position = Vector3.Lerp(transform.position, vFinalPos, Time.deltaTime * fcamrecaverspeed);
         transform.forward = vDir;
 
 
