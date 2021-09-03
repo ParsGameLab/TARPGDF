@@ -88,6 +88,8 @@ public class unitychanControl : MonoBehaviour
         Jumping();
         
         mControl.Move(vMove*Time.deltaTime+vVelocity * Time.deltaTime);
+        NormalAtk();
+        SkillAtk();
         //if (InGround)
         //{
         //    manimater.ResetTrigger("TriggerJJ");
@@ -95,7 +97,7 @@ public class unitychanControl : MonoBehaviour
 
         //}
 
-        
+
 
 
         //transform.Rotate(0.0f, fH, 0.0f);//我要的是滑鼠轉人跟著轉(人轉的動畫)，人左右走(左右走的動畫)攝影機會拍人
@@ -128,12 +130,23 @@ public class unitychanControl : MonoBehaviour
         }
         
     }
-    public void StartJump()
+    void NormalAtk()
     {
 
+        if (Input.GetMouseButton(0))
+        {
+            manimater.SetTrigger("NormalAtk");
+
+        }
+        
     }
-    public void EndJump()
+    void SkillAtk()
     {
+        if (Input.GetMouseButton(1))
+        {
+            manimater.SetTrigger("SkillAtk");
+
+        }
 
     }
     
