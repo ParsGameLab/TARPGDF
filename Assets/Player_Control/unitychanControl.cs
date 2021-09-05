@@ -10,6 +10,7 @@ public class unitychanControl : MonoBehaviour
     public Transform GroundCheck;
     public float CheckRaius = 0.2f;
     public LayerMask flayermask;
+    
     private Animator manimater;
     private CharacterController mControl;
     bool isWalking = true;
@@ -17,10 +18,14 @@ public class unitychanControl : MonoBehaviour
     Vector3 vVelocity=Vector3.zero;
     [SerializeField] private float jumpHeight=1;
     [SerializeField] private float fgravity=-9.8f;
-    private bool injump;
+    
     public float fowardspeed=1.0f;
+    
 
-
+    /// <summary>
+    /// ATk¥Î°Ñ¼Æ
+    /// </summary>
+   
 
 
     // Start is called before the first frame update
@@ -43,8 +48,6 @@ public class unitychanControl : MonoBehaviour
         {
             vVelocity.y = 0;
         }
-
-        //transform.forward = tpsCamera.forward;
         float fH = Input.GetAxis("Horizontal");
         float fV = Input.GetAxis("Vertical");
         fspeed = 5.0f;
@@ -59,7 +62,6 @@ public class unitychanControl : MonoBehaviour
         //Mxy.x=Mathf.Clamp(fH,)
 
         Walking();
-        Debug.Log(isWalking);
         if (isWalking)
         {
             manimater.SetFloat("MoveSpeed", Mathf.Clamp(Mxy.y, -0.5f,0.5f));
@@ -73,29 +75,21 @@ public class unitychanControl : MonoBehaviour
             fspeed = frunspeed;
 
         }
-        Debug.Log("Mxy" + Mxy);
         Vector3 fMoveVAmount = transform.forward * fV * fspeed;
         Vector3 fMoveHAmount = transform.right * fH * fspeed;
         Vector3 vMove = fMoveVAmount + fMoveHAmount;
-        injump = false;
-
         //vMove += Physics.gravity;
         //transform.position = transform.position + transform.forward * fMoveVAmount + transform.right * fMoveHAmount;//no cc
-
         //mControl.Move();
         
         vVelocity.y += fgravity * Time.deltaTime;
+        
         Jumping();
         
         mControl.Move(vMove*Time.deltaTime+vVelocity * Time.deltaTime);
-        NormalAtk();
-        SkillAtk();
-        //if (InGround)
-        //{
-        //    manimater.ResetTrigger("TriggerJJ");
-
-
-        //}
+        
+        
+        
 
 
 
@@ -120,35 +114,24 @@ public class unitychanControl : MonoBehaviour
             manimater.SetTrigger("TriggerJJ");
             vVelocity.y = Mathf.Sqrt(jumpHeight*-2*fgravity);
             //vVelocity.y = jumpHeight;
-            injump = true;
+            
         }
         else
         {
             //manimater.SetBool("Jump", false);
             //manimater.ResetTrigger("TriggerJJ");
-            injump = false;
+           
         }
         
     }
-    void NormalAtk()
-    {
-
-        if (Input.GetMouseButton(0))
-        {
-            manimater.SetTrigger("NormalAtk");
-
-        }
-        
-    }
-    void SkillAtk()
-    {
-        if (Input.GetMouseButton(1))
-        {
-            manimater.SetTrigger("SkillAtk");
-
-        }
-
-    }
     
     
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(tpsCamera.position, tpsCamera.forward*1000.0f);
+    }
+
+
 }
