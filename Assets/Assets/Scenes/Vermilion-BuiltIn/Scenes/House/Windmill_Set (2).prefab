@@ -1,0 +1,253 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4796533990374949002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4796533990374949003}
+  m_Layer: 0
+  m_Name: Windmill_Set (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4796533990374949003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4796533990374949002}
+  m_LocalRotation: {x: -0, y: -0.35926512, z: -0, w: -0.9332356}
+  m_LocalPosition: {x: 197.6, y: 18.5, z: 173.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4440687858377712492}
+  - {fileID: 4201904977950278055}
+  - {fileID: 5299758146988373631}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -0, y: 42.11014, z: 0}
+--- !u!1001 &4796533989584433296
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4796533990374949003}
+    m_Modifications:
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -174.35004
+      objectReference: {fileID: 0}
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 38.908
+      objectReference: {fileID: 0}
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -149.23001
+      objectReference: {fileID: 0}
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1462682908109494338, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910708435356443577, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: mainRenderableMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522686401510621785, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_Name
+      value: Windmill Wing_A_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293063991513466892, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+--- !u!4 &5299758146988373631 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 800571684250519279, guid: 84e736649d819994b9a5e5b5872106da, type: 3}
+  m_PrefabInstance: {fileID: 4796533989584433296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4796533990899777272
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4796533990374949003}
+    m_Modifications:
+    - target: {fileID: 8701126076875079512, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: mainRenderableMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079513, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079515, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_Name
+      value: Windmill_A_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -173.97339
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.849575
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -137.97105
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+--- !u!4 &4201904977950278055 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8701126076875079519, guid: 6c6f1aa026a06ca4abffde52f39bd132, type: 3}
+  m_PrefabInstance: {fileID: 4796533990899777272}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4796533991066985775
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4796533990374949003}
+    m_Modifications:
+    - target: {fileID: 9165045505445332544, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: mainRenderableMesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332545, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -173.92004
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.8075
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -146.18861
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332572, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_Name
+      value: Windmill Door_A_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165045505445332575, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+--- !u!4 &4440687858377712492 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9165045505445332547, guid: 4d188b5c3827613488fc8bd7cfb9cf2d, type: 3}
+  m_PrefabInstance: {fileID: 4796533991066985775}
+  m_PrefabAsset: {fileID: 0}
