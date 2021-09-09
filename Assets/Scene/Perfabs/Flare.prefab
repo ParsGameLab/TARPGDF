@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6644858684113977257}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -146,10 +146,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8708831252659331189, guid: 5c7201a49d4dc2244892183130f02b23, type: 3}
-      propertyPath: m_IgnoreLayers.m_Bits
-      value: 136
-      objectReference: {fileID: 0}
     - target: {fileID: 8708831252659331191, guid: 5c7201a49d4dc2244892183130f02b23, type: 3}
       propertyPath: m_Name
       value: CoreFlare
@@ -168,10 +164,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6644858684113977256}
     m_Modifications:
-    - target: {fileID: 8182205861000167985, guid: 18fc0970e3fe11546bbed9f0f38048b9, type: 3}
-      propertyPath: m_IgnoreLayers.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 8182205861000167998, guid: 18fc0970e3fe11546bbed9f0f38048b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
