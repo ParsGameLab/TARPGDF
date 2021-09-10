@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class PathfindingGridComponent : TerrainComponent {
 	
@@ -10,6 +11,8 @@ public class PathfindingGridComponent : TerrainComponent {
 	// Debug.
 	public bool 			m_bDebug = true;
 	public Color			m_DebugColor = Color.white;
+
+
 	
 	public PathFindingGrid FindingGrid
 	{

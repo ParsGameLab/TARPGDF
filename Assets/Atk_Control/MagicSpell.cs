@@ -37,7 +37,7 @@ public class MagicSpell : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.GetComponent<IEnemy_Base>().UnderAttack(5f);
+            other.GetComponent<IEnemy_Base>().UnderAttack(30f);
             //Destroy(other.gameObject);
             Destroy(gameObject);
         }

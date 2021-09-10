@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class PlacedObject : MonoBehaviour
 {
-    private GameObject gotrap;
+    private PlacedObjectTypeSO placedObjectTypeSO;
     private Vector2Int origin;
-    private WeaponController.Dir dir;
-    private WeaponController wp;
-    private GameObject m_WeaponController;
+    private PlacedObjectTypeSO.Dir dir;
+    //private WeaponController wp;
+    //private GameObject m_WeaponController;
     // Start is called before the first frame update
-    public static PlacedObject Create(Vector3 worldPosition, Vector2Int origin, WeaponController.Dir dir, GameObject gotrap)
+    public static PlacedObject Create(Vector3 worldPosition, Vector2Int origin, PlacedObjectTypeSO.Dir dir, PlacedObjectTypeSO placedObjectTypeSO)
     {
-        Transform placedObjectTransform = Instantiate(gotrap.transform, worldPosition, Quaternion.identity);
+        Transform placedObjectTransform = Instantiate(placedObjectTypeSO.prefab, worldPosition, Quaternion.Euler(0, placedObjectTypeSO.GetRotationAngle(dir), 0));
 
         PlacedObject placedObject = placedObjectTransform.GetComponent<PlacedObject>();
-        placedObject.Setup(gotrap, origin, dir);
+        placedObject.Setup(placedObjectTypeSO, origin, dir);
 
         return placedObject;
     }
-    private void Setup(GameObject gotrap, Vector2Int origin, WeaponController.Dir dir)
+    private void Setup(PlacedObjectTypeSO placedObjectTypeSO, Vector2Int origin, PlacedObjectTypeSO.Dir dir)
     {
-        this.gotrap = gotrap;
+        this.placedObjectTypeSO = placedObjectTypeSO;
         this.origin = origin;
         this.dir = dir;
     }
@@ -29,11 +29,19 @@ public class PlacedObject : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    //public List<Vector2Int> GetGridPositionList()
+    //{
+    //    m_WeaponController = GameObject.Find("SdUnitychan");
+    //    wp = m_WeaponController.GetComponent(typeof(WeaponController)) as WeaponController;
+    //    return wp.GetGridPositionList(origin, dir);
+    //}
     public List<Vector2Int> GetGridPositionList()
     {
-        m_WeaponController = GameObject.Find("SdUnitychan");
-        wp = m_WeaponController.GetComponent(typeof(WeaponController)) as WeaponController;
-        return wp.GetGridPositionList(origin, dir);
+        return placedObjectTypeSO.GetGridPositionList(origin, dir);
+    }
+    public override string ToString()
+    {
+        return placedObjectTypeSO.nameString;
     }
 
 
