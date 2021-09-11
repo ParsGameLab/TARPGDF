@@ -5,160 +5,193 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
     public abstract class IEnemy_Base : MonoBehaviour {
 
         #region Field
+        public GameObject target;
+        protected Quaternion myOriginRotation;
+
+        [SerializeField]
+        protected float confuseTime = 2.5f;
+        private float confuseTimer;
+
+        [SerializeField]
+        protected float detectDistance;
+        [SerializeField]
+        protected float acceptableMaxHeightOffset;
+        [SerializeField]
+        protected float myVision;
+
+        public LayerMask detectLayerMask;
+
+        private bool isDeath = false;
+
+        protected EnemyAnimations myAnimations;
+
         protected Camera mainCamera;
         protected HealthBar myHealthBar;
         protected HealthSystem reference_HealthSystem;
 
-        protected float currentHealthPoint;
         [SerializeField] 
         protected float maxHealthPoint;
+        private float currentHealthPoint;
 
-        //float middlePointX_mainCameraEyes;
-        //float middlePointY_mainCameraEyes;
-        //Vector3 middlePoint_mainCameraEyes;
+        protected IEnemyBehaviourSystem_Base reference_CurrentState;
+        public readonly IEnemyBehaviourSystem_Base detectionState = new DetectionState();
+        #endregion
+
+        #region Property
+        public Quaternion MyOriginRotation => myOriginRotation;
+        public float ConfuseTime => confuseTime;
+        public float DetectDistance => detectDistance;
+        public float AcceptalbeMaxHeightOffset => acceptableMaxHeightOffset;
+        public float MyVision => myVision;
+        public LayerMask DetectLayerMask => detectLayerMask;
+
+        public GameObject Target {
+            get { return target; }
+            set { target = value; }
+        }
+
+        public float ConfuseTimer {
+            get {
+                return confuseTimer;
+            }
+            set {
+                confuseTimer = value;
+            }
+        }
         #endregion
 
         #region Function
+        protected virtual void OnEnable() {
+            reference_CurrentState = detectionState;
+            reference_CurrentState.EnterState(this);
+        }
+
         protected virtual void Awake() {
             myHealthBar = transform.GetChild(0).transform.Find("HealthBar").GetComponent<HealthBar>();
+            myAnimations = new EnemyAnimations(this, transform.GetChild(0).GetComponent<Animator>());
         }
 
         protected virtual void Start() {
             mainCamera = Camera.main;
             myHealthBar.SetUp_MainCamera(mainCamera);
-            //middlePointX_mainCameraEyes = mainCamera.pixelWidth / 2;
-            //middlePointY_mainCameraEyes = mainCamera.pixelHeight / 2;
-            //middlePoint_mainCameraEyes = new Vector3(middlePointX_mainCameraEyes, middlePointY_mainCameraEyes, 0);
 
+            
             reference_HealthSystem = new HealthSystem(maxHealthPoint);
+            reference_HealthSystem.OnHealthEmpty += Reference_HealthSystem_OnHealthEmpty;
 
             currentHealthPoint = maxHealthPoint;
 
             myHealthBar.SetUp_HealthSystem(reference_HealthSystem);
-            myHealthBar.SetSize();            
+            myHealthBar.SetSize();
+
+            myOriginRotation = transform.rotation;
         }
 
-        public virtual void Update() {
-            
-            HasBeAimedAlready();
+        public virtual void Update() {        
+            HasBeAimedAlready_Type2();
+            reference_CurrentState.Update();
+        }
 
-            /*******************************************
-             * 僅在 Project Review 時使用。
-             ******************************************/
-            if(isAWoodendummy && eventCount == 0) {
-                reference_HealthSystem.OnHealthCharging += Reference_HealthSystem_OnHealthCharging;
-                eventCount++;
-            } else if(!isAWoodendummy && eventCount > 0) {
-                reference_HealthSystem.OnHealthCharging -= Reference_HealthSystem_OnHealthCharging;
-                eventCount--;
-            }
+        protected virtual void OnDrawGizmosSelected() {
+            Gizmos.color = new Color(Color.green.r, Color.green.g, Color.green.b, .55f);
+            Gizmos.DrawSphere(transform.position, detectDistance);
 
-            OnProjectReview();
+            Gizmos.color = new Color(Color.blue.r, Color.blue.g, Color.blue.b, .55f);
+            Gizmos.DrawLine(
+                transform.position,
+                transform.position + Vector3.up * acceptableMaxHeightOffset);
+            Gizmos.DrawLine(
+                transform.position,
+                transform.position - Vector3.up * acceptableMaxHeightOffset);
+
+            UnityEditor.Handles.color = new Color(Color.red.r, Color.red.g, Color.red.b, .6f);
+            UnityEditor.Handles.DrawSolidArc(
+                transform.position,
+                Vector3.up, transform.forward,
+                myVision,
+                detectDistance);
+
+            UnityEditor.Handles.DrawSolidArc(
+                transform.position,
+                -Vector3.up, transform.forward,
+                myVision,
+                detectDistance);
         }
         #endregion
 
         #region Method
-        //public virtual void UnderAttack(float damagePoint) {
-        //    currentHealthPoint -= (int)damagePoint;
-        //    reference_HealthSystem.Calculate_HealthPoint_Damage(damagePoint);
-        //}
+        public void TransitionToState(IEnemyBehaviourSystem_Base theTargetState) {
+            reference_CurrentState = theTargetState;
+            theTargetState.EnterState(this);
+        }
+        
+        public void LookTarget() {
+            Vector3 vectorToTarget = target.transform.position - transform.position;
+            transform.rotation = Quaternion.LookRotation(vectorToTarget);
+        }
 
-        private void HasBeAimedAlready() {       
-            Ray middlePointRay_mainCamera = mainCamera.ScreenPointToRay(CalculateTheCrossHairPosition());
-            RaycastHit hitInfo;
-            if(Physics.Raycast(middlePointRay_mainCamera, out hitInfo, 750f)) {
-                if(hitInfo.transform.GetComponent<Collider>().CompareTag("Enemy")) {
-                    GameObject beHitterHealthBar = hitInfo.transform.GetChild(0).transform.Find("HealthBar").gameObject;
-                    beHitterHealthBar.SetActive(true);
-                } else {
-                    myHealthBar.gameObject.SetActive(false);
+        public void LookOriginDirection() {
+             transform.rotation = Quaternion.Lerp(transform.rotation, myOriginRotation, .005f);
+        }
+
+        private void HasBeAimedAlready_Type2() {
+            Ray middlePointRay_mainCamera = mainCamera.ScreenPointToRay(Utils.CalculateTheCrossHairPosition(mainCamera));
+            RaycastHit[] results = new RaycastHit[15];
+            GameObject[] beHitterHealthBars = new GameObject[15];
+            int index = 0;
+            int numbers = Physics.RaycastNonAlloc(middlePointRay_mainCamera, results, 750f);
+            for(int i = 0; i < numbers; i++) {
+                if(results[i].transform.GetComponent<Collider>().CompareTag("Enemy") && !results[i].transform.GetComponent<IEnemy_Base>().isDeath) {
+                    beHitterHealthBars[index] = results[i].transform.GetChild(0).transform.Find("HealthBar").gameObject;
+                    index++;
                 }
-            } else {
-                myHealthBar.gameObject.SetActive(false);
+            }
+
+            myHealthBar.gameObject.SetActive(false);
+
+            if(beHitterHealthBars[0] != null) {
+                beHitterHealthBars[0].SetActive(true);
             }
         }
 
-        private Vector3 CalculateTheCrossHairPosition() {
+        public virtual void UnderAttack(float damagePoint) {
+            currentHealthPoint -= (int)damagePoint;
+            reference_HealthSystem.Calculate_HealthPoint_Damage(damagePoint);
+        }
+        #endregion
+
+        #region Event
+        private void Reference_HealthSystem_OnHealthEmpty(object sender, System.EventArgs e) {
+            if(isDeath) { return; }
+            myAnimations.OnDeath();
+            isDeath = true;
+        }
+        #endregion 
+
+    }
+
+    public class EnemyAnimations {
+
+        private Animator animator;
+
+        public EnemyAnimations(IEnemy_Base checkWhoAreYou, Animator theAnimator) {
+            animator = theAnimator;
+        }
+
+        public void OnDeath() {
+            animator.SetTrigger("death");
+        }
+
+    }
+
+    public static class Utils {
+
+        public static Vector3 CalculateTheCrossHairPosition(Camera mainCamera) {
             float middlePointX_mainCameraEyes = mainCamera.pixelWidth / 2;
             float middlePointY_mainCameraEyes = mainCamera.pixelHeight / 2;
             Vector3 middlePoint_mainCameraEyes = new Vector3(middlePointX_mainCameraEyes, middlePointY_mainCameraEyes, 0);
             return middlePoint_mainCameraEyes;
         }
-        #endregion
-
-        /*******************************************
-         * 僅在 Project Review 時使用。
-         ******************************************/
-        #region Field
-        public bool isAWoodendummy = true;
-        private int eventCount = 0;
-        private bool isInvincible = false;
-
-        private float delayTimer = 0;
-        #endregion
-
-        #region Method
-        private void OnProjectReview() {
-            if(isInvincible) {
-                delayTimer = 0;
-                Invoke("BeginCharge", .15f);
-            } else {
-                delayTimer += Time.deltaTime;
-                if(isAWoodendummy && delayTimer > .85f) {
-                    Invoke("BeginRestore", .35f);
-                }
-            }
-        }
-        public virtual void UnderAttack(float damagePoint) {
-            if(isInvincible) {
-                return;
-            }
-
-            delayTimer = 0;
-            myHealthBar.SetColor(Color.red);
-
-            currentHealthPoint -= (int)damagePoint;
-            reference_HealthSystem.Calculate_HealthPoint_Damage(damagePoint, isAWoodendummy);
-        }
-        private void BeginCharge() {
-            Charge_Broken(Time.deltaTime * 265f);            
-        }
-
-        private void BeginRestore() {
-            Restore_Standby(Time.deltaTime * 235f);
-        }
-
-        protected virtual void Charge_Broken(float chargePoint) {
-            currentHealthPoint += (int)chargePoint;
-            if(currentHealthPoint % 1f == 0) {
-                myHealthBar.SetColor(Color.green);
-            }
-
-            reference_HealthSystem.Calculate_HealthPoint_Heal(chargePoint);
-
-            if(currentHealthPoint >= maxHealthPoint) {
-                currentHealthPoint = maxHealthPoint;
-                myHealthBar.SetColor(Color.red);
-                isInvincible = false;
-            }
-        }
-
-        protected virtual void Restore_Standby(float restorPoint) {
-            currentHealthPoint += (int)restorPoint;
-
-            reference_HealthSystem.Calculate_HealthPoint_Heal(restorPoint);
-
-            if(currentHealthPoint >= maxHealthPoint) {
-                currentHealthPoint = maxHealthPoint;
-            }
-        }
-        #endregion
-
-        #region Event
-        private void Reference_HealthSystem_OnHealthCharging(object sender, System.EventArgs e) {
-            isInvincible = true;
-        }
-        #endregion
 
     }
 

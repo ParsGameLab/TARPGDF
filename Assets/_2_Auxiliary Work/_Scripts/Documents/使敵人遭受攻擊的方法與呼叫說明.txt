@@ -6,7 +6,7 @@ using iii_UMVR06_TPSDefenseGame_Subroutines_2;
 
 ------------------------------------------------
 
-Unity-Chan 的任意遠程魔法彈或遠程物理子彈，在添加 "Collider"，並且啟動 "Is Trigger" 的情形下，
+Unity-Chan 的任意遠程魔法彈或遠程物理子彈，在添加 "Collider"，並且啟動 "Is Trigger" 的情況下，
 呼叫 IEnemy_Base 底下的 "UnderAttack(float damagePoint)" ，即可使符合判定條件的敵人遭受攻擊。
 
 以 OnTriggerEnter(Collider other) 為例：

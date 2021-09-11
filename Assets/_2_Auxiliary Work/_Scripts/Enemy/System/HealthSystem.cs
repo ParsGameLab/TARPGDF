@@ -6,7 +6,8 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
     public class HealthSystem {
 
         #region Event
-        public event EventHandler OnHealthChanged;    
+        public event EventHandler OnHealthChanged;
+        public event EventHandler OnHealthEmpty;
         #endregion
 
         #region Field
@@ -36,6 +37,7 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             currentHealthPoint -= (int)theDamagePoint;
             if(currentHealthPoint <= 0) { 
                 currentHealthPoint = 0;
+                OnHealthEmpty?.Invoke(this, EventArgs.Empty);
             }
             OnHealthChanged?.Invoke(this, EventArgs.Empty);
         }
@@ -52,34 +54,7 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
         #endregion
 
-        /*******************************************
-         * 僅在 Project Review 時使用。
-         ******************************************/
-        #region Event
-        public event EventHandler OnHealthCharging;
-        #endregion
 
-        #region Field
-        private bool isAWoodendummy = false;
-        #endregion
-
-        #region Method
-        public void Calculate_HealthPoint_Damage(float theDamagePoint, bool checkIsAWoodendummy) {
-            isAWoodendummy = checkIsAWoodendummy;
-            currentHealthPoint -= (int)theDamagePoint;
-            if(currentHealthPoint <= 0) {
-                currentHealthPoint = 0;
-                HasBeganCharging();
-            }
-            OnHealthChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void HasBeganCharging() {
-            if(currentHealthPoint <= 0 && isAWoodendummy) {
-                OnHealthCharging?.Invoke(this, EventArgs.Empty);
-            }
-        }
-        #endregion
     }
 
 }
