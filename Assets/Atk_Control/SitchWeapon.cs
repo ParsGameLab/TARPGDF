@@ -23,6 +23,7 @@ public class SitchWeapon : MonoBehaviour
         SwitchWpController();
         
     }
+
     private void SwitchPlayerWp(int index)
     {
         if (Weapons.Count == 1)
