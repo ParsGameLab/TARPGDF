@@ -18,6 +18,8 @@ public class AStar
     protected LinkedList<PathNode>     m_PathNodes;          
 	private	  IAStarTerrainInterface   m_TerrainInterface;
 	private   eFindingStatus           m_FindingStatus;
+
+	//static public AStar m_Instance;
 	public MyPool<PathNode> NodePool
     {
         get { return m_GridNodes; }
@@ -45,7 +47,8 @@ public class AStar
 		m_GridNodes = new MyPool<PathNode>();
 		TerrainRepresentation.FillNodesToPool(m_GridNodes);
 		m_FindingStatus = eFindingStatus.Waiting;
-    }
+		//m_Instance = this;
+	}
 	
 	private void UncheckAllNode(bool bCheckBlock = true)
 	{

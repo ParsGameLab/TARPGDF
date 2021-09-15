@@ -335,8 +335,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31142f65253cc64d90add00c9a15624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoint: 18
-  isAWoodendummy: 1
+  target: {fileID: 0}
+  confuseTime: 2.2
+  detectDistance: 2.5
+  acceptableMaxHeightOffset: 1.53
+  myVision: 11.35
+  detectLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  maxHealthPoint: 29
 --- !u!1 &8897734016420870865
 GameObject:
   m_ObjectHideFlags: 0

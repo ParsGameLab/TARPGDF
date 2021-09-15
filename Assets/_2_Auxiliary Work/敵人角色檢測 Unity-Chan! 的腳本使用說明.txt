@@ -1,0 +1,22 @@
+
+在Layer裡（Tag旁的Layer），新增一層 "Player"，並為 Unity-Chan! 進行添加。
+
+--------------------------------------------
+
+確認已為 Unity-Chan!添加"Player" Layer後，將"_2_Auxiliary Work/_Scripts/Components" 底下的 "Attackable.cs"，
+拖曳附加至 Unity-Chan! 身上。如此便可被敵人角色所檢測。
+
+--------------------------------------------
+
+敵人角色目前已暫時添加，且開放可為其調整的數值：
+
+Target：當前被敵人角色檢測到的目標物。（無須手動添加任何物件，
+此欄存在的目的，是為了方便觀察 Unity-Chan! 是否已確實被敵人角色檢測到而開放。）
+
+1.Confuse Time：困惑時間；計時結束後，敵人角色會重新轉到原本所面對的方向。（供專案進度報告時，演示使用。
+在 Unity-Chan! 的距離，超出敵人角色的"Detect Distance"後，敵人角色不會馬上調轉方向。）
+2.Detect Distance：偵查距離。
+3.Acceptable Max Height Offset：敵人角色，所能檢測到的最大高度。
+4.My Vision：敵人角色的視野。
+5.Detect Layer Mask：敵人角色會對其進行檢測的Layer。（此欄，需與 Unity-Chan! 所在的Layer相互搭配。）
+6.Max Health Point: 敵人角色的最大血量。（附註：若出現有關"NAN"的錯誤訊息，乃是此欄被設置為"0"的原因。最大血量值，不該為零。）

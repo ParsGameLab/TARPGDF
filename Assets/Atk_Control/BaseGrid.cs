@@ -194,7 +194,16 @@ public class BaseGrid
 		}
 		m_CellState[col, row] = iState;
 	}
-	
+	public void SetTexCellStateInStart(int col, int row, int iState)
+	{
+		
+		if (BeInBoundary(col, row) == false)
+		{
+			return;
+		}
+		m_CellState[col, row] = iState;
+	}
+
 
 	public int GetCellState(int index)//這是陣列裡有沒有
 	{

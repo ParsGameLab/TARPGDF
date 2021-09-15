@@ -45,37 +45,11 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
         public void SetHealthBarDirection_LookAt() {
             transform.localRotation = Quaternion.LookRotation(mainCamera.transform.forward, Vector3.up);
         }
-
-        //public void SetHealthBarDirection_HorizontalRotation() {
-        //    currentAngle = transform.localEulerAngles.y;
-        //    desiredAngle = mainCamera.transform.localEulerAngles.y;
-        //    currentAngle = Mathf.LerpAngle(currentAngle, desiredAngle, 1f);
-        //    transform.rotation = Quaternion.Euler(0, currentAngle, 0);
-        //}
         #endregion
 
         #region Event
         private void Ref_HealthSystem_OnHealthChanged(object sender, System.EventArgs e) {
             SetSize();
-        }
-        #endregion
-
-        /*******************************************
-         * 僅在 Project Review 時使用。
-         ******************************************/
-        #region Field
-        private Color barSpriteColor;
-        #endregion
-
-        #region Property
-        public Color BarSpriteColor {
-            get { return barSpriteColor; }
-        }
-        #endregion
-
-        #region Method
-        public void SetColor(Color theColor) {
-            barAnchor.Find("BarSprite").GetComponent<SpriteRenderer>().color = theColor;
         }
         #endregion
 
