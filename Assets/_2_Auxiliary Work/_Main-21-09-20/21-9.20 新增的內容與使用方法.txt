@@ -1,0 +1,42 @@
+呼叫此文檔裡，有提及到的方法前，都需要先"using iii_UMVR06_TPSDefenseGame_Subroutines_2;"
+
+21-9-19，Package的使用說明：（在_2_Auxiliary Work/_Main資料夾底下）
+分辨率：設定「FullHD(1920x1080)」。
+預製體："_2_Subroutines，拖曳至Hierarchy。
+腳本："_2_StatHandler_UnityChan.cs"，附加到Unity-Chan!身上。
+-----------------------------------------------
+相關方法的呼叫方式：
+public void ExpandMana(float manaConsumedPoint): 把_2_StatHandler_UnityChan.cs附加到Unity-Chan!身上，並取得_2_StatHandler_UnityChan元件後，即可呼叫。
+例：
+public _2_StatHandler_UnityChan.cs statHandler_UnityChan;
+並在Inspector中，直接把_2_StatHandler_UnityChan元件，拖曳至新增的statHandler_UnityChan欄位中；
+亦可在Awake()或Start()，GetComponet，如：statHandler_UnityChan = GetComponent<_2_StatHandler_UnityChan>();
+
+敵方角色的Attack()：如是以Animation event的方式進行呼叫，則將相關腳本拖曳至帶有Animator元件的物件上，並在設定Animation event時，於Inspector選擇即可。例：將Bat_NormalAnimEvent.cs，拖曳至Bat_Normal\BatPBR底下，因BatPBR帶有Animator。
+
+2_InactiveEnemiesList.cs底下的三個公共靜態函數之呼叫方式：
+
+	‧ _2_InactiveEnemiesList.ReTransformAndPosition_Single(whichTransform, index);
+	‧ _2_InactiveEnemiesList.ReTransformAndPosition_RangeIndex(whichTransform, firstIndex, lastIndex);
+	‧ _2_InactiveEnemiesList.ReTransformAndPosition_RandomTransform(whichTransforms_ForRandomTranform, firstIndex, lastIndex);
+-----------------------------------------------
+21-9-19，Package裡，新增的內容如下：
+
+1.Unity-Chan!的肖像框以及肖像。
+2.Unity-Chan!的「血量條」與「法力條」。
+3.Unity-Chan!受到傷害時的血量條變化之功能。
+4.當ExpendMana(float manaConsumedPoint)被呼叫時， Unity-Chan!的法力條會產生相應的變化。
+
+5.敵方角色的攻擊方法與公共欄位（攻擊數值（須設定））。（相關方法：IEnemy_Base.cs的Attack()）
+6.IEnemy_Base.cs的Attack()已擴充至 EnemyAnimationEventBase.cs。將繼承於EnemyAnimationEventBase.cs的各子類腳本，附加到各個敵方角色，帶有Animator元件的那個物件上，即可於Animation添加event時，進行選擇並呼叫。
+7.敵方角色死亡後，會在2.5秒後自主關閉，同時依附到"_2_Subroutines\InactiveEnemies"底下成為InactiveEnemies的子物件。
+8.停止活動的敵方角色會以清單的方式，呈現在InactiveEnemies的Inspector中。（相關腳本：_2_InactiveEnemiesList.cs）
+9._2_InactiveEnemiesList.cs 提供了三個公共的靜態函數：
+	 ‧ ReTransformAndPosition_Single(Transform whichTransform, int index)
+	 ‧ ReTransformAndPosition_RangeIndex(Transform whichTransform, int firstIndex, int lastIndex)
+	 ‧ ReTransformAndPosition_RandomTransform(Transform[] whichTransforms, int firstIndex, int lastIndex)
+三個公共靜態函數的用途與參數說明，已用註解補充，會在被呼叫時，由Visual Studio的IntelliCode顯示提供。 
+
+10.新的敵方角色(default)，全體添加血量條、Character Controller、idle動畫與死亡動畫，並製成預製體。
+
+
