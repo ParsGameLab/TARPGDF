@@ -15,7 +15,7 @@ public class TpGridManager : MonoBehaviour
     {
         //m_EnemyGo = GameObject.FindWithTag("Enemy");
         m_PathfindingTerrain = GameObject.Find("Grid");
-        m_WeaponController= GameObject.Find("SdUnitychan");
+        m_WeaponController= GameObject.Find("BigUnityChan");
         PathfindingGridComponent pg = m_PathfindingTerrain.GetComponent(typeof(PathfindingGridComponent)) as PathfindingGridComponent;//³õ¤W§ä
         WeaponController wc = m_WeaponController.GetComponent(typeof(WeaponController)) as WeaponController;
         //NavigationComponent nv = m_EnemyGo.GetComponent(typeof(NavigationComponent)) as NavigationComponent;

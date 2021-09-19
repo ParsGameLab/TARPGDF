@@ -5,21 +5,21 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
     public abstract class IEnemy_Base : MonoBehaviour {
 
         #region Field
-        public GameObject target;
-        protected Quaternion myOriginRotation;
+        //public GameObject target;
+        //protected Quaternion myOriginRotation;
 
-        [SerializeField]
-        protected float confuseTime = 2.5f;
-        private float confuseTimer;
+        //[SerializeField]
+        //protected float confuseTime = 2.5f;
+        //private float confuseTimer;
 
-        [SerializeField]
-        protected float detectDistance;
-        [SerializeField]
-        protected float acceptableMaxHeightOffset;
-        [SerializeField]
-        protected float myVision;
+        //[SerializeField]
+        //protected float detectDistance;
+        //[SerializeField]
+        //protected float acceptableMaxHeightOffset;
+        //[SerializeField]
+        //protected float myVision;
 
-        public LayerMask detectLayerMask;
+        //public LayerMask detectLayerMask;
 
         private bool isDeath = false;
 
@@ -33,37 +33,37 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
         protected float maxHealthPoint;
         private float currentHealthPoint;
 
-        protected IEnemyBehaviourSystem_Base reference_CurrentState;
-        public readonly IEnemyBehaviourSystem_Base detectionState = new DetectionState();
+        //protected IEnemyBehaviourSystem_Base reference_CurrentState;
+        //public readonly IEnemyBehaviourSystem_Base detectionState = new DetectionState();
         #endregion
 
         #region Property
-        public Quaternion MyOriginRotation => myOriginRotation;
-        public float ConfuseTime => confuseTime;
-        public float DetectDistance => detectDistance;
-        public float AcceptalbeMaxHeightOffset => acceptableMaxHeightOffset;
-        public float MyVision => myVision;
-        public LayerMask DetectLayerMask => detectLayerMask;
+        //public Quaternion MyOriginRotation => myOriginRotation;
+        //public float ConfuseTime => confuseTime;
+        //public float DetectDistance => detectDistance;
+        //public float AcceptalbeMaxHeightOffset => acceptableMaxHeightOffset;
+        //public float MyVision => myVision;
+        //public LayerMask DetectLayerMask => detectLayerMask;
 
-        public GameObject Target {
-            get { return target; }
-            set { target = value; }
-        }
+        //public GameObject Target {
+        //    get { return target; }
+        //    set { target = value; }
+        //}
 
-        public float ConfuseTimer {
-            get {
-                return confuseTimer;
-            }
-            set {
-                confuseTimer = value;
-            }
-        }
+        //public float ConfuseTimer {
+        //    get {
+        //        return confuseTimer;
+        //    }
+        //    set {
+        //        confuseTimer = value;
+        //    }
+        //}
         #endregion
 
         #region Function
         protected virtual void OnEnable() {
-            reference_CurrentState = detectionState;
-            reference_CurrentState.EnterState(this);
+            //reference_CurrentState = detectionState;
+            //reference_CurrentState.EnterState(this);
         }
 
         protected virtual void Awake() {
@@ -84,56 +84,56 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             myHealthBar.SetUp_HealthSystem(reference_HealthSystem);
             myHealthBar.SetSize();
 
-            myOriginRotation = transform.rotation;
+            //myOriginRotation = transform.rotation;
         }
 
         public virtual void Update() {        
             HasBeAimedAlready_Type2();
-            reference_CurrentState.Update();
+            //reference_CurrentState.Update();
         }
 
-        protected virtual void OnDrawGizmosSelected() {
-            Gizmos.color = new Color(Color.green.r, Color.green.g, Color.green.b, .55f);
-            Gizmos.DrawSphere(transform.position, detectDistance);
+//        protected virtual void OnDrawGizmosSelected() {
+//            Gizmos.color = new Color(Color.green.r, Color.green.g, Color.green.b, .55f);
+//            Gizmos.DrawSphere(transform.position, detectDistance);
 
-            Gizmos.color = new Color(Color.blue.r, Color.blue.g, Color.blue.b, .55f);
-            Gizmos.DrawLine(
-                transform.position,
-                transform.position + Vector3.up * acceptableMaxHeightOffset);
-            Gizmos.DrawLine(
-                transform.position,
-                transform.position - Vector3.up * acceptableMaxHeightOffset);
-#if UNITY_EDITOR
-            UnityEditor.Handles.color = new Color(Color.red.r, Color.red.g, Color.red.b, .6f);
-            UnityEditor.Handles.DrawSolidArc(
-                transform.position,
-                Vector3.up, transform.forward,
-                myVision,
-                detectDistance);
+//            Gizmos.color = new Color(Color.blue.r, Color.blue.g, Color.blue.b, .55f);
+//            Gizmos.DrawLine(
+//                transform.position,
+//                transform.position + Vector3.up * acceptableMaxHeightOffset);
+//            Gizmos.DrawLine(
+//                transform.position,
+//                transform.position - Vector3.up * acceptableMaxHeightOffset);
+//#if UNITY_EDITOR
+//            UnityEditor.Handles.color = new Color(Color.red.r, Color.red.g, Color.red.b, .6f);
+//            UnityEditor.Handles.DrawSolidArc(
+//                transform.position,
+//                Vector3.up, transform.forward,
+//                myVision,
+//                detectDistance);
 
-            UnityEditor.Handles.DrawSolidArc(
-                transform.position,
-                -Vector3.up, transform.forward,
-                myVision,
-                detectDistance);
-#endif
-        }
+//            UnityEditor.Handles.DrawSolidArc(
+//                transform.position,
+//                -Vector3.up, transform.forward,
+//                myVision,
+//                detectDistance);
+//#endif
+//        }
         #endregion
 
         #region Method
-        public void TransitionToState(IEnemyBehaviourSystem_Base theTargetState) {
-            reference_CurrentState = theTargetState;
-            theTargetState.EnterState(this);
-        }
+        //public void TransitionToState(IEnemyBehaviourSystem_Base theTargetState) {
+        //    reference_CurrentState = theTargetState;
+        //    theTargetState.EnterState(this);
+        //}
         
-        public void LookTarget() {
-            Vector3 vectorToTarget = target.transform.position - transform.position;
-            transform.rotation = Quaternion.LookRotation(vectorToTarget);
-        }
+        //public void LookTarget() {
+        //    Vector3 vectorToTarget = target.transform.position - transform.position;
+        //    transform.rotation = Quaternion.LookRotation(vectorToTarget);
+        //}
 
-        public void LookOriginDirection() {
-             transform.rotation = Quaternion.Lerp(transform.rotation, myOriginRotation, .005f);
-        }
+        //public void LookOriginDirection() {
+        //     transform.rotation = Quaternion.Lerp(transform.rotation, myOriginRotation, .005f);
+        //}
 
         private void HasBeAimedAlready_Type2() {
             Ray middlePointRay_mainCamera = mainCamera.ScreenPointToRay(Utils.CalculateTheCrossHairPosition(mainCamera));

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,24 +11,39 @@ public class WeaponController : MonoBehaviour
 
     private Animator manimater;
     public Transform firePoint;
-    public GameObject magicspell;
+    [SerializeField]
+    private GameObject pfmagicspell;
+    [SerializeField]
+    private Transform SpellParent;
+
     public LayerMask hitEnemy;
     //public GameObject useingWp;
     public LayerMask hitGround;
+    
 
 
     bool changeMainWp;
+    private AnimatorStateInfo animStateInfo;
+    
+    public Transform weapon;
 
 
     private PathFindingGrid m_PutTrapTerrain;
     //public Transform t_Gridtrans;
     private PlacedObject placedObject;
-    private int trap1width=4;
-    private int trap1height=4;
+    
 
     [SerializeField] private List<PlacedObjectTypeSO> placedObjectTypeSOList;
     private PlacedObjectTypeSO placedObjectTypeSO;
     private PlacedObjectTypeSO.Dir dir= PlacedObjectTypeSO.Dir.Down;
+    private int HitCount = 0;
+
+    private float force=0;
+    private float minforce=2;
+    private float maxforce=7;
+
+    public GameObject SkillCharge;
+    public GameObject TrapCharge;
 
 
 
@@ -47,13 +62,26 @@ public class WeaponController : MonoBehaviour
         manimater = GetComponent<Animator>();
         placedObjectTypeSO = null;
         changeMainWp = true;
+        animStateInfo = manimater.GetCurrentAnimatorStateInfo(1);
+        
+        SkillCharge.SetActive(false);
+        TrapCharge.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //useingWp = GetComponent<SitchWeapon>().GetCurrectWp();
         
+        if (!manimater.GetCurrentAnimatorStateInfo(1).IsName("AtkIde") && manimater.GetCurrentAnimatorStateInfo(1).normalizedTime > 1f)
+        {
+            // æ¯æ¬¡è¨­ç½®å®Œåƒæ•¸ä¹‹å¾Œï¼Œéƒ½æ‡‰è©²åœ¨ä¸‹ä¸€å¹€é–‹å§‹æ™‚å°‡åƒæ•¸è¨­ç½®æ¸…ç©ºï¼Œé¿å…é€£çºŒåˆ‡æ›  
+            manimater.SetInteger("ActionID", 0);
+            HitCount = 0;
+        }
+
+        
+        //useingWp = GetComponent<SitchWeapon>().GetCurrectWp();
+
         //if (useingWp.CompareTag("Weapon1"))
         //{
         //    manimater.SetInteger("WpState", 0);
@@ -64,17 +92,36 @@ public class WeaponController : MonoBehaviour
         //{
         //    manimater.SetInteger("WpState", 1);
         //    PutTrap(useingWp);
-        //}//§â³o­Óª½±µ´«¦¨¥t¤@®M
+        //}//æŠŠé€™å€‹ç›´æ¥æ›æˆå¦ä¸€å¥—
         NumSwitchWpController();
         if (changeMainWp)
         {
+            SkillChargeSet();
             manimater.SetInteger("WpState", 0);
-            NormalAtkMotin();
+            if (manimater.GetCurrentAnimatorStateInfo(1).IsName("AtkIde"))
+            {
+                weapon.gameObject.SetActive(true);
+
+            }
+            
+            if (Input.GetMouseButton(0))
+            { 
+                NormalAtkMotin();
+          
+            }
             SkillAtkMotin();
+            Vatk();
         }
         else
         {
             manimater.SetInteger("WpState", 1);
+            if (manimater.GetCurrentAnimatorStateInfo(1).IsName("PutTrap"))
+            {
+                weapon.gameObject.SetActive(false);
+
+
+            }
+            PutTrapChargeSet();
             PutTrap(placedObjectTypeSO);
         }
 
@@ -83,12 +130,14 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Alpha1))
         {
+            
             changeMainWp = true;
             DeselectObjectType();
 
         }
         if (Input.GetKey(KeyCode.Alpha2))
         {
+            
             changeMainWp = false;
             placedObjectTypeSO = placedObjectTypeSOList[0];
             RefreshSelectedObjectType();
@@ -96,18 +145,21 @@ public class WeaponController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Alpha3))
         {
+            
             changeMainWp = false;
             placedObjectTypeSO = placedObjectTypeSOList[1];
             RefreshSelectedObjectType();
         }
         if (Input.GetKey(KeyCode.Alpha4))
         {
+            
             changeMainWp = false;
             placedObjectTypeSO = placedObjectTypeSOList[2];
             RefreshSelectedObjectType();
         }
         if (Input.GetKey(KeyCode.Alpha5))
         {
+            
             changeMainWp = false;
             placedObjectTypeSO = placedObjectTypeSOList[3];
             RefreshSelectedObjectType();
@@ -117,44 +169,140 @@ public class WeaponController : MonoBehaviour
     }
     void NormalAtkMotin()
     {
-
-        if (Input.GetMouseButton(0))
+        if (manimater.GetCurrentAnimatorStateInfo(1).IsName("AtkIde") && HitCount == 0 && manimater.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.4f)
         {
-            manimater.SetTrigger("NormalAtk");
-
+            // åœ¨å¾…å‘½ç‹€æ…‹ä¸‹ï¼ŒæŒ‰ä¸‹æ”»æ“Šéµï¼Œé€²å…¥æ”»æ“Š1ç‹€æ…‹ï¼Œä¸¦è¨˜éŒ„é€£æ“Šæ•¸çˆ²1 
+            manimater.SetInteger("ActionID", 1);
+            HitCount = 1;
         }
+        if (manimater.GetCurrentAnimatorStateInfo(1).IsName("Attack01") && HitCount == 1 && manimater.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.5f)
+        {
+            // åœ¨æ”»æ“Š1ç‹€æ…‹ä¸‹ï¼ŒæŒ‰ä¸‹æ”»æ“Šéµï¼Œè¨˜éŒ„é€£æ“Šæ•¸çˆ²2ï¼ˆåˆ‡æ›ç‹€æ…‹åœ¨Update()ä¸­ï¼‰  
+            manimater.SetInteger("ActionID", 2);
+            HitCount = 2;
+        }
+
+        //if (Input.GetMouseButton(0))
+        //{
+        //    manimater.SetTrigger("NormalAtk");
+
+        //}
 
     }
     public void NorAtk()
     {
 
+        
+        //Ray r = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 1.0f));
+        //GameObject goMagicSpell = GameObject.Instantiate(pfmagicspell, firePoint.position, Quaternion.identity,SpellParent);
+        Transform CameraTrans = Camera.main.transform;
+        
         RaycastHit rh;
-        Ray r = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 1.0f));
-        if (Physics.Raycast(r, out rh, 40.0f, hitEnemy))
+        GameObject goMagicSpell = GameObject.Instantiate(pfmagicspell);
+        MagicSpell magicspellsp = goMagicSpell.GetComponent<MagicSpell>();
+        if (Physics.Raycast(CameraTrans.position, CameraTrans.forward,out rh,hitEnemy))//Physics.Raycast(r, out rh, 1000.0f /*hitEnemy*/)
         {
 
-            Vector3 vAtkDir = rh.point - firePoint.position;
-            GameObject goMagicSpell = GameObject.Instantiate(magicspell);
-            goMagicSpell.GetComponent<MagicSpell>().MagicNorAttack(firePoint.position, vAtkDir);
+            //Vector3 vAtkDir = rh.point - firePoint.position;
+            //GameObject goMagicSpell = GameObject.Instantiate(pfmagicspell);
+
+            //magicspellsp.target = rh.point;
+            //magicspellsp.hit = true;
+            magicspellsp.MagicNorAttack(firePoint.position, rh.point);//use
+
+            //goMagicSpell.GetComponent<MagicSpell>().MagicNorAttack(firePoint.position, vAtkDir);
         }
         else
         {
+            //magicspellsp.target = CameraTrans.position+CameraTrans.forward * 25.0f;
+            //magicspellsp.hit = true;
 
             //Vector3 vTarget=Camera.main.transform.forward * 1000.0f;
-            Vector3 vTarget = Camera.main.transform.forward * 1000.0f;
-            Vector3 vAtkDir = vTarget - firePoint.position;
+
+            Vector3 vTarget = CameraTrans.forward * 1000.0f;
+            magicspellsp.MagicNorAttack(firePoint.position, vTarget);//use
+
+            //Vector3 vAtkDir = vTarget - firePoint.position;
             //Vector3 sDir = new Vector3(Screen.width / 2, Screen.height / 2);
             //Vector3 vAtDir = sDir - firePoint.position;
-            GameObject goMagicSpell = GameObject.Instantiate(magicspell);
-            goMagicSpell.GetComponent<MagicSpell>().MagicNorAttack(firePoint.position, vAtkDir);
+            //GameObject goMagicSpell = GameObject.Instantiate(pfmagicspell);
+
+            //goMagicSpell.GetComponent<MagicSpell>().MagicNorAttack(firePoint.position, vAtkDir);
             Debug.Log("hhhhhhhhh");
         }
-    }//¾a°Êµeªº¨Æ¥óÄ²µo
+    }//é å‹•ç•«çš„äº‹ä»¶è§¸ç™¼
+    void Vatk()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            manimater.SetTrigger("Vatk");
+        }
+    }
     void SkillAtkMotin()
     {
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    manimater.SetTrigger("SkillAtk");
+
+        //}
         if (Input.GetMouseButton(1))
         {
-            manimater.SetTrigger("SkillAtk");
+            if (force < maxforce)
+            {
+                force += Time.deltaTime * 10f;
+            }
+            else
+            {
+                force = maxforce;
+            }
+            manimater.SetFloat("IsForce", force);
+        }
+        else
+        {
+            if (force > 0.0f)
+            {
+                if(force < maxforce)
+                {
+                    manimater.SetTrigger("SmallSkill");
+                    force = 0.0f;
+                }
+                else
+                {
+                    manimater.SetTrigger("BigSkill");
+                    force = 0.0f;
+                }
+                
+
+            }
+            
+            manimater.SetFloat("IsForce", -1);
+
+        }
+        
+
+    }
+    void SkillChargeSet()
+    {
+        if (manimater.GetCurrentAnimatorStateInfo(0).IsName("Force"))
+        {
+            SkillCharge.SetActive(true);
+        }
+        else
+        {
+            SkillCharge.SetActive(false);
+
+        }
+    }
+    void PutTrapChargeSet()
+    {
+       
+        if (manimater.GetCurrentAnimatorStateInfo(1).IsName("PutTrap"))
+        {
+            TrapCharge.SetActive(true);
+        }
+        else
+        {
+            TrapCharge.SetActive(false);
 
         }
 
@@ -162,8 +310,8 @@ public class WeaponController : MonoBehaviour
     void PutTrap(PlacedObjectTypeSO placedObjectTypeSO)
     {
         Vector3 inGridPoint;
-        Vector3 mouseHit;//»İ­n§â¦oÂà´«¦¨ºô®æ¸Ìªº¦V¶qxz´N¦n
-        Ray rt = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 1.0f));//¥Ø«e¿Ã¹õ¥¿¤¤®g¨ì¥@¬ÉªºÂI
+        Vector3 mouseHit;//éœ€è¦æŠŠå¥¹è½‰æ›æˆç¶²æ ¼è£¡çš„å‘é‡xzå°±å¥½
+        Ray rt = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 1.0f));//ç›®å‰è¢å¹•æ­£ä¸­å°„åˆ°ä¸–ç•Œçš„é»
         RaycastHit rtHit;
         if(Physics.Raycast(rt,out rtHit,999f, hitGround))
         {
@@ -180,12 +328,12 @@ public class WeaponController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             manimater.SetTrigger("PutTrap");
-            //List<Vector2Int> gridPostionList=GetGridPositionList(VintBack(index), Dir.Down);//²{¦b¦³©ñªº¤H¦s¶i¥h
+            //List<Vector2Int> gridPostionList=GetGridPositionList(VintBack(index), Dir.Down);//ç¾åœ¨æœ‰æ”¾çš„äººå­˜é€²å»
             List<Vector2Int> gridPostionList = placedObjectTypeSO.GetGridPositionList(VintBack(index), dir);
             bool canBuild = true;
             foreach(Vector2Int gridPostion in gridPostionList)
-            {   //¯à§âxz±a¤J½T»{ª¬ºA
-                if(m_PutTrapTerrain.GetTrapCellAllState(gridPostion.x, gridPostion.y) != 0)//¥u¦³¨SªF¦è¤~¯à¹L¥h
+            {   //èƒ½æŠŠxzå¸¶å…¥ç¢ºèªç‹€æ…‹
+                if(m_PutTrapTerrain.GetTrapCellAllState(gridPostion.x, gridPostion.y) != 0)//åªæœ‰æ²’æ±è¥¿æ‰èƒ½éå»
                 {
                     canBuild = false;
                     break;
@@ -200,12 +348,12 @@ public class WeaponController : MonoBehaviour
                 //GameObject buildtrapforms=Instantiate(PlacedObjectTypeSO.prefeb, inGridPoint, Quaternion.Euler(0,placedObjectTypeSO.GetRotationAngle(dir), 0)));
 
 
-                foreach (Vector2Int gridPostion in gridPostionList)//§â¨C¤@­Ó¥[¶i¥h³´¨Àªºxz³£³]©w1//¨C¦³¤@­Ó³´¨À´N¶î¶Â
+                foreach (Vector2Int gridPostion in gridPostionList)//æŠŠæ¯ä¸€å€‹åŠ é€²å»é™·é˜±çš„xzéƒ½è¨­å®š1//æ¯æœ‰ä¸€å€‹é™·é˜±å°±å¡—é»‘
                 {
                     m_PutTrapTerrain.SetTrapCellAllState(gridPostion.x, gridPostion.y, 1);
                     SetPlacedObject(placedObject, index);
 
-                    //ÅÜ¦¨­n§â¨C­Ó[xz]³£¶Ç¹L¥h¶î¶Â
+                    //è®Šæˆè¦æŠŠæ¯å€‹[xz]éƒ½å‚³éå»å¡—é»‘
                 }
                 OnObjectPlaced?.Invoke(this, EventArgs.Empty);
             }
@@ -218,8 +366,8 @@ public class WeaponController : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
                 Vector3 preinGridPoint;
-                Vector3 premouseHit;//»İ­n§â¦oÂà´«¦¨ºô®æ¸Ìªº¦V¶qxz´N¦n
-                Ray prert = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 1.0f));//¥Ø«e¿Ã¹õ¥¿¤¤®g¨ì¥@¬ÉªºÂI
+                Vector3 premouseHit;//éœ€è¦æŠŠå¥¹è½‰æ›æˆç¶²æ ¼è£¡çš„å‘é‡xzå°±å¥½
+                Ray prert = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 1.0f));//ç›®å‰è¢å¹•æ­£ä¸­å°„åˆ°ä¸–ç•Œçš„é»
                 RaycastHit prertHit;
                 if (Physics.Raycast(prert, out prertHit, 999f, hitGround))
                 {
@@ -240,12 +388,12 @@ public class WeaponController : MonoBehaviour
 
                 List<Vector2Int> gridPostionList = placedObject. GetGridPositionList();
                 
-                foreach (Vector2Int gridPostion in gridPostionList)//§â¨C¤@­Ó¥[¶i¥h³´¨Àªºxz³£³]©w1//¨C¦³¤@­Ó³´¨À´N¶î¶Â
+                foreach (Vector2Int gridPostion in gridPostionList)//æŠŠæ¯ä¸€å€‹åŠ é€²å»é™·é˜±çš„xzéƒ½è¨­å®š1//æ¯æœ‰ä¸€å€‹é™·é˜±å°±å¡—é»‘
                     {
                         m_PutTrapTerrain.SetTrapCellAllState(gridPostion.x, gridPostion.y, 0);
                         ClearPlacedObject();//preindex
 
-                        //ÅÜ¦¨­n§â¨C­Ó[xz]³£¶Ç¹L¥h¶î¶Â
+                        //è®Šæˆè¦æŠŠæ¯å€‹[xz]éƒ½å‚³éå»å¡—é»‘
                     }
                 }
 
@@ -295,8 +443,8 @@ public class WeaponController : MonoBehaviour
     public Vector3 GetMouseWorldSnappedPosition()
     {
         Vector3 inGridPoint;
-        Vector3 mouseHit;//»İ­n§â¦oÂà´«¦¨ºô®æ¸Ìªº¦V¶qxz´N¦n
-        Ray rt = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 1.0f));//¥Ø«e¿Ã¹õ¥¿¤¤®g¨ì¥@¬ÉªºÂI
+        Vector3 mouseHit;//éœ€è¦æŠŠå¥¹è½‰æ›æˆç¶²æ ¼è£¡çš„å‘é‡xzå°±å¥½
+        Ray rt = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 1.0f));//ç›®å‰è¢å¹•æ­£ä¸­å°„åˆ°ä¸–ç•Œçš„é»
         RaycastHit rtHit;
         if (Physics.Raycast(rt, out rtHit, 999f, hitGround))
         {
@@ -368,5 +516,5 @@ public class WeaponController : MonoBehaviour
     //            break;
     //    }
     //    return gridPositionList;
-    //}//À°§Ú§â¶î¶Âªº¦a¤èÂX¤j¶Ç¶i©³¼hªºªí
+    //}//å¹«æˆ‘æŠŠå¡—é»‘çš„åœ°æ–¹æ“´å¤§å‚³é€²åº•å±¤çš„è¡¨
 }

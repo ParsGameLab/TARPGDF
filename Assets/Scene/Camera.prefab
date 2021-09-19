@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 8822954766032540913}
   - component: {fileID: 8822954766032540916}
   - component: {fileID: 8822954766032540907}
+  - component: {fileID: 511283719}
   m_Layer: 9
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +140,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 2646732850822871500}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 2
@@ -184,3 +185,26 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &511283719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2646732850822871501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934b3378bdab9e54da9873262025354b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mLookAtPoint: {fileID: 0}
+  mFollowDistance: 5
+  mMaxFollowDistance: 2
+  mMinFollowDistance: 1
+  mVerticalLimitUp: 50
+  mVerticalLimitDown: 50
+  rotateSensitivity: 6
+  fcamrecaverspeed: 20
+  mCheckLayer:
+    serializedVersion: 2
+    m_Bits: 64

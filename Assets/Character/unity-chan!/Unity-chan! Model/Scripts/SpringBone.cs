@@ -47,11 +47,11 @@ namespace UnityChan
 
 		private void Awake ()
 		{
-			trs = transform;
-			localRotation = transform.localRotation;
+			trs = this.transform;
+			localRotation = this.transform.localRotation;
 			//Kobayashi:Reference for "SpringManager" component with unitychan
 			// GameObject.Find("unitychan_dynamic").GetComponent<SpringManager>();
-			managerRef = GetParentSpringManager (transform);
+			managerRef = GetParentSpringManager (this.transform);
 		}
 
 		private SpringManager GetParentSpringManager (Transform t)

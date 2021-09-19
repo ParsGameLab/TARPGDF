@@ -76,7 +76,7 @@ public class SteeringBehavior
 
         //cPos = cPos + t.forward * data.m_Speed;
         //t.position = cPos;
-        data.m_Cc.SimpleMove(t.forward * data.m_Speed*20);
+        data.m_Cc.SimpleMove(t.forward * data.m_Speed*15);
     }
 
     static public bool CheckCollision(AIData data)//看有沒有障礙//看障礙
@@ -343,7 +343,7 @@ public class SteeringBehavior
 
         if(fDist < 3.0f)
         {
-            Debug.Log(data.m_Speed);
+            //Debug.Log(data.m_Speed);
             if(data.m_Speed > 0.1f)//太近ㄌ，速度又超大
             {
                 data.m_fMoveForce = -(1.0f - fDist/3.0f)*5.0f;//開始給你扣速度

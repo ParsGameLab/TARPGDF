@@ -43,7 +43,7 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
         }
 
         public void SetHealthBarDirection_LookAt() {
-            transform.localRotation = Quaternion.LookRotation(mainCamera.transform.forward, Vector3.up);
+            transform.rotation = Quaternion.LookRotation(mainCamera.transform.forward, Vector3.up);
         }
         #endregion
 

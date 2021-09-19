@@ -198,7 +198,7 @@ public class FSMMoveToState : FSMState
 
     public override void DoBeforeLeave(AIData data)
     {
-        data.m_Am.SetBool("WalkBool", false);
+        
     }
 
     public override void Do(AIData data)
@@ -286,10 +286,12 @@ public class FSMMoveToState : FSMState
             data.m_TargetObject = go;
             if (bAttack)
             {
+                data.m_Am.SetBool("WalkBool", false);
                 data.m_FSMSystem.PerformTransition(eFSMTransition.Go_Attack);
             }
             else
             {
+                data.m_Am.SetBool("WalkBool", false);
                 data.m_FSMSystem.PerformTransition(eFSMTransition.Go_Chase);
             }
             return;
@@ -317,7 +319,7 @@ public class FSMChaseState : FSMState
 
     public override void DoBeforeLeave(AIData data)
     {
-        data.m_Am.SetBool("RunBool", false);
+        
     }
 
     public override void Do(AIData data)
@@ -343,6 +345,7 @@ public class FSMChaseState : FSMState
         }
         if (bAttack)
         {
+            data.m_Am.SetBool("RunBool", false);
             data.m_FSMSystem.PerformTransition(eFSMTransition.Go_Attack);
         }
     }
@@ -360,13 +363,14 @@ public class FSMAttackState : FSMState
 
     public override void DoBeforeEnter(AIData data)
     {
-        fAttackTime = Random.Range(1.0f, 3.0f);
+        
+        fAttackTime = Random.Range(0.5f, 2.0f);
         m_fCurrentTime = 0.0f;
     }
 
     public override void DoBeforeLeave(AIData data)
     {
-        data.m_Am.SetBool("BoolAtk", false);
+        
     }
 
 
@@ -374,14 +378,17 @@ public class FSMAttackState : FSMState
     {
         // Check Animation complete.
         //...
-        //Vector3 dirfowrd = data.m_vTarget - data.m_Go.transform.position;
-        //data.m_vTarget = dirfowrd;
-        
+        Vector3 dirfowrd = data.m_vTarget - data.m_Go.transform.position;
+        data.m_vTarget = dirfowrd;
+
         if (m_fCurrentTime > fAttackTime)
         {
             m_fCurrentTime = 0.0f;
             // Do attack.
-            data.m_Am.SetBool("BoolAtk", true);
+            if (data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("IdleBattle"))
+            {
+                data.m_Am.SetTrigger("AtkTrigger");
+            }
         }
         m_fCurrentTime += Time.deltaTime;
     }
@@ -390,13 +397,16 @@ public class FSMAttackState : FSMState
     {
         bool bAttack = false;
         bool bCheck = AIFunction.CheckTargetEnemyInSight(data, data.m_TargetObject, ref bAttack);
+        
         if (bCheck == false)
         {
+            
             data.m_FSMSystem.PerformTransition(eFSMTransition.Go_MoveTo);
             return;
         }
         if (bAttack == false)
         {
+            
             data.m_FSMSystem.PerformTransition(eFSMTransition.Go_Chase);
             return;
         }

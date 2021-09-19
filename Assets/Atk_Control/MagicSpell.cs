@@ -7,6 +7,10 @@ public class MagicSpell : MonoBehaviour
 {
     private float fTime;
     public float fmagicspeed = 10.0f;
+    [SerializeField]
+    private GameObject spellDecal;
+    public Vector3 target { get; set; }
+    public bool hit {get;set;}
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +20,13 @@ public class MagicSpell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = transform.position+transform.forward * fmagicspeed * Time.deltaTime;
+        transform.position = transform.position + transform.forward * fmagicspeed * Time.deltaTime;
+
+        //transform.position = Vector3.MoveTowards(transform.position, target, fmagicspeed * Time.deltaTime);
+        //if (!hit && Vector3.Distance(transform.position, target) < 0.01f)
+        //{
+        //    Destroy(gameObject);
+        //}
         fTime += Time.deltaTime;
         if (fTime > 3.0f)
         {
@@ -25,22 +35,32 @@ public class MagicSpell : MonoBehaviour
     }
     public void MagicNorAttack(Vector3 FirePoint, Vector3 targetposition)
     {
-        
-            transform.position = FirePoint;
-            transform.forward = targetposition;
-            gameObject.SetActive(true);
 
-        
-        
+        transform.position = FirePoint;
+        transform.forward = targetposition;
+        //gameObject.SetActive(true);
+
+
+
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        ContactPoint contact = other.GetContact(0);
+        GameObject.Instantiate(spellDecal, contact.point, Quaternion.LookRotation(contact.normal));
+        Destroy(gameObject);
     }
     private void OnTriggerEnter(Collider other)
     {
+        
+
         if (other.gameObject.CompareTag("Enemy"))
         {
+            
             other.GetComponent<IEnemy_Base>().UnderAttack(30f);
             //Destroy(other.gameObject);
             Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
     
 }

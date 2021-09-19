@@ -6,6 +6,8 @@ public class EnemySponManerger : MonoBehaviour
 {
     public Transform Spawpoint;
     // Start is called before the first frame update
+    float timelimit;
+    float nextTime;
     void Start()
     {
         SpawnWave();
@@ -27,7 +29,7 @@ public class EnemySponManerger : MonoBehaviour
     {
         Vector2 p = Random.insideUnitCircle * 5;
         Vector3 spawpoint=position+new Vector3(p.x,0,p.y);
-        Transform pfEnemy = Resources.Load<Transform>("Golem");
+        Transform pfEnemy = Resources.Load<Transform>("pfWolf");
         Transform enemyTransform=Instantiate(pfEnemy, spawpoint, Quaternion.identity);
     }
 }

@@ -6,6 +6,7 @@ public class AINormalMob : MonoBehaviour
 {
     public AIData m_Data;
     FSMSystem m_FSM;
+    float deadtine = 0;
     
     //private CharacterController m_AICc;
     // Use this for initialization
@@ -59,9 +60,14 @@ public class AINormalMob : MonoBehaviour
 
         if (m_Data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("Die"))
         {
+            
             m_FSM.PerformGlobalTransition(eFSMTransition.Go_Dead);
         }
 
+    }
+    public void OnDead()
+    {
+        Destroy(this.gameObject);
     }
     private void OnDrawGizmos()
     {
