@@ -5,30 +5,33 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
     public class HealthSystem {
 
-        #region Event
         public event EventHandler OnHealthChanged;
         public event EventHandler OnHealthEmpty;
-        #endregion
 
         #region Field
-        private int currentHealthPoint;
         private int maxHealthPoint;
+        private int currentHealthPoint;
         #endregion
 
-        #region Constructor
         public HealthSystem(float theMaxHealthPoint) {
             maxHealthPoint = (int)theMaxHealthPoint;
-            currentHealthPoint = maxHealthPoint;
+            currentHealthPoint = maxHealthPoint;            
         }
-        #endregion
 
-        #region Property
-        public float CurrentHealthPoint {
-            get { return currentHealthPoint; }
-        }
-        #endregion
+        //#region Property
+        //public float CurrentHealthPoint {
+        //    get { return currentHealthPoint; }
+        //}
+        //#endregion
 
         #region Method
+        public void ResetHealthPoint(float maxHealthPoint) {
+            this.maxHealthPoint = (int)maxHealthPoint;
+            currentHealthPoint = this.maxHealthPoint;
+
+            OnHealthChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         public float GetHealthPercent() {
             return currentHealthPoint / (float)maxHealthPoint;
         }
@@ -48,12 +51,8 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
                 currentHealthPoint = maxHealthPoint;
             }
             OnHealthChanged?.Invoke(this, EventArgs.Empty);
-
         }
-
-
         #endregion
-
 
     }
 

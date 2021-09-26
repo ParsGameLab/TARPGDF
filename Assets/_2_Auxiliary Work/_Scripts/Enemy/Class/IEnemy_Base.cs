@@ -1,69 +1,40 @@
+using System;
 using UnityEngine;
 
 namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
     public abstract class IEnemy_Base : MonoBehaviour {
 
+        #region event & Property - For Outside
+        public event EventHandler OnEnemyDeath;
+        public bool IsDeath => isDeath;
+        #endregion
+
         #region Field
-        //public GameObject target;
-        //protected Quaternion myOriginRotation;
-
-        //[SerializeField]
-        //protected float confuseTime = 2.5f;
-        //private float confuseTimer;
-
-        //[SerializeField]
-        //protected float detectDistance;
-        //[SerializeField]
-        //protected float acceptableMaxHeightOffset;
-        //[SerializeField]
-        //protected float myVision;
-
-        //public LayerMask detectLayerMask;
+        [SerializeField][Min(1)]
+        protected float attackPower;
 
         private bool isDeath = false;
-
         protected EnemyAnimations myAnimations;
 
         protected Camera mainCamera;
         protected HealthBar myHealthBar;
         protected HealthSystem reference_HealthSystem;
 
-        [SerializeField] 
+        [SerializeField][Min(1)]
         protected float maxHealthPoint;
-        private float currentHealthPoint;
+        public float currentHealthPoint;
 
-        //protected IEnemyBehaviourSystem_Base reference_CurrentState;
-        //public readonly IEnemyBehaviourSystem_Base detectionState = new DetectionState();
-        #endregion
-
-        #region Property
-        //public Quaternion MyOriginRotation => myOriginRotation;
-        //public float ConfuseTime => confuseTime;
-        //public float DetectDistance => detectDistance;
-        //public float AcceptalbeMaxHeightOffset => acceptableMaxHeightOffset;
-        //public float MyVision => myVision;
-        //public LayerMask DetectLayerMask => detectLayerMask;
-
-        //public GameObject Target {
-        //    get { return target; }
-        //    set { target = value; }
-        //}
-
-        //public float ConfuseTimer {
-        //    get {
-        //        return confuseTimer;
-        //    }
-        //    set {
-        //        confuseTimer = value;
-        //    }
-        //}
+        protected string[] myName;
         #endregion
 
         #region Function
         protected virtual void OnEnable() {
-            //reference_CurrentState = detectionState;
-            //reference_CurrentState.EnterState(this);
+            //Debug.Log("OnEnable.");
+        }
+
+        protected virtual void OnDisable() {
+            //Debug.Log("OnDisable.");
         }
 
         protected virtual void Awake() {
@@ -75,7 +46,6 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             mainCamera = Camera.main;
             myHealthBar.SetUp_MainCamera(mainCamera);
 
-            
             reference_HealthSystem = new HealthSystem(maxHealthPoint);
             reference_HealthSystem.OnHealthEmpty += Reference_HealthSystem_OnHealthEmpty;
 
@@ -84,56 +54,41 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             myHealthBar.SetUp_HealthSystem(reference_HealthSystem);
             myHealthBar.SetSize();
 
-            //myOriginRotation = transform.rotation;
+            myName = gameObject.name.Split('(');
+            _2_Subroutines.Instance.SetEnemyBases(this, myName[0]);
         }
 
         public virtual void Update() {        
             HasBeAimedAlready_Type2();
-            //reference_CurrentState.Update();
         }
-
-//        protected virtual void OnDrawGizmosSelected() {
-//            Gizmos.color = new Color(Color.green.r, Color.green.g, Color.green.b, .55f);
-//            Gizmos.DrawSphere(transform.position, detectDistance);
-
-//            Gizmos.color = new Color(Color.blue.r, Color.blue.g, Color.blue.b, .55f);
-//            Gizmos.DrawLine(
-//                transform.position,
-//                transform.position + Vector3.up * acceptableMaxHeightOffset);
-//            Gizmos.DrawLine(
-//                transform.position,
-//                transform.position - Vector3.up * acceptableMaxHeightOffset);
-//#if UNITY_EDITOR
-//            UnityEditor.Handles.color = new Color(Color.red.r, Color.red.g, Color.red.b, .6f);
-//            UnityEditor.Handles.DrawSolidArc(
-//                transform.position,
-//                Vector3.up, transform.forward,
-//                myVision,
-//                detectDistance);
-
-//            UnityEditor.Handles.DrawSolidArc(
-//                transform.position,
-//                -Vector3.up, transform.forward,
-//                myVision,
-//                detectDistance);
-//#endif
-//        }
         #endregion
 
-        #region Method
-        //public void TransitionToState(IEnemyBehaviourSystem_Base theTargetState) {
-        //    reference_CurrentState = theTargetState;
-        //    theTargetState.EnterState(this);
-        //}
-        
-        //public void LookTarget() {
-        //    Vector3 vectorToTarget = target.transform.position - transform.position;
-        //    transform.rotation = Quaternion.LookRotation(vectorToTarget);
-        //}
+        #region Method - For Outside
+        public void ResetEnemyStat() {
+            reference_HealthSystem.ResetHealthPoint(maxHealthPoint);
+            currentHealthPoint = maxHealthPoint;
+            isDeath = false;
+        }
 
-        //public void LookOriginDirection() {
-        //     transform.rotation = Quaternion.Lerp(transform.rotation, myOriginRotation, .005f);
-        //}
+        public virtual void UnderAttack(float damagePoint) {
+            currentHealthPoint -= (int)damagePoint;
+            reference_HealthSystem.Calculate_HealthPoint_Damage(damagePoint);
+        }
+        #endregion
+
+        #region event
+        private void Reference_HealthSystem_OnHealthEmpty(object sender, System.EventArgs e) {
+            if(isDeath) { return; }
+            myAnimations.OnDeath();
+            OnEnemyDeath?.Invoke(this, EventArgs.Empty);
+            isDeath = true;
+        }
+        #endregion 
+
+        #region Method
+        public virtual void Attack() {
+            _2_Subroutines.Instance.StatHandler_UnityChan.UnderAttack(this, attackPower);
+        }
 
         private void HasBeAimedAlready_Type2() {
             Ray middlePointRay_mainCamera = mainCamera.ScreenPointToRay(Utils.CalculateTheCrossHairPosition(mainCamera));
@@ -154,20 +109,7 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
                 beHitterHealthBars[0].SetActive(true);
             }
         }
-
-        public virtual void UnderAttack(float damagePoint) {
-            currentHealthPoint -= (int)damagePoint;
-            reference_HealthSystem.Calculate_HealthPoint_Damage(damagePoint);
-        }
         #endregion
-
-        #region Event
-        private void Reference_HealthSystem_OnHealthEmpty(object sender, System.EventArgs e) {
-            if(isDeath) { return; }
-            myAnimations.OnDeath();
-            isDeath = true;
-        }
-        #endregion 
 
     }
 

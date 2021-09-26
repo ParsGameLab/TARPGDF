@@ -76,7 +76,16 @@ public class SteeringBehavior
 
         //cPos = cPos + t.forward * data.m_Speed;
         //t.position = cPos;
-        data.m_Cc.SimpleMove(t.forward * data.m_Speed*15);
+        if(data.State== AIData.eMobState.slowdown)
+        {
+            data.m_Cc.SimpleMove(t.forward * data.m_Speed*5f );
+            Debug.Log("SLOWDOWN");
+        }
+        else
+        {
+            data.m_Cc.SimpleMove(t.forward * data.m_Speed*15);
+        }
+        
     }
 
     static public bool CheckCollision(AIData data)//看有沒有障礙//看障礙

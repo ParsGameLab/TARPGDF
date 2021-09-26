@@ -5,11 +5,17 @@ using UnityEngine;
 public class WayPointMg : MonoBehaviour
 {
     // Start is called before the first frame update
-    public List<Transform> wps= new List<Transform>();
+    public PathArray[] patharray;
 
+    [System.Serializable]
+    public class PathArray
+    {
+        public List<Transform> wps= new List<Transform>();
+
+    }
     public List<Transform> WayPointPath
     {
-        get { return wps; }
+        get { return patharray[Random.Range(0, patharray.Length)].wps; }
     }
     void Start()
     {

@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using iii_UMVR06_TPSDefenseGame_Subroutines_2;
 
 public class unitychanControl : MonoBehaviour
 {
+    public _2_StatHandler_UnityChan statHandler_UnityChan;
+
     public Transform tpsCamera;
     public float fspeed = 3.0f;
     public float frunspeed = 5.0f;
@@ -52,6 +55,8 @@ public class unitychanControl : MonoBehaviour
         {
             vVelocity.y = 0;
         }
+        if (statHandler_UnityChan.IsDeath) { return; }
+
         float fH = Input.GetAxis("Horizontal");
         float fV = Input.GetAxis("Vertical");
         if (manimater.GetCurrentAnimatorStateInfo(0).IsName("Force")|| manimater.GetCurrentAnimatorStateInfo(0).IsName("SmallSkill") || manimater.GetCurrentAnimatorStateInfo(0).IsName("BigSkill"))

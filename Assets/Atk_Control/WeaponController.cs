@@ -133,6 +133,7 @@ public class WeaponController : MonoBehaviour
             
             changeMainWp = true;
             DeselectObjectType();
+            TrapCharge.SetActive(false);
 
         }
         if (Input.GetKey(KeyCode.Alpha2))

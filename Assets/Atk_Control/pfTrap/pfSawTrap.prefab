@@ -42,6 +42,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SawAtkDmg: 40
+  fbuffspeed: 1
 --- !u!1 &7216076813360002487
 GameObject:
   m_ObjectHideFlags: 0
@@ -52,6 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5338321433975916601}
   - component: {fileID: -5731598456342649472}
+  - component: {fileID: 3460632757213041710}
   m_Layer: 0
   m_Name: pfSawTrap
   m_TagString: Untagged
@@ -87,6 +89,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe427d6b82280484a83a82620d5ac43d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3460632757213041710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7216076813360002487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcb1c2c1961964d4e8e50e232dfba2d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SawAtkDmg: 10
+  fbuffspeed: 1
 --- !u!1001 &1574126006531273792
 PrefabInstance:
   m_ObjectHideFlags: 0

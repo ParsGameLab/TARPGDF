@@ -47,7 +47,7 @@ public class MagicBallTriger : MonoBehaviour
             {
 
                 other.GetComponent<IEnemy_Base>().UnderAttack(dmg);
-               
+                other.GetComponent<AINormalMob>().m_Data.State = AIData.eMobState.slowdown;
 
             }
 
