@@ -13,6 +13,7 @@ public class EnemySponManerger : MonoBehaviour
     private float nextWaveSpawTimer;
     private float nextMobSpawTimer;
     private int remainingMobSpawAmount;
+    private int remainingEliteMobAmount;
     private int WaveNumber;
     public int SceneWave;
     private int Gnumber;
@@ -20,7 +21,7 @@ public class EnemySponManerger : MonoBehaviour
     private bool CanStart;
 
     public const string Wolf = "Mobs/pfWolf";
-    private List<string> PathNameList;
+    private string[] PathNameList;//=["","","",""];
 
     public static EnemySponManerger Instance;
     public float PathFollowWeight = 1f;
@@ -69,21 +70,22 @@ public class EnemySponManerger : MonoBehaviour
             }       
         }
         else if (Gnumber == 2)
-            {
+        {
             if (WaveNumber <= 4)
             {
                 G2();
             }
             else
             {
+                nextWaveSpawTimer = 0;
                 CanStart = true;
             }
 
         }
         else if(Gnumber == 3)
-            {
+        {
 
-            }
+        }
         //每一波分開執行，看Each裡有幾波，再看要做幾次
         
     }
@@ -91,9 +93,12 @@ public class EnemySponManerger : MonoBehaviour
     {
         nextWaveSpawTimer = 10f;
         spawCount++;
-        remainingMobSpawAmount = 1 + 8 * WaveNumber;
+        remainingMobSpawAmount = 1 + 6 * WaveNumber+ 2*Gnumber;//+看Gnumber給精英怪
+        remainingEliteMobAmount = 2 * Gnumber;
         WaveNumber++;
         OnWaveNumberChanged?.Invoke(this, EventArgs.Empty);
+        //這裡決定要生的怪物string下面帶入
+
     }
     private void G1()
     {
@@ -108,14 +113,12 @@ public class EnemySponManerger : MonoBehaviour
             if (nextMobSpawTimer < 0f)
             {
                 nextMobSpawTimer = UnityEngine.Random.Range(0f, 0.3f);
-                Create(Wolf);
+                Create(Wolf);//普通兩波分開兩種各生一半
+                //randoncraete
                 remainingMobSpawAmount--;
-                if (remainingMobSpawAmount <= 0)
-                {
-                    nextWaveSpawTimer = 10f;
-                }
+               
             }
-        }
+        }//remainingEliteMobAmount照寫
     }
     private void G2()
     {
