@@ -341,7 +341,7 @@ public class WeaponController : MonoBehaviour
                 }
 
             }
-            if (canBuild)//CanBuild(index)
+            if (canBuild)//CanBuild(index)++CostforBuild
             {
                 Vector2Int rotationOffect = placedObjectTypeSO.GetRotationOffset(dir);
                 Vector3 placeObjectWorldPosition = inGridPoint + new Vector3(rotationOffect.x, 0, rotationOffect.y) * m_PutTrapTerrain.CellSize;

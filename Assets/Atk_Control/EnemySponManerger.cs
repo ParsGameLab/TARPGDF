@@ -12,16 +12,24 @@ public class EnemySponManerger : MonoBehaviour
     // Start is called before the first frame update
     private float nextWaveSpawTimer;
     private float nextMobSpawTimer;
+    private float nextMobSpawTimer2;
+    private float nextMobSpawTimerElite;
     private int remainingMobSpawAmount;
+    private int remainingMobSpawAmountType2;
     private int remainingEliteMobAmount;
     private int WaveNumber;
     public int SceneWave;
     private int Gnumber;
     public int spawCount;
     private bool CanStart;
+    public GameObject Gbutton;
 
     public const string Wolf = "Mobs/pfWolf";
-    private string[] PathNameList;//=["","","",""];
+    public string[] PathNameList;//=["","","",""];
+    public string[] PathNameListElite;
+    private string useMob;
+    private string useMob2;
+    private string useElite;
 
     public static EnemySponManerger Instance;
     public float PathFollowWeight = 1f;
@@ -33,9 +41,10 @@ public class EnemySponManerger : MonoBehaviour
     }
     void Start()
     {
+        //PathNameList =["Mobs/pfWolf", "Mobs/pfLizard", "Mobs/pfRatAssassin", "Mobs/pfSpecter"];
         CanStart = true;
         Gnumber = 0;
-        spawCount = 1;
+        spawCount = 0;
         WaveNumber = 1;
 
 
@@ -46,12 +55,15 @@ public class EnemySponManerger : MonoBehaviour
     {
         if (CanStart)
         {
+            Gbutton.SetActive(true);
             if (Input.GetKeyDown(KeyCode.G))
             {
                 Gnumber += 1;
-                spawCount = 1;
+                spawCount += 1;
+
                 WaveNumber = 1;
                 CanStart = false;
+                Gbutton.SetActive(false);
             }
 
         }
@@ -59,7 +71,7 @@ public class EnemySponManerger : MonoBehaviour
 
         if (Gnumber == 1)
         {
-            if (WaveNumber <= 3)
+            if (WaveNumber <= 2)
             {
                 G1();
             }
@@ -71,9 +83,9 @@ public class EnemySponManerger : MonoBehaviour
         }
         else if (Gnumber == 2)
         {
-            if (WaveNumber <= 4)
+            if (WaveNumber <= 3)
             {
-                G2();
+                G1();
             }
             else
             {
@@ -84,6 +96,15 @@ public class EnemySponManerger : MonoBehaviour
         }
         else if(Gnumber == 3)
         {
+            if (WaveNumber <= 4)
+            {
+                G1();
+            }
+            else
+            {
+                nextWaveSpawTimer = 0;
+                CanStart = true;
+            }
 
         }
         //每一波分開執行，看Each裡有幾波，再看要做幾次
@@ -91,11 +112,15 @@ public class EnemySponManerger : MonoBehaviour
     }
     private void SpawnWave()//每一小波的時間間隔跟數量種類
     {
-        nextWaveSpawTimer = 10f;
-        spawCount++;
-        remainingMobSpawAmount = 1 + 6 * WaveNumber+ 2*Gnumber;//+看Gnumber給精英怪
+        nextWaveSpawTimer = 20f;
+        
+        remainingMobSpawAmount = 1 + 2 * WaveNumber+ 2*Gnumber+ 1*spawCount;//+看Gnumber給精英怪
+        remainingMobSpawAmountType2 = 1 + 2 * WaveNumber + 2 * Gnumber + 1 * spawCount;
         remainingEliteMobAmount = 2 * Gnumber;
         WaveNumber++;
+        useMob = PathNameList[UnityEngine.Random.Range(0, PathNameList.Length)];
+        useMob2 = PathNameList[UnityEngine.Random.Range(0, PathNameList.Length)];
+        useElite = PathNameListElite[UnityEngine.Random.Range(0, PathNameListElite.Length)];
         OnWaveNumberChanged?.Invoke(this, EventArgs.Empty);
         //這裡決定要生的怪物string下面帶入
 
@@ -103,6 +128,7 @@ public class EnemySponManerger : MonoBehaviour
     private void G1()
     {
         nextWaveSpawTimer -= Time.deltaTime;
+        
         if (nextWaveSpawTimer < 0f)
         {
             SpawnWave();
@@ -113,12 +139,37 @@ public class EnemySponManerger : MonoBehaviour
             if (nextMobSpawTimer < 0f)
             {
                 nextMobSpawTimer = UnityEngine.Random.Range(0f, 0.3f);
-                Create(Wolf);//普通兩波分開兩種各生一半
+                Create(useMob);//普通兩波分開兩種各生一半
                 //randoncraete
                 remainingMobSpawAmount--;
                
             }
         }//remainingEliteMobAmount照寫
+        if (remainingMobSpawAmountType2 > 0)
+        {
+            nextMobSpawTimer2 -= Time.deltaTime;
+            if (nextMobSpawTimer2 < 0f)
+            {
+                nextMobSpawTimer2 = UnityEngine.Random.Range(0.2f, 0.4f);
+                Create(useMob2);//普通兩波分開兩種各生一半
+                //randoncraete
+                remainingMobSpawAmountType2--;
+
+            }
+        }
+        if (remainingEliteMobAmount > 0)
+        {
+            nextMobSpawTimerElite -= Time.deltaTime;
+            if (nextMobSpawTimerElite < 0f)
+            {
+                nextMobSpawTimerElite = UnityEngine.Random.Range(3f, 4f);
+                Create(useElite);//普通兩波分開兩種各生一半
+                //randoncraete
+                remainingEliteMobAmount--;
+
+            }
+        }
+
     }
     private void G2()
     {
@@ -133,7 +184,7 @@ public class EnemySponManerger : MonoBehaviour
             if (nextMobSpawTimer < 0f)
             {
                 nextMobSpawTimer = UnityEngine.Random.Range(0f, 0.3f);
-                Create(Wolf);
+                Create(useMob);
                 remainingMobSpawAmount--;
             }
         }
@@ -152,10 +203,10 @@ public class EnemySponManerger : MonoBehaviour
         spawPosition = Spawpoint.position + new Vector3(p.x, 0, p.y);
         Transform pfEnemy = Resources.Load<Transform>(PathName);
         Transform enemyTransform = Instantiate(pfEnemy, spawPosition, Quaternion.identity);
-        var boid = enemyTransform.GetComponent<Boid>();
-        boid.Position = spawPosition;
-        boid.Path = Path;
-        m_boids.Add(boid);
+        //var boid = enemyTransform.GetComponent<Boid>();
+        //boid.Position = spawPosition;
+        //boid.Path = Path;
+        //m_boids.Add(boid);
     }
 
     public static float GetPointToSegmentDistanceSqr(Vector2 askPoint, Vector2 p0, Vector2 p1, Vector2 normal, float length, out Vector2 mapPoint, out float projectionLength)

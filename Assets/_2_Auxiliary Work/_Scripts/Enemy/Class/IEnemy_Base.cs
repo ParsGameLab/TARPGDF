@@ -8,6 +8,7 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
         #region event & Property - For Outside
         public event EventHandler OnEnemyDeath;
         public bool IsDeath => isDeath;
+        private bool canHit;
         #endregion
 
         #region Field
@@ -56,6 +57,8 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
             myName = gameObject.name.Split('(');
             _2_Subroutines.Instance.SetEnemyBases(this, myName[0]);
+
+            canHit = true;
         }
 
         public virtual void Update() {        
@@ -72,6 +75,11 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
         public virtual void UnderAttack(float damagePoint) {
             currentHealthPoint -= (int)damagePoint;
+            if (isDeath == false && canHit && damagePoint > 20f)
+            {
+                myAnimations.GetHit();
+
+            }
             reference_HealthSystem.Calculate_HealthPoint_Damage(damagePoint);
         }
         #endregion
@@ -123,6 +131,10 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
         public void OnDeath() {
             animator.SetTrigger("death");
+        }
+        public void GetHit()
+        {
+            animator.SetTrigger("GetHit");
         }
 
     }

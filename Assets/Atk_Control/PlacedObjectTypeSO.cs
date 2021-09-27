@@ -29,6 +29,7 @@ public class PlacedObjectTypeSO : ScriptableObject
     public string nameString;
     public Transform prefab;
     public Transform visual;
+    public int Amount;
     public int width;
     public int height;
 
@@ -86,5 +87,8 @@ public class PlacedObjectTypeSO : ScriptableObject
         }
         return gridPositionList;
     }
+
+    ////////////////////////////////////////////////
+    //public ª½±µ¥h¦©cost
 
 }

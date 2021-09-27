@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class SteeringBehavior
 {
+    
+    
     static public void aaa(float a)
     {
         a = 1.0f;
     }
     static public void Move(AIData data)
     {
+        float fgravity = -9.8f;
+        Vector3 vVelocity = Vector3.zero;
         if (data.m_bMove == false)
         {
             return;
@@ -73,17 +77,17 @@ public class SteeringBehavior
 
             }
         }
-
+        vVelocity.y += fgravity * Time.deltaTime;
         //cPos = cPos + t.forward * data.m_Speed;
         //t.position = cPos;
-        if(data.State== AIData.eMobState.slowdown)
+        if (data.State== AIData.eMobState.slowdown)
         {
-            data.m_Cc.SimpleMove(t.forward * data.m_Speed*5f );
+            data.m_Cc.SimpleMove(t.forward * data.m_Speed*5f + vVelocity * Time.deltaTime);
             Debug.Log("SLOWDOWN");
         }
         else
         {
-            data.m_Cc.SimpleMove(t.forward * data.m_Speed*15);
+            data.m_Cc.SimpleMove(t.forward * data.m_Speed*15 + vVelocity * Time.deltaTime);
         }
         
     }

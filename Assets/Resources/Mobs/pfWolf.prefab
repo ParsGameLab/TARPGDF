@@ -1934,6 +1934,7 @@ GameObject:
   - component: {fileID: 6412284569880842556}
   - component: {fileID: 6412284569883525514}
   - component: {fileID: 1371635228801371639}
+  - component: {fileID: 502111576319716013}
   m_Layer: 0
   m_Name: WerewolfMesh
   m_TagString: Untagged
@@ -2089,6 +2090,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6412284569880415516}
   m_Mesh: {fileID: 4300000, guid: 586e6d42620c3e648b3c10381ede0587, type: 3}
+--- !u!114 &502111576319716013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412284569880415516}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5e5f5f25b03bd489e3f221643b39ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6412284569880415518
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,7 +2821,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2.03
   m_Radius: 0.8
-  m_SlopeLimit: 45
+  m_SlopeLimit: 30
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -2835,7 +2848,7 @@ MonoBehaviour:
     m_fMaxRot: 0.2
     m_Go: {fileID: 0}
     m_fSight: 5
-    m_fAttackRange: 3
+    m_fAttackRange: 2.5
     m_fAttackTime: 0
     m_fHp: 100
     m_TargetObject: {fileID: 0}
@@ -2898,8 +2911,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 30
-  maxHealthPoint: 100
-  currentHealthPoint: 100
+  maxHealthPoint: 90
+  currentHealthPoint: 0
 --- !u!1001 &1404390507488848305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3171,13 +3184,13 @@ PrefabInstance:
       objectReference: {fileID: 8552454152592099856}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
---- !u!4 &8968935065982772820 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 417948, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
-  m_PrefabInstance: {fileID: 8968935065982912200}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8968935065983042388 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 132508, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
+  m_PrefabInstance: {fileID: 8968935065982912200}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8968935065982772820 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 417948, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
   m_PrefabInstance: {fileID: 8968935065982912200}
   m_PrefabAsset: {fileID: 0}

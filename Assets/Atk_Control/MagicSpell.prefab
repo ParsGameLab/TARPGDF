@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3104092480812673309}
   - component: {fileID: 3008866898570554801}
   - component: {fileID: 3009864206124854883}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4894,7 +4894,7 @@ GameObject:
   - component: {fileID: 3104052355389852545}
   - component: {fileID: 3009511139700442271}
   - component: {fileID: 3008624778538815203}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4909,7 +4909,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3098584587868832299}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.003, y: 0, z: 0.004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3103986712221186065}
@@ -9768,7 +9768,7 @@ GameObject:
   - component: {fileID: 3101993820051787539}
   - component: {fileID: 3008730903823370857}
   - component: {fileID: 3010551302730466517}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14646,7 +14646,7 @@ GameObject:
   - component: {fileID: 3099509189538757647}
   - component: {fileID: 3099509189538757646}
   - component: {fileID: 3099509189538757652}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MagicSpell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19620,6 +19620,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fmagicspeed: 10
   spellDecal: {fileID: 3035790168469330547, guid: 51ff3fbd54c85d34e8d3785af41f1de9, type: 3}
+  Dmg: 30
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &3100266790014392543
 GameObject:
   m_ObjectHideFlags: 0
@@ -19631,7 +19635,7 @@ GameObject:
   - component: {fileID: 3103913041489544933}
   - component: {fileID: 3009442316620875225}
   - component: {fileID: 3008449060587286229}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24505,7 +24509,7 @@ GameObject:
   - component: {fileID: 3101865505743946769}
   - component: {fileID: 3009335075285824049}
   - component: {fileID: 3010119145406456375}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Waves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29379,7 +29383,7 @@ GameObject:
   - component: {fileID: 3102386686777711401}
   - component: {fileID: 3009082413182683195}
   - component: {fileID: 3010104742766279939}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,8 +9,10 @@ public class MagicSpell : MonoBehaviour
     public float fmagicspeed = 10.0f;
     [SerializeField]
     private GameObject spellDecal;
+    public float Dmg=30f;
     public Vector3 target { get; set; }
     public bool hit {get;set;}
+    public LayerMask hitLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,24 +45,33 @@ public class MagicSpell : MonoBehaviour
 
 
     }
-    private void OnCollisionEnter(Collision other)
-    {
-        ContactPoint contact = other.GetContact(0);
-        GameObject.Instantiate(spellDecal, contact.point, Quaternion.LookRotation(contact.normal));
-        Destroy(gameObject);
-    }
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    ContactPoint contact = other.GetContact(0);
+    //    GameObject.Instantiate(spellDecal, contact.point, Quaternion.LookRotation(contact.normal));
+    //    Destroy(gameObject);
+    //}
     private void OnTriggerEnter(Collider other)
     {
-        
 
-        if (other.gameObject.CompareTag("Enemy"))
+
+        //if (other.gameObject.CompareTag("Enemy"))
+        //{
+
+        //    other.GetComponent<IEnemy_Base>().UnderAttack(Dmg);
+        //    //Destroy(other.gameObject);
+        //    Destroy(gameObject);
+        //}
+        if (other.gameObject.CompareTag("EnemyHit")) 
         {
             
-            other.GetComponent<IEnemy_Base>().UnderAttack(30f);
-            //Destroy(other.gameObject);
+            other.GetComponentInParent<IEnemy_Base>().UnderAttack(Dmg);
             Destroy(gameObject);
+        
+            
         }
-        Destroy(gameObject);
+            
+        Destroy(gameObject,4f);
     }
     
 }
