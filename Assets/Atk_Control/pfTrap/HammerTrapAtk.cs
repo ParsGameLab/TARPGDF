@@ -36,10 +36,10 @@ public class HammerTrapAtk : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy") && !bOnTrigger)
+        if (other.gameObject.CompareTag("EnemyHit") && !bOnTrigger)
         {
             HammerTrapAnime.SetTrigger("HammerAtk");
-            other.GetComponent<IEnemy_Base>().UnderAttack(HammerAtkDmg);
+            other.GetComponentInParent<IEnemy_Base>().UnderAttack(HammerAtkDmg);
 
             bOnTrigger = true;
             //Destroy(other.gameObject);

@@ -10,10 +10,10 @@ public class VatkTrigger : MonoBehaviour
     {
 
 
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("EnemyHit"))
         {
 
-            other.GetComponent<IEnemy_Base>().UnderAttack(dmg);
+            other.GetComponentInParent<IEnemy_Base>().UnderAttack(dmg);
             //Destroy(other.gameObject);
             //取得FSMC去把全域狀態切換順便給時間倒數
             

@@ -368,9 +368,10 @@ GameObject:
   - component: {fileID: 3180552190660957196}
   - component: {fileID: 8926872304475862937}
   - component: {fileID: 5241551618012142960}
-  m_Layer: 0
+  - component: {fileID: 5922027424658402465}
+  m_Layer: 9
   m_Name: SpecterPBRDefault
-  m_TagString: Untagged
+  m_TagString: EnemyHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -448,6 +449,20 @@ MonoBehaviour:
   - {fileID: 8898481145853432917, guid: 2e4017d7344eee44e937c2430c060753, type: 3}
   - {fileID: 4336375771725810182, guid: 0d8941105ea4dc6408856fbd5b509232, type: 3}
   DestroyAfter: 1.5
+--- !u!136 &5922027424658402465
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3180552190653539942}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.42, z: 0}
 --- !u!1 &3180552190653539944
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,13 +2530,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.44
+  m_Height: 4.13
   m_Radius: 0.49
   m_SlopeLimit: 30
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.21, z: 0.02}
+  m_Center: {x: 0, y: 2.08, z: 0.02}
 --- !u!114 &808969624920661266
 MonoBehaviour:
   m_ObjectHideFlags: 0

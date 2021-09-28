@@ -2113,9 +2113,10 @@ GameObject:
   - component: {fileID: 6412284569880842558}
   - component: {fileID: 6412284569887817546}
   - component: {fileID: 2409396732091154}
-  m_Layer: 0
+  - component: {fileID: 5882886042426862782}
+  m_Layer: 9
   m_Name: WerewolfPBRDefault
-  m_TagString: Untagged
+  m_TagString: EnemyHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2182,6 +2183,19 @@ MonoBehaviour:
   - {fileID: 2505049921127473866, guid: d268e3b9f5667dd43b43e1a14f419b6b, type: 3}
   - {fileID: 428928300203907250, guid: f434639b063e7024c97d8f8a0e4bb005, type: 3}
   DestroyAfter: 1.5
+--- !u!65 &5882886042426862782
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412284569880415518}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.39, y: 2.03, z: 0.97}
+  m_Center: {x: 0, y: 1, z: 0.45}
 --- !u!1 &6412284569880415520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,7 +2789,6 @@ GameObject:
   - component: {fileID: 7593765961068554047}
   - component: {fileID: 8552454152592099856}
   - component: {fileID: 5856539490435929835}
-  - component: {fileID: 1729307062431591366}
   - component: {fileID: 266410229}
   - component: {fileID: 7126468313759083972}
   m_Layer: 0
@@ -2819,13 +2832,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.03
-  m_Radius: 0.8
+  m_Height: 2.98
+  m_Radius: 0.7
   m_SlopeLimit: 30
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0.33}
+  m_Center: {x: 0, y: 1.48, z: 0}
 --- !u!114 &5856539490435929835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2864,19 +2877,6 @@ MonoBehaviour:
     m_core: {fileID: 0}
     m_bCol: 0
   slowFX: {fileID: 8968935065983042388}
---- !u!65 &1729307062431591366
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8516038684370523112}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1.39, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0.3}
 --- !u!114 &266410229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3184,13 +3184,13 @@ PrefabInstance:
       objectReference: {fileID: 8552454152592099856}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
---- !u!1 &8968935065983042388 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 132508, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
-  m_PrefabInstance: {fileID: 8968935065982912200}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8968935065982772820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 417948, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
+  m_PrefabInstance: {fileID: 8968935065982912200}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8968935065983042388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 132508, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
   m_PrefabInstance: {fileID: 8968935065982912200}
   m_PrefabAsset: {fileID: 0}

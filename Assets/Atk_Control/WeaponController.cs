@@ -45,6 +45,9 @@ public class WeaponController : MonoBehaviour
     public GameObject SkillCharge;
     public GameObject TrapCharge;
 
+    private ITrapCustomer trapBuyer;
+    
+
 
 
     // Start is called before the first frame update
@@ -52,6 +55,7 @@ public class WeaponController : MonoBehaviour
     {
         Instance = this;
         m_PutTrapTerrain = null;
+        trapBuyer = GetComponent<ITrapCustomer>();
     }
     public void Init(PathFindingGrid grid)
     {
@@ -78,8 +82,6 @@ public class WeaponController : MonoBehaviour
             manimater.SetInteger("ActionID", 0);
             HitCount = 0;
         }
-
-        
         //useingWp = GetComponent<SitchWeapon>().GetCurrectWp();
 
         //if (useingWp.CompareTag("Weapon1"))
@@ -341,11 +343,12 @@ public class WeaponController : MonoBehaviour
                 }
 
             }
-            if (canBuild)//CanBuild(index)++CostforBuild
+            if (canBuild&& trapBuyer.CanBuyTrap(placedObjectTypeSO.GetCost))//CanBuild(index)++CostforBuild
             {
                 Vector2Int rotationOffect = placedObjectTypeSO.GetRotationOffset(dir);
                 Vector3 placeObjectWorldPosition = inGridPoint + new Vector3(rotationOffect.x, 0, rotationOffect.y) * m_PutTrapTerrain.CellSize;
                 PlacedObject placedObject= PlacedObject.Create(placeObjectWorldPosition, VintBack(index), dir, placedObjectTypeSO);
+                TryBuyTrap(placedObjectTypeSO);
                 //GameObject buildtrapforms=Instantiate(PlacedObjectTypeSO.prefeb, inGridPoint, Quaternion.Euler(0,placedObjectTypeSO.GetRotationAngle(dir), 0)));
 
 
@@ -518,4 +521,19 @@ public class WeaponController : MonoBehaviour
     //    }
     //    return gridPositionList;
     //}//幫我把塗黑的地方擴大傳進底層的表
+
+    private void TryBuyTrap(PlacedObjectTypeSO placedObjectTypeSO)
+    {
+        if (trapBuyer.TrySpendCoinAmount(placedObjectTypeSO.GetCost))
+        {
+            trapBuyer.BoughtTrap(placedObjectTypeSO);
+
+        }
+        else
+        {
+            
+            //顯示禁止icon
+        }
+        
+    }
 }

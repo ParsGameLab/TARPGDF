@@ -21,10 +21,10 @@ public class MagicStromTrigger : MonoBehaviour
     {
 
 
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("EnemyHit"))
         {
 
-            other.GetComponent<IEnemy_Base>().UnderAttack(dmg);
+            other.GetComponentInParent<IEnemy_Base>().UnderAttack(dmg);
 
 
         }

@@ -1187,9 +1187,10 @@ GameObject:
   - component: {fileID: 2824624712323695516}
   - component: {fileID: 1610450590319462604}
   - component: {fileID: 7784964653125789307}
-  m_Layer: 0
+  - component: {fileID: 2333720604376757731}
+  m_Layer: 9
   m_Name: pfLizardWarrior
-  m_TagString: Untagged
+  m_TagString: EnemyHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1270,6 +1271,19 @@ MonoBehaviour:
   - {fileID: 8898481145853432917, guid: 2e4017d7344eee44e937c2430c060753, type: 3}
   - {fileID: 4336375771725810182, guid: 0d8941105ea4dc6408856fbd5b509232, type: 3}
   DestroyAfter: 1.5
+--- !u!65 &2333720604376757731
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824624712314351678}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.43, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0.54}
 --- !u!1 &2824624712314351680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2852,13 +2866,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.17
+  m_Height: 3.63
   m_Radius: 1.05
   m_SlopeLimit: 30
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.1, z: 0.31}
+  m_Center: {x: 0, y: 1.82, z: 0}
 --- !u!114 &5575250093039244552
 MonoBehaviour:
   m_ObjectHideFlags: 0

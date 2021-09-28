@@ -1666,9 +1666,10 @@ GameObject:
   - component: {fileID: 3645255388231820379}
   - component: {fileID: 3913115858922559651}
   - component: {fileID: 7289237388220754654}
-  m_Layer: 0
+  - component: {fileID: 8855535185850544176}
+  m_Layer: 9
   m_Name: RatAssassinPBRDefault
-  m_TagString: Untagged
+  m_TagString: EnemyHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1748,6 +1749,19 @@ MonoBehaviour:
   - {fileID: 1041181722733882, guid: dff0196cb998a4d49b15ffce4b4d5e71, type: 3}
   - {fileID: 1855497614338780, guid: cdc1c5794aca73645b5c818b75539f4b, type: 3}
   DestroyAfter: 1.5
+--- !u!65 &8855535185850544176
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3645255388241303491}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.04, y: 1.52, z: 1.42}
+  m_Center: {x: 0, y: 0.73, z: 0.42}
 --- !u!1 &3645255388241303493
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,13 +2780,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.5
+  m_Height: 2.7
   m_Radius: 0.59
   m_SlopeLimit: 30
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.73, z: 0.21}
+  m_Center: {x: 0, y: 1.33, z: 0}
 --- !u!114 &5600850354106932435
 MonoBehaviour:
   m_ObjectHideFlags: 0

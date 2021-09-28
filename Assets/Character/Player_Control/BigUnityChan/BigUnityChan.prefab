@@ -4332,6 +4332,9 @@ GameObject:
   - component: {fileID: 8715484844579077101}
   - component: {fileID: 6421633813218594258}
   - component: {fileID: 294950253138740398}
+  - component: {fileID: 1676615884}
+  - component: {fileID: 1676615885}
+  - component: {fileID: 1676615876}
   m_Layer: 0
   m_Name: BigUnityChan
   m_TagString: Player
@@ -4411,9 +4414,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2834eeaba8d98fa4a8f547a2c17df916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statHandler_UnityChan: {fileID: 1676615884}
   tpsCamera: {fileID: 0}
   fspeed: 3
-  frunspeed: 5
+  frunspeed: 6
   GroundCheck: {fileID: 1034112010674782420}
   CheckRaius: 0.1
   flayermask:
@@ -4566,7 +4570,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4220594714443453295}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
@@ -4599,6 +4603,45 @@ MonoBehaviour:
   hitEnemy:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1676615884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220594714443453295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ab516c07d9f3d4e881ca669ecd44b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoint: 100
+  maxManaPoint: 100
+--- !u!114 &1676615885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220594714443453295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 557129a19abc9284195f9b6f03a3e876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1676615876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220594714443453295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420da9887b580224098fb0dd35d2c70f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinAmount: 4000
 --- !u!1 &4220594714443453297
 GameObject:
   m_ObjectHideFlags: 0

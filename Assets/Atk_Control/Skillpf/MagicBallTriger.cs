@@ -43,11 +43,11 @@ public class MagicBallTriger : MonoBehaviour
         {
 
 
-            if (other.gameObject.CompareTag("Enemy"))
+            if (other.gameObject.CompareTag("EnemyHit"))
             {
 
-                other.GetComponent<IEnemy_Base>().UnderAttack(dmg);
-                other.GetComponent<AINormalMob>().m_Data.State = AIData.eMobState.slowdown;
+                other.GetComponentInParent<IEnemy_Base>().UnderAttack(dmg);
+                other.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.slowdown;
 
             }
 

@@ -23,10 +23,10 @@ public class KnifeTrapAtk : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy") )
+        if (other.gameObject.CompareTag("EnemyHit"))
         {
             
-            other.GetComponent<IEnemy_Base>().UnderAttack(KnifeAtkDmg);
+            other.GetComponentInParent<IEnemy_Base>().UnderAttack(KnifeAtkDmg);
 
             
             //Destroy(other.gameObject);

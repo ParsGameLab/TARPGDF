@@ -34,10 +34,10 @@ public class SawTrapAtk : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy") && !bOnTrigger)
+        if (other.gameObject.CompareTag("EnemyHit") && !bOnTrigger)
         {
 
-            other.GetComponent<IEnemy_Base>().UnderAttack(SawAtkDmg);
+            other.GetComponentInParent<IEnemy_Base>().UnderAttack(SawAtkDmg);
             bOnTrigger = true;
 
 

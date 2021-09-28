@@ -36,10 +36,10 @@ public class NeedleTrapAtk : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy")&&!bOnTrigger)
+        if (other.gameObject.CompareTag("EnemyHit") && !bOnTrigger)
         {
             NeedleTrapAnime.SetTrigger("NeedleAtk");
-            other.GetComponent<IEnemy_Base>().UnderAttack(NeedleAtkDmg);
+            other.GetComponentInParent<IEnemy_Base>().UnderAttack(NeedleAtkDmg);
             
             bOnTrigger = true;
             //Destroy(other.gameObject);

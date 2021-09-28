@@ -422,7 +422,7 @@ public class FSMAttackState : FSMState
     public override void DoBeforeEnter(AIData data)
     {
         
-        fAttackTime = Random.Range(1f, 1.5f);
+        fAttackTime = Random.Range(0f, 0.5f);
         m_fCurrentTime = 0.0f;
     }
 
