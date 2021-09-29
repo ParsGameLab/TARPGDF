@@ -11,6 +11,8 @@ public class AINormalMob : MonoBehaviour
     private float ftimer;
     private Animation anim;
     public GameObject slowFX;
+    public int coinAmount;
+    bool CountAlready;
 
 
     //public static AINormalMob Create(Vector3 position)
@@ -26,7 +28,7 @@ public class AINormalMob : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+        CountAlready = false;
         m_FSM = new FSMSystem(m_Data);
         m_Data.m_Go = this.gameObject;
         m_Data.m_FSMSystem = m_FSM;
@@ -116,10 +118,16 @@ public class AINormalMob : MonoBehaviour
         {
             
             m_FSM.PerformGlobalTransition(eFSMTransition.Go_Dead);
-            
-            //this.gameObject.GetComponent<CharacterController>().enabled = false;
-            
 
+            //this.gameObject.GetComponent<CharacterController>().enabled = false;
+            if (CountAlready==false)
+            {
+                Player.Instance.AddCoinAmount(coinAmount);
+                UiMainforCoin.Instance().SpawnFloatingText(transform, coinAmount.ToString());
+                CountAlready = true;
+
+            }
+            
             m_Collider.enabled = false;
             this.gameObject.GetComponentInChildren<DissolveSphere>().enabled = true;
             Destroy(this.gameObject, 3f);

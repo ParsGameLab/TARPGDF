@@ -81,6 +81,17 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
                 return;
             }
         }
+        public bool IsManaEnoughtoUse(int useMana)
+        {
+            if (manaSystem.IsManaEnough(useMana))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public void UnderAttack(IEnemy_Base enemy, float damagePoint) {
             healthSystem.Calculate_HealthPoint_Damage(damagePoint);

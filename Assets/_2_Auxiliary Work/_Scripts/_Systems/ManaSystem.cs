@@ -32,6 +32,22 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             OnManaChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        public int GetManaPoint()
+        {
+            return currentManaPoint;
+        }
+        public bool IsManaEnough(int spendMana)
+        {
+            if (GetManaPoint() >= spendMana)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 
 }

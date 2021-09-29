@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iii_UMVR06_TPSDefenseGame_Subroutines_2;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,7 +47,14 @@ public class WeaponController : MonoBehaviour
     public GameObject TrapCharge;
 
     private ITrapCustomer trapBuyer;
-    
+
+    public _2_StatHandler_UnityChan statHandler_UnityChan;
+    public int smallSkillMana;
+    public int BigSkillMana;
+    bool Big;
+    bool Small;
+
+
 
 
 
@@ -246,8 +254,23 @@ public class WeaponController : MonoBehaviour
         //if (Input.GetMouseButtonDown(1))
         //{
         //    manimater.SetTrigger("SkillAtk");
-
+        
         //}
+        if (statHandler_UnityChan.IsManaEnoughtoUse(smallSkillMana) == false)//連小技能都放不了
+        {
+            Big = false;
+            Small = false;
+            return;
+        }
+        else if (statHandler_UnityChan.IsManaEnoughtoUse(BigSkillMana))
+        {
+            Big = true;
+            Small = true;
+        }
+        else if (statHandler_UnityChan.IsManaEnoughtoUse(smallSkillMana))
+        {
+            Small = true;
+        }
         if (Input.GetMouseButton(1))
         {
             if (force < maxforce)
@@ -260,18 +283,31 @@ public class WeaponController : MonoBehaviour
             }
             manimater.SetFloat("IsForce", force);
         }
-        else
+        else//我放開就算
         {
             if (force > 0.0f)
             {
                 if(force < maxforce)
                 {
-                    manimater.SetTrigger("SmallSkill");
+                    //statHandler_UnityChan.IsManaEnoughtoUse(smallSkillMana);
+                    if (Small) 
+                    {
+                        statHandler_UnityChan.ExpendMana(smallSkillMana);
+                        manimater.SetTrigger("SmallSkill");
+                    }
+                    
                     force = 0.0f;
                 }
                 else
                 {
-                    manimater.SetTrigger("BigSkill");
+                    //statHandler_UnityChan.IsManaEnoughtoUse(BigSkillMana);
+                    if (Big)
+                    {
+                        statHandler_UnityChan.ExpendMana(BigSkillMana);
+                        manimater.SetTrigger("BigSkill");
+
+                    }
+                    
                     force = 0.0f;
                 }
                 
