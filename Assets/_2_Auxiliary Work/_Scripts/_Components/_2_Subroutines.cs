@@ -7,11 +7,14 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
         private static _2_Subroutines instance;
 
+        private _2_LevelCoreHandler levelCoreHandler;
         private _2_StatHandler_UnityChan statHandler_UnityChan;
         private Dictionary<string, int> dictionary_enemyBases = new Dictionary<string, int>();
 
         public static _2_Subroutines Instance => instance;
-        
+
+        public _2_LevelCoreHandler LevelCoreHandler => levelCoreHandler;
+
         public _2_StatHandler_UnityChan StatHandler_UnityChan => statHandler_UnityChan;
 
         private void Awake() {
@@ -22,6 +25,10 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             } else {
                 Destroy(gameObject);
             }
+        }
+
+        public void SetLevelCoreHandler(_2_LevelCoreHandler levelCoreHandler) {
+            this.levelCoreHandler = levelCoreHandler;
         }
 
         public void SetUnityChanStatHandler(_2_StatHandler_UnityChan statHandler_UnityChan) {

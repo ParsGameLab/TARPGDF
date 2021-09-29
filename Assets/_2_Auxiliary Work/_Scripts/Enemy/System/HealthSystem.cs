@@ -40,8 +40,10 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             currentHealthPoint -= (int)theDamagePoint;
             if(currentHealthPoint <= 0) { 
                 currentHealthPoint = 0;
+
                 OnHealthEmpty?.Invoke(this, EventArgs.Empty);
             }
+
             OnHealthChanged?.Invoke(this, EventArgs.Empty);
         }
 
@@ -50,6 +52,7 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             if(currentHealthPoint >= maxHealthPoint) {
                 currentHealthPoint = maxHealthPoint;
             }
+
             OnHealthChanged?.Invoke(this, EventArgs.Empty);
         }
         #endregion

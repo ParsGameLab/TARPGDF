@@ -97,7 +97,10 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
         public virtual void Attack() {
             _2_Subroutines.Instance.StatHandler_UnityChan.UnderAttack(this, attackPower);
         }
-
+        public virtual void AttackLevelCore()
+        {
+            _2_Subroutines.Instance.LevelCoreHandler.UnderAttack(this, attackPower);
+        }
         private void HasBeAimedAlready_Type2() {
             Ray middlePointRay_mainCamera = mainCamera.ScreenPointToRay(Utils.CalculateTheCrossHairPosition(mainCamera));
             RaycastHit[] results = new RaycastHit[15];

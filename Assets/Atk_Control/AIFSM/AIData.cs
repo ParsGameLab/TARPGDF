@@ -111,7 +111,7 @@ public class AIFunction
         GameObject go = data.m_core;
         Vector3 v = go.transform.position - data.m_Go.transform.position;
         float fDist = v.magnitude;
-        if (fDist < data.m_fAttackRange)//攻擊範圍內
+        if (fDist < data.m_fSight)//攻擊範圍內
         {
             bAttack = true;
             return go;

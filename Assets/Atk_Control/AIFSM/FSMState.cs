@@ -505,7 +505,8 @@ public class FSMAttackCoreState : FSMState
         // Check Animation complete.
         //...
         data.m_vTarget = coreGo.transform.position;
-
+        data.m_Am.SetBool("WalkBool", false);
+        data.m_Am.SetBool("RunBool", false);
         if (m_fCurrentTime > fAttackTime)
         {
             m_fCurrentTime = 0.0f;
