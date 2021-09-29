@@ -36,12 +36,15 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
         private int currentHealthPoint;
         public int maxManaPoint;
         private int currentManaPoint;
+
+        private float timer;
         #endregion
 
         private void Awake() {
             myStatBarListener = 
                 GameObject.Find("Unity-Chan!Canvas").
-                transform.Find("StatHUD_Unity-Chan!").GetComponent<_2_StatBarListener_UnityChan>();          
+                transform.Find("StatHUD_Unity-Chan!").GetComponent<_2_StatBarListener_UnityChan>();
+            timer = 0f;
 
             #region 21-09-21
             myAnimator = GetComponent<Animator>();
@@ -66,7 +69,17 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             healthSystem.OnHealthEmpty += HealthSystem_OnHealthEmpty;
             #endregion
         }
-        
+        private void Update()
+        {
+            timer += Time.deltaTime;
+            if (timer >= 5f)
+            {
+                manaSystem.RecoverManaPercent(10);
+                timer = 0f;
+            }
+            
+        }
+
         private void OnAnimatorMove() {
             
         }
@@ -79,6 +92,17 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             } else {
                 Debug.LogWarning("法力值不足，無法繼續施法。");
                 return;
+            }
+        }
+        public void TryUseMana(int usemana)
+        {
+            if (manaSystem.TrySpendManaAmount(usemana))
+            {
+                Debug.Log("canmana");
+            }
+            else
+            {
+                Debug.Log("notenought");
             }
         }
         public bool IsManaEnoughtoUse(int useMana)

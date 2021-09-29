@@ -262,15 +262,16 @@ public class WeaponController : MonoBehaviour
             Small = false;
             return;
         }
-        else if (statHandler_UnityChan.IsManaEnoughtoUse(BigSkillMana))
-        {
-            Big = true;
-            Small = true;
-        }
-        else if (statHandler_UnityChan.IsManaEnoughtoUse(smallSkillMana))
-        {
-            Small = true;
-        }
+        //else if (statHandler_UnityChan.IsManaEnoughtoUse(BigSkillMana))
+        //{
+        //    Big = true;
+        //    Small = true;
+        //}
+        //else if (statHandler_UnityChan.IsManaEnoughtoUse(smallSkillMana))
+        //{
+        //    Big = false;
+        //    Small = true;
+        //}
         if (Input.GetMouseButton(1))
         {
             if (force < maxforce)
@@ -285,29 +286,32 @@ public class WeaponController : MonoBehaviour
         }
         else//我放開就算
         {
+            
             if (force > 0.0f)
             {
                 if(force < maxforce)
                 {
                     //statHandler_UnityChan.IsManaEnoughtoUse(smallSkillMana);
-                    if (Small) 
+                    if (!statHandler_UnityChan.IsManaEnoughtoUse(smallSkillMana)) 
                     {
-                        statHandler_UnityChan.ExpendMana(smallSkillMana);
-                        manimater.SetTrigger("SmallSkill");
+                        return;
                     }
                     
+                    statHandler_UnityChan.TryUseMana(smallSkillMana);
+                    manimater.SetTrigger("SmallSkill");
                     force = 0.0f;
+                   
                 }
                 else
                 {
                     //statHandler_UnityChan.IsManaEnoughtoUse(BigSkillMana);
-                    if (Big)
+                    if (!statHandler_UnityChan.IsManaEnoughtoUse(BigSkillMana))
                     {
-                        statHandler_UnityChan.ExpendMana(BigSkillMana);
-                        manimater.SetTrigger("BigSkill");
-
+                        return;
                     }
                     
+                    statHandler_UnityChan.TryUseMana(BigSkillMana);
+                    manimater.SetTrigger("BigSkill");
                     force = 0.0f;
                 }
                 

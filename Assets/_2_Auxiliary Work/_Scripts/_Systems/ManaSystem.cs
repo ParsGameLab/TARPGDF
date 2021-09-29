@@ -31,6 +31,26 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             if(currentManaPoint <= 0) { currentManaPoint = 0; }
             OnManaChanged?.Invoke(this, EventArgs.Empty);
         }
+        public void RecoverManaPercent(float manaRecoverPoint)
+        {
+            currentManaPoint += (int)manaRecoverPoint;
+            if(currentManaPoint >= maxManaPoint) { currentManaPoint = maxManaPoint; }
+            OnManaChanged?.Invoke(this, EventArgs.Empty);
+
+        }
+        public bool TrySpendManaAmount(int spendManaAmount)
+        {
+            if( GetManaPoint() >= spendManaAmount)
+            {
+                currentManaPoint -= spendManaAmount;
+                OnManaChanged?.Invoke(this, EventArgs.Empty);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public int GetManaPoint()
         {

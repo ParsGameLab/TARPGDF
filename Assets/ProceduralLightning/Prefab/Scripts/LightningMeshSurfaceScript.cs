@@ -149,6 +149,7 @@ namespace DigitalRuby.ThunderAndLightning
         protected override void Start()
         {
             base.Start();
+            base.Camera= Camera.main;
         }
 
         protected override void Update()

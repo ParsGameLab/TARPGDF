@@ -2628,6 +2628,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11401034, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
+      propertyPath: CameraMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11401034, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
       propertyPath: MeshFilter
       value: 
       objectReference: {fileID: 4162193990211789884}
@@ -2635,6 +2639,10 @@ PrefabInstance:
       propertyPath: MeshCollider
       value: 
       objectReference: {fileID: 6451189414689124776}
+    - target: {fileID: 11401034, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
+      propertyPath: UseWorldSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
 --- !u!4 &4162193989295242024 stripped
