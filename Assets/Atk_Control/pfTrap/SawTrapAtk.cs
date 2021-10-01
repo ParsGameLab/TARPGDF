@@ -6,7 +6,7 @@ using iii_UMVR06_TPSDefenseGame_Subroutines_2;
 public class SawTrapAtk : MonoBehaviour
 {
     public float SawAtkDmg = 10f;
-    private float AtkCdTimer = 2.0f;
+    private float AtkCdTimer = 4.0f;
     private bool bOnTrigger;
     public float fbuffspeed = 1.0f;
 
@@ -27,7 +27,7 @@ public class SawTrapAtk : MonoBehaviour
             if (AtkCdTimer < 0f)
             {
 
-                AtkCdTimer = 3.0f;
+                AtkCdTimer = 4.0f;
                 bOnTrigger = false;
             }
         }
@@ -38,6 +38,7 @@ public class SawTrapAtk : MonoBehaviour
         {
 
             other.GetComponentInParent<IEnemy_Base>().UnderAttack(SawAtkDmg);
+            other.GetComponentInParent<IEnemy_Base>().PlayGetHit();
             bOnTrigger = true;
 
 

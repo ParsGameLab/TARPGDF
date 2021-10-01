@@ -23,6 +23,8 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
         private bool isDeath = false;
         public bool IsDeath => isDeath;
 
+        
+
         private Vector3 myRespawnPosition;
 
         private _2_Subroutines subroutinesCommander;
@@ -65,6 +67,7 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             myStatBarListener.SetManaSystem(manaSystem);
             currentManaPoint = maxManaPoint;
 
+            
             #region 21-09-21
             healthSystem.OnHealthEmpty += HealthSystem_OnHealthEmpty;
             #endregion
@@ -120,6 +123,11 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
         public void UnderAttack(IEnemy_Base enemy, float damagePoint) {
             healthSystem.Calculate_HealthPoint_Damage(damagePoint);
             currentHealthPoint -= (int)damagePoint;
+        }
+        public void UnderEnemyAttack(float damagePoint)
+        {
+            currentHealthPoint -= (int)damagePoint;
+            healthSystem.Calculate_HealthPoint_Damage(damagePoint);
         }
         #endregion
 

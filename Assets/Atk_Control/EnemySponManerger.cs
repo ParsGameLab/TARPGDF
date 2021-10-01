@@ -35,6 +35,9 @@ public class EnemySponManerger : MonoBehaviour
     public float PathFollowWeight = 1f;
     public WayPath Path;
     private List<Boid> m_boids = new List<Boid>(20);
+
+    public GameObject WinUI;
+
     private void Awake()
     {
         Instance = this;
@@ -105,18 +108,39 @@ public class EnemySponManerger : MonoBehaviour
                 nextWaveSpawTimer = 0;
                 CanStart = true;
             }
+            if (CheckEnemyClear())
+            {
+                WinUI.SetActive(true);
+            }
 
         }
         //每一波分開執行，看Each裡有幾波，再看要做幾次
         
     }
+    public bool CheckEnemyClear()
+    {
+       GameObject[] golist =GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject go in golist)
+        {
+            if (go != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        return true;
+    }
     private void SpawnWave()//每一小波的時間間隔跟數量種類
     {
         nextWaveSpawTimer = 20f;
         
-        remainingMobSpawAmount = 1 + 2 * WaveNumber+ 2*Gnumber+ 1*spawCount;//+看Gnumber給精英怪
-        remainingMobSpawAmountType2 = 1 + 2 * WaveNumber + 2 * Gnumber + 1 * spawCount;
-        remainingEliteMobAmount = 2 * Gnumber;
+        remainingMobSpawAmount = 3 + 1 * WaveNumber+ 1*Gnumber+ 1*spawCount;//+看Gnumber給精英怪
+        remainingMobSpawAmountType2 = 3 + 1 * WaveNumber + 1 * Gnumber + 1 * spawCount;
+        remainingEliteMobAmount = 1 * Gnumber;
         WaveNumber++;
         useMob = PathNameList[UnityEngine.Random.Range(0, PathNameList.Length)];
         useMob2 = PathNameList[UnityEngine.Random.Range(0, PathNameList.Length)];

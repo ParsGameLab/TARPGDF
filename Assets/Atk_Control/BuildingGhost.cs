@@ -41,7 +41,7 @@ public class BuildingGhost : MonoBehaviour {
         //    NoCoinUI.SetActive(true);
         //}
         
-        RefreshVisual();//?問一下怎摸省
+        //RefreshVisual();//?問一下怎摸省
         Vector3 targetPosition = WeaponController.Instance.GetMouseWorldSnappedPosition();
             //targetPosition.y = 1f;
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 15f);

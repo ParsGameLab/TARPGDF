@@ -7,12 +7,16 @@ public class AINormalMob : MonoBehaviour
     public AIData m_Data;
     FSMSystem m_FSM;
     private float slowtime = 2f;
+    
     Collider m_Collider;
     private float ftimer;
+    private float smallftimer;
     private Animation anim;
     public GameObject slowFX;
     public int coinAmount;
     bool CountAlready;
+    private float normaxspeed;
+    private bool inslowdown;
 
 
     //public static AINormalMob Create(Vector3 position)
@@ -86,7 +90,8 @@ public class AINormalMob : MonoBehaviour
         m_FSM.AddState(dstate);
         m_FSM.AddState(hitstate);
 
-
+        normaxspeed = m_Data.m_fMaxSpeed;
+        inslowdown = false;
     }
 
     // Update is called once per frame
@@ -98,13 +103,28 @@ public class AINormalMob : MonoBehaviour
         //{
         //    m_FSM.PerformGlobalTransition(eFSMTransition.Go_GetHit);
         //}
+        if(m_Data.State == AIData.eMobState.dizzy)
+        {
+            m_Data.m_Am.SetTrigger("Dizzy");
+            
+        }
+
+        
+
         if (m_Data.State == AIData.eMobState.slowdown)
         {
+            inslowdown = true;
             slowFX.SetActive(true);
             m_Data.m_Am.SetFloat("Speed", 0.4f);
+            float slowspeed = normaxspeed * 0.4f;
+            if (slowspeed <= 0.05) { slowspeed = 0.05f; }
+            
+            m_Data.m_fMaxSpeed = slowspeed;
+
             if (ftimer > slowtime)
             {
-                
+                inslowdown = false;
+                m_Data.m_fMaxSpeed = normaxspeed;
                 ftimer = 0f;
                 m_Data.m_Am.SetFloat("Speed", 1f);
                 slowFX.SetActive(false);
@@ -113,7 +133,31 @@ public class AINormalMob : MonoBehaviour
 
             }
             ftimer += Time.deltaTime;
+        }else if (m_Data.State == AIData.eMobState.smallslowdown&&!inslowdown)
+        {
+            
+            float smallslowspeed = normaxspeed * 0.2f;
+            if (smallslowspeed <= 0.05) { smallslowspeed = 0.05f; }
+            m_Data.m_fMaxSpeed = smallslowspeed;
+            m_Data.m_Am.SetFloat("Speed", 0.2f);
+        }else
+        {
+            m_Data.m_fMaxSpeed = normaxspeed;
+            m_Data.m_Am.SetFloat("Speed", 1f);
+            slowFX.SetActive(false);
+            m_Data.State = AIData.eMobState.normal;
+
         }
+        if (m_Data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("Dizzy"))
+        {
+            m_Data.m_fMaxSpeed = 0;
+        }
+        else
+        {
+            m_Data.State = AIData.eMobState.normal;
+            m_Data.m_fMaxSpeed = normaxspeed;
+        }
+
         if (m_Data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("Die"))
         {
             
@@ -140,6 +184,11 @@ public class AINormalMob : MonoBehaviour
         if (null == ani) return;
         AnimationState state = ani[name];
         if (!state) state.speed = speed;
+    }
+
+    public Vector3 GetTagetPosition()
+    {
+        return m_Data.GetTarget();
     }
     
 

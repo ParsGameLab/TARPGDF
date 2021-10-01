@@ -5,7 +5,7 @@ using iii_UMVR06_TPSDefenseGame_Subroutines_2;
 
 public class NeedleTrapAtk : MonoBehaviour
 {
-    private float AtkCdTimer=3.0f;
+    private float AtkCdTimer=5.0f;
     public float fbuffspeed = 1.0f;
     private bool bOnTrigger;
     public Animator NeedleTrapAnime;
@@ -26,7 +26,7 @@ public class NeedleTrapAtk : MonoBehaviour
             if (AtkCdTimer < 0f)
             {
             
-                AtkCdTimer = 3.0f;
+                AtkCdTimer = 5.0f;
                 bOnTrigger = false;
             }
         }
@@ -40,7 +40,8 @@ public class NeedleTrapAtk : MonoBehaviour
         {
             NeedleTrapAnime.SetTrigger("NeedleAtk");
             other.GetComponentInParent<IEnemy_Base>().UnderAttack(NeedleAtkDmg);
-            
+            other.GetComponentInParent<IEnemy_Base>().PlayGetHit();
+
             bOnTrigger = true;
             //Destroy(other.gameObject);
             

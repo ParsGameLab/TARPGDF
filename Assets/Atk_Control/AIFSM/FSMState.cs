@@ -393,6 +393,7 @@ public class FSMChaseState : FSMState
         bool bCheck = AIFunction.CheckTargetEnemyInSight(data, data.m_TargetObject, ref bAttack);//插在敵人是check還是有人在旁邊
         if (bCheck == false)
         {
+            data.m_Am.SetBool("RunBool", false);
             data.m_FSMSystem.PerformTransition(eFSMTransition.Go_MoveTo);
             return;
         }
@@ -422,7 +423,7 @@ public class FSMAttackState : FSMState
     public override void DoBeforeEnter(AIData data)
     {
         
-        fAttackTime = Random.Range(0f, 0.5f);
+        fAttackTime = Random.Range(0.5f, 1f);
         m_fCurrentTime = 0.0f;
     }
 
@@ -436,8 +437,9 @@ public class FSMAttackState : FSMState
     {
         // Check Animation complete.
         //...
+        data.m_vTarget = data.GetPlayer().transform.position;
         Vector3 dirfowrd = data.m_vTarget - data.m_Go.transform.position;
-        data.m_vTarget = dirfowrd;
+        data.m_Go.transform.forward = dirfowrd;
 
         if (m_fCurrentTime > fAttackTime)
         {
@@ -504,7 +506,9 @@ public class FSMAttackCoreState : FSMState
     {
         // Check Animation complete.
         //...
-        data.m_vTarget = coreGo.transform.position;
+       
+        Vector3 dirfowrd = coreGo.transform.position-data.m_Go.transform.position ;
+        data.m_Go.transform.forward = dirfowrd;
         data.m_Am.SetBool("WalkBool", false);
         data.m_Am.SetBool("RunBool", false);
         if (m_fCurrentTime > fAttackTime)

@@ -162,6 +162,7 @@ Transform:
   - {fileID: 6437420085239730279}
   - {fileID: 4976706146031768050}
   - {fileID: 1252634045184403032}
+  - {fileID: 260770101500173186}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -178,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 50
-  maxHealthPoint: 200
+  maxHealthPoint: 400
   currentHealthPoint: 0
 --- !u!143 &5865451505261216683
 CharacterController:
@@ -192,7 +193,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 4
-  m_Radius: 1.3
+  m_Radius: 0.67
   m_SlopeLimit: 30
   m_StepOffset: 0.15
   m_SkinWidth: 0.08
@@ -220,7 +221,7 @@ MonoBehaviour:
     m_fMaxRot: 0.1
     m_Go: {fileID: 0}
     m_fSight: 6
-    m_fAttackRange: 3.5
+    m_fAttackRange: 5
     m_fAttackTime: 0
     m_fHp: 100
     m_TargetObject: {fileID: 0}
@@ -326,6 +327,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5045225953889790019}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5982637891821248869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260770101500173186}
+  m_Layer: 0
+  m_Name: AttackePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &260770101500173186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5982637891821248869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.002, y: 0.011, z: 2.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5045225953889790019}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6847507865262298336
 GameObject:
@@ -1941,6 +1972,7 @@ GameObject:
   - component: {fileID: 4989163652415966768}
   - component: {fileID: 4162193990124756339}
   - component: {fileID: 6451189414689124776}
+  - component: {fileID: 699413393447887416}
   m_Layer: 9
   m_Name: BlackKnightPBRDefault
   m_TagString: EnemyHit
@@ -2040,6 +2072,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.95, y: 2.54, z: 1.64}
   m_Center: {x: 0, y: 1.27, z: 0.22}
+--- !u!114 &699413393447887416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6847507865262298442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d2d00a95fad954da8e1ca45cf51bd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Effect: {fileID: 4549287482123070130, guid: 4e94ade93f6a5e14ca717f3f4a3c1e32, type: 3}
+  StartPositionRotation: {fileID: 260770101500173186}
+  DestroyAfter: 1.5
 --- !u!1 &6847507865262298444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,6 +2553,10 @@ PrefabInstance:
       value: EnemyWeaponHitPoint
       objectReference: {fileID: 0}
     - target: {fileID: 5083933546193883518, guid: dfc80f81037f24f4bb8cd5440c33b2aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5083933546193883518, guid: dfc80f81037f24f4bb8cd5440c33b2aa, type: 3}
       propertyPath: m_TagString
       value: EnemyWeapon
       objectReference: {fileID: 0}
@@ -2645,14 +2696,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
---- !u!4 &4162193989295242024 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 417948, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
-  m_PrefabInstance: {fileID: 4162193989295086516}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4162193989294956072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 132508, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
+  m_PrefabInstance: {fileID: 4162193989295086516}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4162193989295242024 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 417948, guid: bb91a69fcf6179746b4011719cd02737, type: 3}
   m_PrefabInstance: {fileID: 4162193989295086516}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8377614960500458175

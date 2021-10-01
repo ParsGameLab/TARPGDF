@@ -4335,7 +4335,7 @@ GameObject:
   - component: {fileID: 1676615884}
   - component: {fileID: 1676615885}
   - component: {fileID: 1676615876}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BigUnityChan
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4473,6 +4473,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dc6798150d9c7ff42abd4922179d5dd9, type: 2}
   SkillCharge: {fileID: 3349846570523944231}
   TrapCharge: {fileID: 819545541010766183}
+  statHandler_UnityChan: {fileID: 1676615884}
+  smallSkillMana: 30
+  BigSkillMana: 50
 --- !u!114 &8715484844579077101
 MonoBehaviour:
   m_ObjectHideFlags: 0

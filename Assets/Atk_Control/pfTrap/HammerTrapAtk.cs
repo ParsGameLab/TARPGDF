@@ -10,6 +10,10 @@ public class HammerTrapAtk : MonoBehaviour
     private bool bOnTrigger;
     public Animator HammerTrapAnime;
     public float HammerAtkDmg = 30f;
+
+    public GameObject Effect;
+    public Transform StartPositionRotation;
+    public float DestroyAfter = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,13 +37,18 @@ public class HammerTrapAtk : MonoBehaviour
 
 
 
+
+    }
+    public void HammerAtk()
+    {
+        var instance = Instantiate(Effect, StartPositionRotation.position, Quaternion.identity);
+        Destroy(instance, DestroyAfter);
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("EnemyHit") && !bOnTrigger)
         {
             HammerTrapAnime.SetTrigger("HammerAtk");
-            other.GetComponentInParent<IEnemy_Base>().UnderAttack(HammerAtkDmg);
 
             bOnTrigger = true;
             //Destroy(other.gameObject);
@@ -47,4 +56,17 @@ public class HammerTrapAtk : MonoBehaviour
 
         }
     }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("EnemyHit"))
+    //    {
+
+    //        other.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.normal;
+
+
+    //        //Destroy(other.gameObject);
+
+
+    //    }
+    //}
 }

@@ -7,6 +7,8 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
         private static _2_Subroutines instance;
 
+        private Canvas canvas_Other; 
+
         private _2_LevelCoreHandler levelCoreHandler;
         private _2_StatHandler_UnityChan statHandler_UnityChan;
         private Dictionary<string, int> dictionary_enemyBases = new Dictionary<string, int>();
@@ -25,6 +27,13 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             } else {
                 Destroy(gameObject);
             }
+
+            canvas_Other = transform.Find("Canvas_Other").GetComponent<Canvas>();
+            canvas_Other.gameObject.SetActive(false);            
+        }
+
+        private void Start() {
+            canvas_Other.gameObject.SetActive(true);
         }
 
         public void SetLevelCoreHandler(_2_LevelCoreHandler levelCoreHandler) {

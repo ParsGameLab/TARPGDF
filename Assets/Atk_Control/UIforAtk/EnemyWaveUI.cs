@@ -23,7 +23,7 @@ public class EnemyWaveUI : MonoBehaviour
 
     private void EnemyWaveManager_OnWaveNumberChaged(object sender, EventArgs e)
     {
-        SetWaveNumberText("Wave"+enemySponManger.GetWaveNumber()+"/3");
+        SetWaveNumberText(enemySponManger.GetWaveNumber()+"/3");
     }
 
     private void Update()

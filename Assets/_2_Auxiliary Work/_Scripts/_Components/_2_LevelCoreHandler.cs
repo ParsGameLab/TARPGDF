@@ -60,6 +60,11 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             healthSystem.Calculate_HealthPoint_Damage(damage);
             currentCoreHealth -= (int)damage;
         }
+        public void UnderEnemyAttack( float damage)
+        {
+            healthSystem.Calculate_HealthPoint_Damage(damage);
+            currentCoreHealth -= (int)damage;
+        }
 
         private void DefendFailure_GameLoss() { //TODO
             //Animator.SetBool();

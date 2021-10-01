@@ -11,6 +11,7 @@ public class AIData  {
         normal,
         slowdown,
         dizzy,
+        smallslowdown,
     }
     public eMobState m_MobState;
 
@@ -60,11 +61,20 @@ public class AIData  {
     public FSMSystem m_FSMSystem;
 
     public BT.cBTSystem m_BTSystem;
+
     public eMobState State
     {
         get { return m_MobState; }
         set { m_MobState = value; }
 
+    }
+    public Vector3 GetTarget()
+    {
+        return m_vTarget;
+    }
+    public GameObject GetPlayer()
+    {
+        return m_player;
     }
 }
 
@@ -73,7 +83,7 @@ public class AIFunction
 {
     public static GameObject CheckEnemyInSight(AIData data, ref bool bAttack)
     {
-        GameObject go = data.m_player;
+        GameObject go = data.GetPlayer();
         Vector3 v = go.transform.position - data.m_Go.transform.position;
         float fDist = v.magnitude;
         if (fDist < data.m_fAttackRange)//攻擊範圍內

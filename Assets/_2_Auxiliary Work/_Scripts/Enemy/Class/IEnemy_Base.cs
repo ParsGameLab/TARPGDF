@@ -75,12 +75,21 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
         public virtual void UnderAttack(float damagePoint) {
             currentHealthPoint -= (int)damagePoint;
-            if (isDeath == false && canHit && damagePoint > 20f)
+            //if (isDeath == false && canHit && damagePoint > 20f)
+            //{
+            //    myAnimations.GetHit();
+
+            //}
+            reference_HealthSystem.Calculate_HealthPoint_Damage(damagePoint);
+        }
+        public void PlayGetHit()
+        {
+            if (isDeath == false )
             {
                 myAnimations.GetHit();
 
             }
-            reference_HealthSystem.Calculate_HealthPoint_Damage(damagePoint);
+
         }
         #endregion
 
