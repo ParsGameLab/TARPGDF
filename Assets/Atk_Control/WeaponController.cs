@@ -69,6 +69,10 @@ public class WeaponController : MonoBehaviour
     {
         m_PutTrapTerrain = grid;
     }
+    public PathFindingGrid GetGrid()
+    {
+        return m_PutTrapTerrain;
+    }
     void Start()
     {
         manimater = GetComponent<Animator>();
@@ -363,7 +367,7 @@ public class WeaponController : MonoBehaviour
         }
         else
         {
-            mouseHit = Vector3.zero;
+            mouseHit = Vector3.zero ;
         }
         int index=m_PutTrapTerrain.GetCellIndex(mouseHit);
         inGridPoint = m_PutTrapTerrain.GetCellPosition(index);
@@ -562,9 +566,9 @@ public class WeaponController : MonoBehaviour
     //    return gridPositionList;
     //}//幫我把塗黑的地方擴大傳進底層的表
 
-    private void TryBuyTrap(PlacedObjectTypeSO placedObjectTypeSO)
+    private void TryBuyTrap(PlacedObjectTypeSO placedObjectTypeSO)//實際買
     {
-        if (trapBuyer.TrySpendCoinAmount(placedObjectTypeSO.GetCost))
+        if (trapBuyer.TrySpendCoinAmount(placedObjectTypeSO.GetCost))//在這完成買
         {
             trapBuyer.BoughtTrap(placedObjectTypeSO);
 

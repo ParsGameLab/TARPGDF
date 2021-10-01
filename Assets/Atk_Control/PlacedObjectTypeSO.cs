@@ -29,6 +29,7 @@ public class PlacedObjectTypeSO : ScriptableObject
     public string nameString;
     public Transform prefab;
     public Transform visual;
+    public Transform redvisual;
     public int costAmount;
     public int width;
     public int height;
