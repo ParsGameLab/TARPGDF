@@ -13,6 +13,7 @@ public class AINormalMob : MonoBehaviour
     private float smallftimer;
     private Animation anim;
     public GameObject slowFX;
+    public GameObject debuff;
     public int coinAmount;
     bool CountAlready;
     private float normaxspeed;
@@ -135,28 +136,26 @@ public class AINormalMob : MonoBehaviour
             ftimer += Time.deltaTime;
         }else if (m_Data.State == AIData.eMobState.smallslowdown&&!inslowdown)
         {
-            
+            debuff.SetActive(true);
             float smallslowspeed = normaxspeed * 0.2f;
             if (smallslowspeed <= 0.05) { smallslowspeed = 0.05f; }
             m_Data.m_fMaxSpeed = smallslowspeed;
             m_Data.m_Am.SetFloat("Speed", 0.2f);
         }else
         {
+            debuff.SetActive(false);
             m_Data.m_fMaxSpeed = normaxspeed;
             m_Data.m_Am.SetFloat("Speed", 1f);
             slowFX.SetActive(false);
             m_Data.State = AIData.eMobState.normal;
 
         }
+
         if (m_Data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("Dizzy"))
         {
             m_Data.m_fMaxSpeed = 0;
         }
-        else
-        {
-            m_Data.State = AIData.eMobState.normal;
-            m_Data.m_fMaxSpeed = normaxspeed;
-        }
+        
 
         if (m_Data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("Die"))
         {

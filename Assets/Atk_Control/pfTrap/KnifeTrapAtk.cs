@@ -26,6 +26,7 @@ public class KnifeTrapAtk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        iTween.RotateTo(gocutter, iTween.Hash("y", 180, "time", 0.45f, "easetype", easeType, "looptype", loopType));
         AtkCdTimer -= fbuffspeed * Time.deltaTime;
         if (AtkCdTimer < 0f)
         {
