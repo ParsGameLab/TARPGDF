@@ -51,10 +51,12 @@ public class PriceUI : MonoBehaviour
         if (trapBuyer.CanBuyTrap(pso.GetCost))
         {
             text.color = normal;
+            Debug.Log("TEXT Nor");
             return;
         }
         else
         {
+            Debug.Log("TEXT RED");
             text.color = red;
             //Εά¦β
         }
