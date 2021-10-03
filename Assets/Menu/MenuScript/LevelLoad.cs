@@ -18,6 +18,7 @@ public class LevelLoad : MonoBehaviour
     public void LoadLevel (int sceneIndex)
     {
         StartCoroutine(LoadAsyncScene(sceneIndex));
+        
     }
 
     IEnumerator LoadAsyncScene(int sceneIndex)
@@ -44,9 +45,7 @@ public class LevelLoad : MonoBehaviour
 
             slider.value = p;
 
-            progressText.text = p + "%";
-
-
+            progressText.text = p + "%";            
 
             yield return null;
         }

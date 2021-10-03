@@ -28,7 +28,7 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
                 Destroy(gameObject);
             }
 
-            canvas_Other = transform.Find("Canvas_Other").GetComponent<Canvas>();
+            canvas_Other = GameObject.Find("Canvas_Other").GetComponent<Canvas>();
             canvas_Other.gameObject.SetActive(false);            
         }
 

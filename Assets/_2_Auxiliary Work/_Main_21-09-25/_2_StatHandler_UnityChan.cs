@@ -181,10 +181,10 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
                 currentAnimatorStateInfo = myAnimator.GetCurrentAnimatorStateInfo(0);                
                 yield return null;
             }
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(4f);
             transform.position = myRespawnPosition;
             myAnimator.SetTrigger("Reaction");
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
             ResetMyStat();
             EnableMyControlRelationalComponents();
         }

@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
         public Color lowHealthColor;
         private Color currentFillerColor;
 
+        private Color corecolor;
+
         private Image healthFill;
         private Text healthPercentText;
         private Text coreNameText;
@@ -21,10 +24,10 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
         private void Awake() {
             healthFill = transform.Find("Background").Find("Filler").GetComponent<Image>();
-            coreNameText = transform.Find("CoreNameText").GetComponent<Text>(); 
+            //coreNameText = transform.Find("CoreNameText").GetComponent<Text>(); 
             healthPercentText = transform.Find("HealthPercentText").GetComponent<Text>();
             currentFillerColor = healthFill.color;
-            currentTextColor = coreNameText.color = healthPercentText.color;
+            currentTextColor =  healthPercentText.color;// coreNameText.color =
         }
 
 
@@ -37,9 +40,9 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
             currentFillerColor = Color.Lerp(lowHealthColor, fullHealthColor, healthFill.fillAmount);
             healthFill.color = currentFillerColor;
             currentTextColor = Color.Lerp(lowTextColor, fullHealthColor, healthFill.fillAmount);
-            coreNameText.color = healthPercentText.color = currentTextColor;
+            //coreNameText.color = healthPercentText.color = currentTextColor;
             if(healthSystem.GetHealthPercent() <= 0) {
-                coreNameText.color = healthPercentText.color = Color.gray;
+                //coreNameText.color = healthPercentText.color = Color.gray;
             }
         }
 

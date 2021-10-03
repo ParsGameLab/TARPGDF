@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class AINormalMob : MonoBehaviour
 {
+    public enum eMobRL
+    {
+        oneway,
+        R,
+        L,
+    }
+    public eMobRL m_eMobRL;
+
     public AIData m_Data;
     FSMSystem m_FSM;
     private float slowtime = 2f;
@@ -48,7 +56,22 @@ public class AINormalMob : MonoBehaviour
 
 
         FSMMoveToState mtstate = new FSMMoveToState();
-        mtstate.SetWp(GameObject.Find("WayPoint").GetComponent<WayPointMg>().WayPointPath);
+        if (m_eMobRL == eMobRL.oneway)//EnemySponManerger.Instance.enemylist ==null&& EnemySponManerger.Instance.enemylist.Contains(this.transform)
+        {
+            mtstate.SetWp(GameObject.Find("WayPoint").GetComponent<WayPointMg>().WayPointPath);
+            
+        }//其餘是否在RL陣列李，有就用左右路
+        else if (m_eMobRL == eMobRL.L)//EnemySpawnManagerS2.Instance.enemylistL.Contains(this.transform)
+        {
+            mtstate.SetWp(GameObject.Find("WayPointL").GetComponent<WayPointMg>().WayPointPath);
+            
+        }
+        else if (m_eMobRL == eMobRL.R)//EnemySpawnManagerS2.Instance.enemylistR.Contains(this.transform)
+        {
+            mtstate.SetWp(GameObject.Find("WayPointR").GetComponent<WayPointMg>().WayPointPath);
+           
+        }
+        //mtstate.SetWp(GameObject.Find("WayPoint").GetComponent<WayPointMg>().WayPointPath);
         mtstate.SetNv(m_Data.m_Go.GetComponent<NavigationComponent>());
         //mtstate.SetSelfBoid(m_Data.m_Go.GetComponent<Boid>());
         //mtstate.SetPathPoint(m_Data.m_Go.GetComponent<NavigationComponent>().Path);
@@ -116,8 +139,8 @@ public class AINormalMob : MonoBehaviour
         {
             inslowdown = true;
             slowFX.SetActive(true);
-            m_Data.m_Am.SetFloat("Speed", 0.4f);
-            float slowspeed = normaxspeed * 0.4f;
+            m_Data.m_Am.SetFloat("Speed", 0.5f);
+            float slowspeed = normaxspeed * 0.5f;
             if (slowspeed <= 0.05) { slowspeed = 0.05f; }
             
             m_Data.m_fMaxSpeed = slowspeed;
@@ -137,10 +160,10 @@ public class AINormalMob : MonoBehaviour
         }else if (m_Data.State == AIData.eMobState.smallslowdown&&!inslowdown)
         {
             debuff.SetActive(true);
-            float smallslowspeed = normaxspeed * 0.2f;
+            float smallslowspeed = normaxspeed * 0.3f;
             if (smallslowspeed <= 0.05) { smallslowspeed = 0.05f; }
             m_Data.m_fMaxSpeed = smallslowspeed;
-            m_Data.m_Am.SetFloat("Speed", 0.2f);
+            m_Data.m_Am.SetFloat("Speed", 0.3f);
         }else
         {
             debuff.SetActive(false);
@@ -169,6 +192,18 @@ public class AINormalMob : MonoBehaviour
                 UiMainforCoin.Instance().SpawnFloatingText(transform, coinAmount.ToString());
                 CountAlready = true;
 
+            }
+
+            if(m_eMobRL == eMobRL.oneway)
+            {
+                EnemySponManerger.Instance.enemylist.Remove(this.transform);
+            }else if(m_eMobRL == eMobRL.L)
+            {
+                EnemySpawnManagerS2.Instance.enemylistL.Remove(this.transform);
+            }
+            else if(m_eMobRL == eMobRL.R)
+            {
+                EnemySpawnManagerS2.Instance.enemylistR.Remove(this.transform);
             }
             
             m_Collider.enabled = false;

@@ -19,6 +19,7 @@ public class EnemyWaveUI : MonoBehaviour
     private void Start()
     {
         enemySponManger.OnWaveNumberChanged += EnemyWaveManager_OnWaveNumberChaged;
+        
     }
 
     private void EnemyWaveManager_OnWaveNumberChaged(object sender, EventArgs e)
@@ -28,15 +29,15 @@ public class EnemyWaveUI : MonoBehaviour
 
     private void Update()
     {
-        float nextWaveSpawnTimer = enemySponManger.GetNextWaveSpawnTimer();
-        if (nextWaveSpawnTimer <= 0f)
-        {
-            SetMessageText("");
-        }
-        else
-        {
-            SetMessageText("Next Wave in" + nextWaveSpawnTimer.ToString("F1") + "s");
-        }
+        //float nextWaveSpawnTimer = enemySponManger.GetNextWaveSpawnTimer();
+        //if (nextWaveSpawnTimer <= 0f)
+        //{
+        //    SetMessageText("");
+        //}
+        //else
+        //{
+        //    SetMessageText("Next Wave in" + nextWaveSpawnTimer.ToString("F1") + "s");
+        //}
     }
     private void SetMessageText(string message)
     {

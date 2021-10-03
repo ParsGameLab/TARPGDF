@@ -38,8 +38,32 @@ public class EnemySponManerger : MonoBehaviour
 
     public GameObject WinUI;
 
+    private float ReUseEnemyTimer;
+    private int currectcounter=0;
+    public List<Transform> enemylist = new List<Transform>();
+
+    private int EnemyAmount;
+    private bool IsBonusGived;
+    public GameObject BonusEffect;
+    public int Wave1Bonus=500;
+    public int Wave2Bonus = 700;
+
+    private float G1W1 = 5f;
+    private float G1W2 = 6f;
+    private float G1W3 = 7f;
+    private float G1W4 = 8f;
+    private float G2W1 = 3f;
+    private float G2W2 = 7f;
+    private float G2W3 = 6f;
+    private float G2W4 = 8f;
+    private float G3W1 = 6f;
+    private float G3W2 = 10f;
+    private float G3W3 = 7f;
+    private float G3W4 = 9f;
+
     private void Awake()
     {
+        BonusEffect.SetActive(false);
         Instance = this;
     }
     void Start()
@@ -61,78 +85,277 @@ public class EnemySponManerger : MonoBehaviour
             Gbutton.SetActive(true);
             if (Input.GetKeyDown(KeyCode.G))
             {
+                BonusEffect.SetActive(false);
+                EnemyAmount = 4;
+                currectcounter++;
                 Gnumber += 1;
-                spawCount += 1;
-
-                WaveNumber = 1;
                 CanStart = false;
                 Gbutton.SetActive(false);
+                IsBonusGived = false;
+                OnWaveNumberChanged?.Invoke(this, EventArgs.Empty);
             }
 
         }
-        
+        //if (CanStart)
+        //{
+        //    Gbutton.SetActive(true);
+        //    if (Input.GetKeyDown(KeyCode.G))
+        //    {
+        //        Gnumber += 1;
+        //        spawCount += 1;
 
-        if (Gnumber == 1)
-        {
-            if (WaveNumber <= 2)
-            {
-                G1();
-            }
-            else
-            {
-                nextWaveSpawTimer = 0;
-                CanStart = true;
-            }       
-        }
-        else if (Gnumber == 2)
-        {
-            if (WaveNumber <= 3)
-            {
-                G1();
-            }
-            else
-            {
-                nextWaveSpawTimer = 0;
-                CanStart = true;
-            }
+        //        WaveNumber = 1;
+        //        CanStart = false;
+        //        Gbutton.SetActive(false);
+        //    }
 
-        }
-        else if(Gnumber == 3)
-        {
-            if (WaveNumber <= 4)
-            {
-                G1();
-            }
-            else
-            {
-                nextWaveSpawTimer = 0;
-                CanStart = true;
-            }
-            if (CheckEnemyClear())
-            {
-                WinUI.SetActive(true);
-            }
+        //}
 
-        }
+
+        //if (Gnumber == 1)
+        //{
+        //    if (WaveNumber <= 2)
+        //    {
+        //        G1();
+        //    }
+        //    else
+        //    {
+        //        nextWaveSpawTimer = 0;
+        //        CanStart = true;
+        //    }       
+        //}
+        //else if (Gnumber == 2)
+        //{
+        //    if (WaveNumber <= 3)
+        //    {
+        //        G1();
+        //    }
+        //    else
+        //    {
+        //        nextWaveSpawTimer = 0;
+        //        CanStart = true;
+        //    }
+
+        //}
+        //else if(Gnumber == 3)
+        //{
+        //    if (WaveNumber <= 4)
+        //    {
+        //        G1();
+        //    }
+        //    else
+        //    {
+        //        nextWaveSpawTimer = 0;
+        //        CanStart = true;
+        //    }
+        //    if (CheckEnemyClear())
+        //    {
+        //        WinUI.SetActive(true);
+        //    }
+
+        //}
         //每一波分開執行，看Each裡有幾波，再看要做幾次
+
+        switch (currectcounter)
+        {
+            case 1:
+                EnemyGenerater(PathNameList[0]);
+                G1W1 -= Time.deltaTime;
+                if (G1W1 < 0f)
+                {
+                    EnemyAmount = 5;
+                    currectcounter =2;
+                }
+                
+                break;
+            case 2:
+                EnemyGenerater(PathNameList[0]);
+                G1W2 -= Time.deltaTime;
+                if (G1W2 < 0f)
+                {
+                    EnemyAmount = 4;
+                    currectcounter =3;
+                }
+                break;
+            case 3:
+                EnemyGenerater(PathNameList[1]);
+                G1W3 -= Time.deltaTime;
+                if (G1W3 < 0f)
+                {
+                    EnemyAmount = 6;
+                    currectcounter = 4;
+                }
+                break;
+            case 4:
+                EnemyGenerater(PathNameList[1]);
+                G1W4 -= Time.deltaTime;
+                if (G1W4 < 0f)
+                {
+                    currectcounter=5;
+                }
+                break;
+            case 5:
+                if (CheckEnemyClear()==true)
+                {
+                    if (IsBonusGived == false)
+                    {
+                        BonusEffect.SetActive(true);
+                        Player.Instance.AddCoinAmount(Wave1Bonus);
+                        IsBonusGived = true;
+                    }
+                    CanStart = true;
+                }
+                break;
+            case 6:
+                EnemyGenerater(PathNameList[2]);
+                G2W1 -= Time.deltaTime;
+                if (G2W1 < 0f)
+                {
+                    EnemyAmount = 11;
+                    currectcounter =7;
+                }
+                break;
+            case 7:
+                EnemyGenerater(PathNameList[2]);
+                G2W2 -= Time.deltaTime;
+                if (G2W2 < 0f)
+                {
+                    EnemyAmount = 7;
+                    currectcounter =8;
+                }
+                break;
+            case 8:
+                EnemyGenerater(PathNameList[0]);
+                G2W3 -= Time.deltaTime;
+                if (G2W3 < 0f)
+                {
+                    EnemyAmount = 9;
+                    currectcounter = 9;
+                }
+                break;
+            case 9:
+                EnemyGenerater(PathNameList[0]);
+                G2W4 -= Time.deltaTime;
+                if (G2W4 < 0f)
+                {
+                    
+                    currectcounter = 10;
+                }
+                break;
+            case 10:
+                if (CheckEnemyClear() == true)
+                {
+                    if (IsBonusGived == false)
+                    {
+                        BonusEffect.SetActive(true);
+                        Player.Instance.AddCoinAmount(Wave2Bonus);
+                        IsBonusGived = true;
+                    }
+                    CanStart = true;
+                }
+                break;
+            case 11:
+                EnemyGenerater(PathNameList[3]);
+                G3W1 -= Time.deltaTime;
+                if (G3W1 < 0f)
+                {
+                    EnemyAmount = 10;
+                    currectcounter = 12;
+                }
+                break;
+            case 12:
+                EnemyGenerater(PathNameList[0]);
+                G3W2 -= Time.deltaTime;
+                if (G3W2 < 0f)
+                {
+                    EnemyAmount = 12;
+                    currectcounter = 13;
+                }
+                break;
+            case 13:
+                EnemyGenerater(PathNameList[2]);
+                G3W3 -= Time.deltaTime;
+                if (G3W3 < 0f)
+                {
+                    EnemyAmount = 13;
+                    currectcounter = 14;
+                }
+                break;
+            case 14:
+                EnemyGenerater(PathNameList[1]);
+                G3W4 -= Time.deltaTime;
+                if (G3W4 < 0f)
+                {
+                    currectcounter = 15;
+                }
+                break;
+            case 15:
+                if (CheckEnemyClear() == true)
+                {
+                    //通關選單打開
+                    Debug.Log("通關選單打開");
+                }
+                break;
+
+
+            // 此為預設 當上面的case都沒達成時則會判斷
+            default:
+                Debug.Log("生完ㄌ");
+                break;
+        }
+
         
     }
+    public void EnemyGenerater(string mob)
+    {
+        if (EnemyAmount > 0)
+        {
+            Create(mob);
+            EnemyAmount--;
+        }
+        else
+        {
+            EnemyAmount = 0;
+        }
+        //if (mobAmount == 0&& timer <= 0f)
+        //{
+        //    //ReUseEnemyTimer = 0f;
+        //    currectcounter++;
+        //}
+    }
+
+    //public void EnemySpawnTimer(float time, string mob, int mobAmount)
+    //{
+    //    ReUseEnemyTimer -= Time.deltaTime;
+    //    if (ReUseEnemyTimer < 0f)
+    //    {
+    //        ReUseEnemyTimer = time;
+    //        EnemyGenerater(mob, mobAmount);
+    //    }
+
+
+    //}
     public bool CheckEnemyClear()
     {
-       GameObject[] golist =GameObject.FindGameObjectsWithTag("Enemy");
-        foreach(GameObject go in golist)
+        if (enemylist.Count==0) 
+        { return true; }
+        else
         {
-            if (go != null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-
+            return false;
         }
-        return true;
+        //foreach(Transform go in enemylist)
+        //{
+        //    if (go == null)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+
+        //}
+        //return false;
     }
     private void SpawnWave()//每一小波的時間間隔跟數量種類
     {
@@ -224,9 +447,12 @@ public class EnemySponManerger : MonoBehaviour
     public void Create(string PathName)
     {
         Vector2 p = UnityEngine.Random.insideUnitCircle * 7;
-        spawPosition = Spawpoint.position + new Vector3(p.x, 0, p.y);
+        spawPosition = Spawpoint.position + new Vector3(p.x, 0, p.y);//圈圈生成
+
         Transform pfEnemy = Resources.Load<Transform>(PathName);
         Transform enemyTransform = Instantiate(pfEnemy, spawPosition, Quaternion.identity);
+        enemyTransform.GetComponent<AINormalMob>().m_eMobRL = AINormalMob.eMobRL.oneway;
+        enemylist.Add(enemyTransform);
         //var boid = enemyTransform.GetComponent<Boid>();
         //boid.Position = spawPosition;
         //boid.Path = Path;
