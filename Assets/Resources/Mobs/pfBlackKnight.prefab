@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134508ec34855a94782494eae44f70ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_eMobRL: 0
   m_Data:
     m_MobState: 0
     m_fRadius: 1
@@ -222,8 +223,8 @@ MonoBehaviour:
     m_fRot: 0
     m_fMaxRot: 0.1
     m_Go: {fileID: 0}
-    m_fSight: 6
-    m_fAttackRange: 5
+    m_fSight: 9
+    m_fAttackRange: 6
     m_fAttackTime: 0
     m_fHp: 100
     m_TargetObject: {fileID: 0}

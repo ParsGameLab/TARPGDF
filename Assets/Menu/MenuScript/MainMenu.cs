@@ -20,10 +20,16 @@ public class MainMenu : MonoBehaviour
     public bool Canvas2_Switch;
     public bool Initialization_0;
 
+    public int seance12=1;
+
     //private void Awake()
     //{
     //    DontDestroyOnLoad(this);
     //}
+    private void Start()
+    {
+        seance12 = 1;
+    }
 
     public void PlayGame()
     {
@@ -121,6 +127,24 @@ public class MainMenu : MonoBehaviour
         {
             ResumeGame();
         }
+        else if (GameObject.Find("EnemySpot") != null &&seance12==1)
+        {
+            if(EnemySponManerger.Instance.IsS1Clear == true)
+            {
+                WIN();
+            
+                seance12 = 2;
+
+            }
+            
+        }else if (GameObject.Find("EnemySpownPosS2") != null && seance12 == 2)
+        {
+            if (EnemySpawnManagerS2.Instance.IsS2Clear == true)
+            {
+                WIN();
+
+            }
+        }
         else if (Input.GetKeyDown(KeyCode.F1))
         {
             WIN();
@@ -129,6 +153,8 @@ public class MainMenu : MonoBehaviour
         {
             LOSE();
         }
+
+
 
     }
 }

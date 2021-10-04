@@ -72,7 +72,7 @@ public class MagicSpell : MonoBehaviour
             
         }
             
-        Destroy(gameObject,4f);
+        Destroy(gameObject,10f);
     }
     
 }

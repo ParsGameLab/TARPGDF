@@ -48,6 +48,8 @@ public class EnemySponManerger : MonoBehaviour
     public int Wave1Bonus=500;
     public int Wave2Bonus = 700;
 
+    public bool S1Clear;
+
     private float G1W1 = 5f;
     private float G1W2 = 6f;
     private float G1W3 = 7f;
@@ -65,6 +67,7 @@ public class EnemySponManerger : MonoBehaviour
     {
         BonusEffect.SetActive(false);
         Instance = this;
+        S1Clear = false;
     }
     void Start()
     {
@@ -80,6 +83,7 @@ public class EnemySponManerger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (CanStart)
         {
             Gbutton.SetActive(true);
@@ -293,6 +297,7 @@ public class EnemySponManerger : MonoBehaviour
                 if (CheckEnemyClear() == true)
                 {
                     //通關選單打開
+                    S1Clear = true;
                     Debug.Log("通關選單打開");
                 }
                 break;
@@ -303,9 +308,13 @@ public class EnemySponManerger : MonoBehaviour
                 Debug.Log("生完ㄌ");
                 break;
         }
-
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            currectcounter = 15;
+        }
         
     }
+    
     public void EnemyGenerater(string mob)
     {
         if (EnemyAmount > 0)
@@ -457,6 +466,15 @@ public class EnemySponManerger : MonoBehaviour
         //boid.Position = spawPosition;
         //boid.Path = Path;
         //m_boids.Add(boid);
+    }
+
+    public bool IsS1Clear
+    {
+        get { return S1Clear; }
+    }
+    public void ReSetS1Clear()
+    {
+        S1Clear = false;
     }
 
     public static float GetPointToSegmentDistanceSqr(Vector2 askPoint, Vector2 p0, Vector2 p1, Vector2 normal, float length, out Vector2 mapPoint, out float projectionLength)

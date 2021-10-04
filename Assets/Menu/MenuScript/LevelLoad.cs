@@ -35,7 +35,8 @@ public class LevelLoad : MonoBehaviour
             LoadingScreen.GetComponent<Image>().sprite = S2_Sprite;
 
 
-        LoadingScreen.SetActive(true);        
+        LoadingScreen.SetActive(true);
+        
 
         while (!operation.isDone)
         {

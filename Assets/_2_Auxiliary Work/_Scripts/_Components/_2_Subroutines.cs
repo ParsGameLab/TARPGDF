@@ -28,10 +28,13 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
                 Destroy(gameObject);
             }
 
-            canvas_Other = GameObject.Find("Canvas_Other").GetComponent<Canvas>();
-            canvas_Other.gameObject.SetActive(false);            
+                 
         }
-
+        public void OnEnable()
+        {
+            canvas_Other = GameObject.Find("Canvas_Other").GetComponent<Canvas>();
+            canvas_Other.gameObject.SetActive(false);
+        }
         private void Start() {
             canvas_Other.gameObject.SetActive(true);
         }

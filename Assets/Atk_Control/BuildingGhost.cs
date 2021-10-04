@@ -48,11 +48,11 @@ public class BuildingGhost : MonoBehaviour {
 
         //    NoCoinUI.SetActive(true);
         //}
-        
+
         RefreshVisual();//?問一下怎摸省
-        
+
         Vector3 targetPosition = WeaponController.Instance.GetMouseWorldSnappedPosition();
-            //targetPosition.y = 1f;
+        //targetPosition.y = 1f;
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 15f);
 
         transform.rotation = Quaternion.Lerp(transform.rotation, WeaponController.Instance.GetPlacedObjectRotation(), Time.deltaTime * 15f);
@@ -173,6 +173,12 @@ public class BuildingGhost : MonoBehaviour {
                 canBuild = false;
                 break;
             }
+
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            dir = PlacedObjectTypeSO.GetNextDir(dir);
+            Debug.Log("" + dir);
 
         }
         if (canBuild)

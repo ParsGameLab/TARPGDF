@@ -24,7 +24,7 @@ public class EnemyWaveUIS2 : MonoBehaviour
 
     private void EnemySponMangerS2_OnWaveNumberChanged(object sender, EventArgs e)
     {
-        SetWaveNumberText(enemySponMangerS2.GetWaveNumber() + "/3");
+        SetWaveNumberText(enemySponMangerS2.GetWaveNumber() + "/5");
     }
 
     
