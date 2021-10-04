@@ -200,10 +200,12 @@ public class AINormalMob : MonoBehaviour
             }else if(m_eMobRL == eMobRL.L)
             {
                 EnemySpawnManagerS2.Instance.enemylistL.Remove(this.transform);
+                EnemySpawnManagerS2.Instance.allenemylist.Remove(this.transform);
             }
             else if(m_eMobRL == eMobRL.R)
             {
                 EnemySpawnManagerS2.Instance.enemylistR.Remove(this.transform);
+                EnemySpawnManagerS2.Instance.allenemylist.Remove(this.transform);
             }
             
             m_Collider.enabled = false;

@@ -39,6 +39,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
     private int currectcounter = 0;
     public List<Transform> enemylistR = new List<Transform>();
     public List<Transform> enemylistL = new List<Transform>();
+    public List<Transform> allenemylist= new List<Transform>();
 
     private int EnemyAmountL;
     private int EnemyAmountR;
@@ -554,6 +555,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
         Transform enemyTransform = Instantiate(pfEnemy, spawPosition, Quaternion.identity);
         enemyTransform.GetComponent<AINormalMob>().m_eMobRL = AINormalMob.eMobRL.L;
         enemylistL.Add(enemyTransform);
+        allenemylist.Add(enemyTransform);
 
     }
     public void CreateR(string PathName)
@@ -565,7 +567,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
         Transform enemyTransform = Instantiate(pfEnemy, spawPosition, Quaternion.identity);
         enemyTransform.GetComponent<AINormalMob>().m_eMobRL = AINormalMob.eMobRL.R;
         enemylistR.Add(enemyTransform);
-
+        allenemylist.Add(enemyTransform);
     }
 
     public int GetWaveNumber()
