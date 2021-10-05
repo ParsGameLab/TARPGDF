@@ -9,11 +9,15 @@ public class MainMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject Crosshair;
     public GameObject PlayerUI;
+    public GameObject UI_Design;
     public GameObject LoadingScreen;
     public GameObject Canvas2;
     public GameObject FadeScreen;
     public GameObject VictoryMenu;
     public GameObject FailMenu;
+    public GameObject Level_1_Button;
+    public GameObject Level_2_Button;
+
 
 
     public bool pauseMenuSwitch;
@@ -77,6 +81,7 @@ public class MainMenu : MonoBehaviour
         LoadingScreen.SetActive(false);
         Canvas2.SetActive(false);        
         PlayerUI.SetActive(false);
+        UI_Design.SetActive(false);
         FadeScreen.GetComponent<FadeInOut>().PlayFadeIn();
     }
 
@@ -87,7 +92,8 @@ public class MainMenu : MonoBehaviour
         Canvas2_Switch = true;
         Canvas2.SetActive(true);
         Crosshair.SetActive(true);
-        PlayerUI.SetActive(true);                      
+        PlayerUI.SetActive(true);
+        UI_Design.SetActive(true);
         pauseMenu.SetActive(false);
         VictoryMenu.SetActive(false);
         FailMenu.SetActive(false);
@@ -99,6 +105,7 @@ public class MainMenu : MonoBehaviour
 
     public void WIN()
     {
+        Cursor.visible = true;
         Time.timeScale = 0f;
         Crosshair.SetActive(false);
         VictoryMenu.SetActive(true);
@@ -108,11 +115,39 @@ public class MainMenu : MonoBehaviour
 
     public void LOSE()
     {
+        Cursor.visible = true;
         Time.timeScale = 0f;
         Crosshair.SetActive(false);
         FailMenu.SetActive(true);
         pauseMenuSwitch = true;
         GameObject.Find("Camera").GetComponent<TPScontt>().enabled = false;
+    }
+
+    public void SetFullScreen(bool isFullScreen)
+    {
+        Screen.fullScreen = isFullScreen;
+    }
+
+    public void LevelChoseLeft()
+    {
+        Level_1_Button.SetActive(true);
+        Level_2_Button.SetActive(false);
+    }
+
+    public void LevelChoseRight()
+    {
+        Level_2_Button.SetActive(true);
+        Level_1_Button.SetActive(false);
+    }
+
+    public void WearMagicHat(bool Wearing)
+    {
+        GameObject.Find("hW_hat").GetComponent<SkinnedMeshRenderer>().enabled = Wearing;
+
+        if (Wearing == true)
+            GameObject.Find("hairband").GetComponent<SkinnedMeshRenderer>().enabled = false;
+        else
+            GameObject.Find("hairband").GetComponent<SkinnedMeshRenderer>().enabled = true;
     }
 
 

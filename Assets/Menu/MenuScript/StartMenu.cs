@@ -9,6 +9,7 @@ public class StartMenu : MonoBehaviour
     public GameObject FadeScreen;
     public GameObject Options_M;
     public GameObject Start_M;
+    
 
     public void Awake()
     {
@@ -23,6 +24,11 @@ public class StartMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void SetFullScreen(bool isFullScreen)
+    {
+        Screen.fullScreen = isFullScreen;
     }
 
     //Update===========================
