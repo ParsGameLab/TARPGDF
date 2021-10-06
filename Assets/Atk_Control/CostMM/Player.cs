@@ -52,4 +52,10 @@ public class Player : MonoBehaviour, ITrapCustomer
             return false;
         }
     }
+
+
+    public void PortCharacter(Vector3 target)
+    {
+        this.transform.position = target;
+    }
 }

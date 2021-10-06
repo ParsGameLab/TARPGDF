@@ -63,7 +63,7 @@ MonoBehaviour:
   LightningOriginParticleSystem: {fileID: 0}
   LightningDestinationParticleSystem: {fileID: 0}
   LightningTintColor: {r: 1, g: 1, b: 1, a: 1}
-  GlowTintColor: {r: 0, g: 0.111111164, b: 1, a: 1}
+  GlowTintColor: {r: 0.9490197, g: 0.13333334, b: 0.9960785, a: 1}
   SourceBlendMode: 5
   DestinationBlendMode: 1
   JitterMultiplier: 0.1
@@ -89,7 +89,7 @@ MonoBehaviour:
     Maximum: 0.15
   LifeTime: 0
   Generations: 6
-  ChaosFactor: 0.15
+  ChaosFactor: 0.022
   ChaosFactorForks: 0.095
   Intensity: 1
   GlowIntensity: 0.226

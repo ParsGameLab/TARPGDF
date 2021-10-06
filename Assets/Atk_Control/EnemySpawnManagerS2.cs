@@ -1,3 +1,4 @@
+using DigitalRuby.ThunderAndLightning;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,6 +50,11 @@ public class EnemySpawnManagerS2 : MonoBehaviour
     public int Wave2Bonus = 1500;
     public int Wave3Bonus = 2000;
     public int Wave4Bonus = 2500;
+
+    public GameObject LightEffect;
+    public Transform LightEffectstartposR;
+    public Transform LightEffectstartposL;
+    public Transform LightEnd;
 
     public bool S2Clear;
 
@@ -553,9 +559,13 @@ public class EnemySpawnManagerS2 : MonoBehaviour
 
         Transform pfEnemy = Resources.Load<Transform>(PathName);
         Transform enemyTransform = Instantiate(pfEnemy, spawPosition, Quaternion.identity);
+        GameObject Lightn = Instantiate(LightEffect);
+        Lightn.GetComponent<LightningBoltPrefabScript>().Source.transform.position = LightEffectstartposL.position;
+        Lightn.GetComponent<LightningBoltPrefabScript>().Destination.transform.position = spawPosition;
         enemyTransform.GetComponent<AINormalMob>().m_eMobRL = AINormalMob.eMobRL.L;
         enemylistL.Add(enemyTransform);
         allenemylist.Add(enemyTransform);
+        Destroy(Lightn, 0.5f);
 
     }
     public void CreateR(string PathName)
@@ -565,9 +575,13 @@ public class EnemySpawnManagerS2 : MonoBehaviour
 
         Transform pfEnemy = Resources.Load<Transform>(PathName);
         Transform enemyTransform = Instantiate(pfEnemy, spawPosition, Quaternion.identity);
+        GameObject Lightn = Instantiate(LightEffect);
+        Lightn.GetComponent<LightningBoltPrefabScript>().Source.transform.position = LightEffectstartposR.position;
+        Lightn.GetComponent<LightningBoltPrefabScript>().Destination.transform.position = spawPosition;
         enemyTransform.GetComponent<AINormalMob>().m_eMobRL = AINormalMob.eMobRL.R;
         enemylistR.Add(enemyTransform);
         allenemylist.Add(enemyTransform);
+        Destroy(Lightn, 0.5f);
     }
 
     public int GetWaveNumber()

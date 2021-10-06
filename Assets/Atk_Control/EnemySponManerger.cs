@@ -1,3 +1,4 @@
+using DigitalRuby.ThunderAndLightning;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,6 +49,10 @@ public class EnemySponManerger : MonoBehaviour
     public int Wave1Bonus=500;
     public int Wave2Bonus = 700;
 
+    public GameObject LightEffect;
+    public Transform LightEffectstartpos;
+    public Transform LightEnd;
+
     public bool S1Clear;
 
     private float G1W1 = 5f;
@@ -68,6 +73,7 @@ public class EnemySponManerger : MonoBehaviour
         BonusEffect.SetActive(false);
         Instance = this;
         S1Clear = false;
+        
     }
     void Start()
     {
@@ -415,6 +421,7 @@ public class EnemySponManerger : MonoBehaviour
         }
         if (remainingEliteMobAmount > 0)
         {
+            
             nextMobSpawTimerElite -= Time.deltaTime;
             if (nextMobSpawTimerElite < 0f)
             {
@@ -457,11 +464,19 @@ public class EnemySponManerger : MonoBehaviour
     {
         Vector2 p = UnityEngine.Random.insideUnitCircle * 7;
         spawPosition = Spawpoint.position + new Vector3(p.x, 0, p.y);//°é°é¥Í¦¨
-
+        
         Transform pfEnemy = Resources.Load<Transform>(PathName);
         Transform enemyTransform = Instantiate(pfEnemy, spawPosition, Quaternion.identity);
+        
+        
+        GameObject Lightn = Instantiate(LightEffect);
+        Lightn.GetComponent<LightningBoltPrefabScript>().Source.transform.position = LightEffectstartpos.position;
+        Lightn.GetComponent<LightningBoltPrefabScript>().Destination.transform.position = spawPosition;
+
         enemyTransform.GetComponent<AINormalMob>().m_eMobRL = AINormalMob.eMobRL.oneway;
         enemylist.Add(enemyTransform);
+
+        Destroy(Lightn, 0.3f);
         //var boid = enemyTransform.GetComponent<Boid>();
         //boid.Position = spawPosition;
         //boid.Path = Path;

@@ -128,7 +128,7 @@ public class BuildingGhost : MonoBehaviour {
         }
         else
         {
-            CantPutUI.SetActive(false);
+            //CantPutUI.SetActive(false);
             NoCoinUI.SetActive(false);
         }
         

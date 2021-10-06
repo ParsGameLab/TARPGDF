@@ -26,6 +26,9 @@ public class unitychanControl : MonoBehaviour
 
     private AnimatorStateInfo animStateInfo;
 
+    public Transform targetR;
+    public Transform targetL;
+
 
     /// <summary>
     /// ATk用參數
@@ -59,7 +62,7 @@ public class unitychanControl : MonoBehaviour
 
         float fH = Input.GetAxis("Horizontal");
         float fV = Input.GetAxis("Vertical");
-        if (manimater.GetCurrentAnimatorStateInfo(0).IsName("Force")|| manimater.GetCurrentAnimatorStateInfo(0).IsName("SmallSkill") || manimater.GetCurrentAnimatorStateInfo(0).IsName("BigSkill"))
+        if (manimater.GetCurrentAnimatorStateInfo(0).IsName("Force")|| manimater.GetCurrentAnimatorStateInfo(0).IsName("SmallSkill") || manimater.GetCurrentAnimatorStateInfo(0).IsName("BigSkill")|| manimater.GetCurrentAnimatorStateInfo(0).IsName("BackCore"))
         {
             fH = 0;
             fV = 0;
@@ -106,6 +109,9 @@ public class unitychanControl : MonoBehaviour
 
 
         //}
+        if (Input.GetKey(KeyCode.B)){
+            manimater.SetTrigger("BackCore");
+        }
         if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = frunspeed;
@@ -137,6 +143,15 @@ public class unitychanControl : MonoBehaviour
 
         //transform.Rotate(0.0f, fH, 0.0f);//我要的是滑鼠轉人跟著轉(人轉的動畫)，人左右走(左右走的動畫)攝影機會拍人
 
+    }
+    
+    public void PortCharacterR()
+    {
+        this.transform.position = targetR.position;
+    }
+    public void PortCharacterL()
+    {
+        this.transform.position = targetL.position;
     }
     void Walking()
     {
