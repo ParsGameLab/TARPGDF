@@ -37,7 +37,7 @@ public class EnemySponManerger : MonoBehaviour
     public WayPath Path;
     private List<Boid> m_boids = new List<Boid>(20);
 
-    public GameObject WinUI;
+    public GameObject lastUI;
 
     private float ReUseEnemyTimer;
     private int currectcounter=0;
@@ -73,7 +73,9 @@ public class EnemySponManerger : MonoBehaviour
         BonusEffect.SetActive(false);
         Instance = this;
         S1Clear = false;
-        
+        lastUI.SetActive(false);
+
+
     }
     void Start()
     {
@@ -99,6 +101,11 @@ public class EnemySponManerger : MonoBehaviour
                 EnemyAmount = 4;
                 currectcounter++;
                 Gnumber += 1;
+                if (Gnumber == 3)
+                {
+                    lastUI.SetActive(true);
+                    StartCoroutine(lastWaveDispear());
+                }
                 CanStart = false;
                 Gbutton.SetActive(false);
                 IsBonusGived = false;
@@ -320,7 +327,12 @@ public class EnemySponManerger : MonoBehaviour
         }
         
     }
-    
+    IEnumerator lastWaveDispear()
+    {
+        yield return new WaitForSeconds(3f);
+        lastUI.SetActive(false);
+    }
+
     public void EnemyGenerater(string mob)
     {
         if (EnemyAmount > 0)

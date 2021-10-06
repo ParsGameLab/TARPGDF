@@ -13,6 +13,8 @@ public class PortalFun3 : MonoBehaviour
     private GameObject m_player;
     private float Timer = 2f;
     public Transform player;
+
+    private CharacterController CCC;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class PortalFun3 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (CanPort == true)
         {
@@ -31,12 +33,15 @@ public class PortalFun3 : MonoBehaviour
             print("Press Q to teleport");
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                CCC.enabled = false;
 
                 player.position = targetdoor.transform.position;
-                m_player.transform.position= targetdoor.transform.position;
-                Player.Instance.PortCharacter(targetdoor.transform.position);
+                CCC.enabled = true;
+                //m_player.transform.position= targetdoor.transform.position;
+                //Player.Instance.PortCharacter(targetdoor.transform.position);
                 var instance = Instantiate(targetPortEffect, targetdoor.position, targetdoor.rotation);
                 Destroy(instance, 2f);
+                CanPort = false;
             }
         }
         else
@@ -50,8 +55,9 @@ public class PortalFun3 : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            
+            //other.gameObject.GetComponent<unitychanControl>().SetPort(true, targetdoor.transform.position);
             CanPort = true;
+            CCC=other.gameObject.GetComponent<CharacterController>();
 
         }
     }

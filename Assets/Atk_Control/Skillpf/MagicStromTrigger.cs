@@ -6,6 +6,8 @@ using UnityEngine;
 public class MagicStromTrigger : MonoBehaviour
 {
     public float dmg = 100.0f;
+    public float speed=10;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +17,7 @@ public class MagicStromTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.localScale = transform.localScale+new Vector3(1.5f, 1.5f, 1.5f) * Time.deltaTime*speed;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -25,9 +27,32 @@ public class MagicStromTrigger : MonoBehaviour
         {
 
             other.GetComponentInParent<IEnemy_Base>().UnderAttack(dmg);
+            other.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.smallslowdown;
+            StartCoroutine(OutSlow(other.gameObject));
+
+        }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyHit"))
+        {
+
+            other.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.normal;
+
+
+            //Destroy(other.gameObject);
 
 
         }
+    }
+
+    IEnumerator OutSlow(GameObject mobs)
+    {
+        
+        yield return new WaitForSeconds(3f);
+        if (mobs == null) { }
+        mobs.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.normal;
 
     }
 }

@@ -34,7 +34,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
 
     public static EnemySpawnManagerS2 Instance;
 
-    public GameObject WinUI;
+    public GameObject lastUI;
 
     private float ReUseEnemyTimer;
     private int currectcounter = 0;
@@ -55,6 +55,10 @@ public class EnemySpawnManagerS2 : MonoBehaviour
     public Transform LightEffectstartposR;
     public Transform LightEffectstartposL;
     public Transform LightEnd;
+
+    public GameObject SupportCannonUI;
+    public List<GameObject> Cannon = new List<GameObject>();
+    public GameObject BuildCannonEffect;
 
     public bool S2Clear;
 
@@ -93,6 +97,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
         BonusEffect.SetActive(false);
         Instance = this;
         S2Clear = false;
+        lastUI.SetActive(false);
     }
     void Start()
     {
@@ -118,6 +123,11 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                 EnemyAmountR = 10;
                 currectcounter++;
                 Gnumber += 1;
+                if (Gnumber == 5)
+                {
+                    lastUI.SetActive(true);
+                    StartCoroutine(lastWaveDispear());
+                }
                 CanStart = false;
                 Gbutton.SetActive(false);
                 IsBonusGived = false;
@@ -323,6 +333,12 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                     {
                         BonusEffect.SetActive(true);
                         Player.Instance.AddCoinAmount(Wave3Bonus);
+                        SupportCannonUI.SetActive(true);
+                        GameObject c1 = Cannon[0];
+                        GameObject c2 = Cannon[1];
+                        GameObject Buildsmoke1 = GameObject.Instantiate(BuildCannonEffect, Cannon[0].transform.position,Quaternion.identity);
+                        GameObject Buildsmoke2 = GameObject.Instantiate(BuildCannonEffect, Cannon[1].transform.position, Quaternion.identity);
+                        StartCoroutine(BuildCannon(c1,c2,Buildsmoke1, Buildsmoke2));
                         IsBonusGived = true;
                     }
                     CanStart = true;
@@ -399,6 +415,11 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                     {
                         BonusEffect.SetActive(true);
                         Player.Instance.AddCoinAmount(Wave4Bonus);
+                        GameObject c1 = Cannon[2];
+                        GameObject c2 = Cannon[3];
+                        GameObject Buildsmoke1 = GameObject.Instantiate(BuildCannonEffect, Cannon[2].transform.position, Quaternion.identity);
+                        GameObject Buildsmoke2 = GameObject.Instantiate(BuildCannonEffect, Cannon[3].transform.position, Quaternion.identity);
+                        StartCoroutine(BuildCannon(c1, c2, Buildsmoke1, Buildsmoke2));
                         IsBonusGived = true;
                     }
                     CanStart = true;
@@ -494,7 +515,25 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                 Debug.Log("¥Í§¹£{");
                 break;
         }
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            currectcounter = 20;
+        }
 
+    }
+    IEnumerator lastWaveDispear()
+    {
+        yield return new WaitForSeconds(3f);
+        lastUI.SetActive(false);
+    }
+    IEnumerator BuildCannon(GameObject c1, GameObject c2, GameObject Buildsmoke1, GameObject Buildsmoke2)
+    {
+        yield return new WaitForSeconds(5f);
+        c1.SetActive(true);
+        Destroy(Buildsmoke1);
+        c2.SetActive(true);
+        Destroy(Buildsmoke2);
+        SupportCannonUI.SetActive(false);
 
     }
     public bool IsS2Clear

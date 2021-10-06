@@ -26,6 +26,7 @@ public class AINormalMob : MonoBehaviour
     bool CountAlready;
     private float normaxspeed;
     private bool inslowdown;
+    public Collider EXcollider;
 
 
     //public static AINormalMob Create(Vector3 position)
@@ -182,7 +183,7 @@ public class AINormalMob : MonoBehaviour
 
         if (m_Data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("Die"))
         {
-            
+            EXcollider.enabled = false;
             m_FSM.PerformGlobalTransition(eFSMTransition.Go_Dead);
 
             //this.gameObject.GetComponent<CharacterController>().enabled = false;
@@ -210,7 +211,7 @@ public class AINormalMob : MonoBehaviour
             
             m_Collider.enabled = false;
             this.gameObject.GetComponentInChildren<DissolveSphere>().enabled = true;
-            Destroy(this.gameObject, 3f);
+            Destroy(this.gameObject, 5f);
 
         }
 

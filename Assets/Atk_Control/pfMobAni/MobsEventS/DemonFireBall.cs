@@ -38,6 +38,8 @@ public class DemonFireBall : MonoBehaviour
         {
 
             other.GetComponent<_2_StatHandler_UnityChan>().UnderEnemyAttack(dmg);
+            other.GetComponent<MobGetHitEvent>().GetHit();
+            //other.GetComponent<unitychanControl>().PlayHit();
             //other.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.slowdown;
 
 

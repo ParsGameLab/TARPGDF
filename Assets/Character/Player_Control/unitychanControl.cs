@@ -29,6 +29,10 @@ public class unitychanControl : MonoBehaviour
     public Transform targetR;
     public Transform targetL;
 
+    public bool CanPort;
+    public Vector3 PortPos;
+
+    
 
     /// <summary>
     /// ATk用參數
@@ -46,11 +50,13 @@ public class unitychanControl : MonoBehaviour
     {
         isWalking = true;
         animStateInfo = manimater.GetCurrentAnimatorStateInfo(0);
+        CanPort = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         
 
         InGround = Physics.CheckSphere(GroundCheck.position, CheckRaius, flayermask);
@@ -138,13 +144,39 @@ public class unitychanControl : MonoBehaviour
 
 
 
+        //if (CanPort)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Q))
+        //    {
+        //        print("Press Q inThis");
+        //        transform.position = PortPos;
+        //        CanPort = false;
 
+        //    }
+        //}
 
 
         //transform.Rotate(0.0f, fH, 0.0f);//我要的是滑鼠轉人跟著轉(人轉的動畫)，人左右走(左右走的動畫)攝影機會拍人
 
     }
-    
+    //public void SetPort(bool CantelePort,Vector3 target)
+    //{
+    //    CanPort = CantelePort;
+    //    PortPos = target;
+    //}
+    public void PlayHit()
+    {
+        if (statHandler_UnityChan.IsDeath == true)
+        {
+            return;
+        }
+        else
+        {
+            manimater.SetTrigger("BeAtk");
+
+        }
+       
+    }
     public void PortCharacterR()
     {
         this.transform.position = targetR.position;

@@ -26,6 +26,8 @@ public class MainMenu : MonoBehaviour
 
     public int seance12=1;
 
+    public bool IsLose;
+
     //private void Awake()
     //{
     //    DontDestroyOnLoad(this);
@@ -33,6 +35,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         seance12 = 1;
+        IsLose = false;
     }
 
     public void PlayGame()
@@ -179,6 +182,9 @@ public class MainMenu : MonoBehaviour
                 WIN();
 
             }
+        }else if(IsLose == true)
+        {
+            LOSE();
         }
         else if (Input.GetKeyDown(KeyCode.F1))
         {

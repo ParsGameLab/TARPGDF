@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4534985676138140154}
   - component: {fileID: 1252801167106420786}
+  - component: {fileID: 7077522463623007245}
   m_Layer: 0
   m_Name: TowerCCanon
   m_TagString: Untagged
@@ -49,13 +50,26 @@ MonoBehaviour:
   AttackRange: 27.64
   bAttack: 0
   fAttackTime: 5
-  fowardspeed: 15
+  fowardspeed: 2
   targetRange: {fileID: 7400580735961826845}
   Cannon: {fileID: 4534985676138204260}
   Effect: {fileID: 1144968388891163963, guid: 48fcc95ae639f004b932002eab071f76, type: 3}
   Effectsmoke: {fileID: 1833268098726028, guid: f72f0eb4a0fb5934fab797add8da8711, type: 3}
   FirePosition: {fileID: 8593197213639450565}
   DestroyAfter: 4
+--- !u!65 &7077522463623007245
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4534985676138306136}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 7, z: 7}
+  m_Center: {x: 0, y: 3.5, z: 0}
 --- !u!1 &4534985676138352320
 GameObject:
   m_ObjectHideFlags: 0

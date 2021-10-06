@@ -7,10 +7,11 @@ public class UTchanPortAnimationEvent : MonoBehaviour
     public Transform targetdoor;
     public GameObject circleEffect;
     public GameObject targetPortEffect;
+    private CharacterController CCC;
     
     void Start()
     {
-        
+        CCC = transform.GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -25,7 +26,9 @@ public class UTchanPortAnimationEvent : MonoBehaviour
     }
     public void BackCore()
     {
+        CCC.enabled = false;
         transform.position = targetdoor.transform.position;
+        CCC.enabled = true;
         var instance = Instantiate(targetPortEffect, targetdoor.position, targetdoor.rotation);
         Destroy(instance, 2f);
         circleEffect.SetActive(false);

@@ -14,6 +14,7 @@ public class NorMobsAtk : MonoBehaviour
         {
 
             other.GetComponent<_2_StatHandler_UnityChan>().UnderEnemyAttack(dmg);
+            other.GetComponent<MobGetHitEvent>().GetHit();
 
         }
         if (other.gameObject.CompareTag("Core"))
