@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 50
-  maxHealthPoint: 750
+  maxHealthPoint: 600
   currentHealthPoint: 0
 --- !u!143 &5865451505261216683
 CharacterController:
@@ -220,9 +220,9 @@ MonoBehaviour:
     m_fRadius: 1
     m_fProbeLength: 2
     m_Speed: 0
-    m_fMaxSpeed: 0.1
+    m_fMaxSpeed: 0.14
     m_fRot: 0
-    m_fMaxRot: 0.1
+    m_fMaxRot: 0.14
     m_Go: {fileID: 0}
     m_fSight: 9
     m_fAttackRange: 6

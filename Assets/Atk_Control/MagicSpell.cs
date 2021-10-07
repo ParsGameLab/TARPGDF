@@ -66,7 +66,11 @@ public class MagicSpell : MonoBehaviour
         {
             
             other.GetComponentInParent<IEnemy_Base>().UnderAttack(Dmg);
-            other.GetComponentInParent<IEnemy_Base>().PlayGetHit();
+            if (Random.Range(1, 10) < 4)
+            {
+                other.GetComponentInParent<IEnemy_Base>().PlayGetHit();
+            }
+           
             Destroy(gameObject);
         
             

@@ -36,6 +36,7 @@ public class CanonAi : MonoBehaviour
             if (fCurrentTime > fAttackTime)
             {
                 fCurrentTime = 0.0f;
+                SoundManager.Instance.PlaySound(SoundManager.Sound.Cannon);
                 CanonAttack(go);
             }
             fCurrentTime += Time.deltaTime;

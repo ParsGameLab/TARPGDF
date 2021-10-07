@@ -10,8 +10,10 @@ public class CanonShell : MonoBehaviour
     public float shellspeed = 15.0f;
 
     public GameObject EffectExplo;
+    public bool exp;
     void Start()
     {
+        exp = false;
         fTime = 0.0f;
     }
 
@@ -33,8 +35,13 @@ public class CanonShell : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-
+        if (exp == false)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Sound.Expolsion);
+            exp = true;
+        }
         
+
         if (other.gameObject.CompareTag("EnemyHit"))
         {
 

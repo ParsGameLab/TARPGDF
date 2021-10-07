@@ -14,9 +14,10 @@ public class VatkTrigger : MonoBehaviour
         {
 
             other.GetComponentInParent<IEnemy_Base>().UnderAttack(dmg);
+            other.GetComponentInParent<IEnemy_Base>().PlayGetHit();
             //Destroy(other.gameObject);
             //取得FSMC去把全域狀態切換順便給時間倒數
-            
+
         }
         
     }

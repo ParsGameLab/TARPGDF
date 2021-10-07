@@ -84,6 +84,7 @@ public class EnemySponManerger : MonoBehaviour
         Gnumber = 0;
         spawCount = 0;
         WaveNumber = 1;
+        currectcounter = 0;
 
 
     }
@@ -97,6 +98,8 @@ public class EnemySponManerger : MonoBehaviour
             Gbutton.SetActive(true);
             if (Input.GetKeyDown(KeyCode.G))
             {
+                BattleBGM.Instance.PlaySound();
+                MusicManager.Instance.StopSound();
                 BonusEffect.SetActive(false);
                 EnemyAmount = 5;
                 currectcounter++;
@@ -180,7 +183,7 @@ public class EnemySponManerger : MonoBehaviour
                 G1W1 -= Time.deltaTime;
                 if (G1W1 < 0f)
                 {
-                    EnemyAmount = 8;
+                    EnemyAmount = 6;
                     currectcounter =2;
                 }
                 
@@ -190,7 +193,7 @@ public class EnemySponManerger : MonoBehaviour
                 G1W2 -= Time.deltaTime;
                 if (G1W2 < 0f)
                 {
-                    EnemyAmount = 6;
+                    EnemyAmount = 5;
                     currectcounter =3;
                 }
                 break;
@@ -199,7 +202,7 @@ public class EnemySponManerger : MonoBehaviour
                 G1W3 -= Time.deltaTime;
                 if (G1W3 < 0f)
                 {
-                    EnemyAmount = 9;
+                    EnemyAmount = 7;
                     currectcounter = 4;
                 }
                 break;
@@ -208,14 +211,17 @@ public class EnemySponManerger : MonoBehaviour
                 G1W4 -= Time.deltaTime;
                 if (G1W4 < 0f)
                 {
-                    currectcounter=7;
+                    currectcounter=5;
                 }
                 break;
             case 5:
                 if (CheckEnemyClear()==true)
                 {
+                    
                     if (IsBonusGived == false)
                     {
+                        StartCoroutine(BattleBGM.Instance.FadeMusic(2f, 0));
+                        MusicManager.Instance.WaitAndPlaySound(2f);
                         BonusEffect.SetActive(true);
                         Player.Instance.AddCoinAmount(Wave1Bonus);
                         IsBonusGived = true;
@@ -228,7 +234,7 @@ public class EnemySponManerger : MonoBehaviour
                 G2W1 -= Time.deltaTime;
                 if (G2W1 < 0f)
                 {
-                    EnemyAmount = 15;
+                    EnemyAmount = 10;
                     currectcounter =7;
                 }
                 break;
@@ -256,14 +262,18 @@ public class EnemySponManerger : MonoBehaviour
                 if (G2W4 < 0f)
                 {
                     
-                    currectcounter = 11;
+                    currectcounter = 10;
                 }
                 break;
             case 10:
                 if (CheckEnemyClear() == true)
                 {
+                    StartCoroutine(BattleBGM.Instance.FadeMusic(3f, 0));
+                    MusicManager.Instance.WaitAndPlaySound(2f);
                     if (IsBonusGived == false)
                     {
+                        StartCoroutine(BattleBGM.Instance.FadeMusic(3f, 0));
+                        MusicManager.Instance.WaitAndPlaySound(2f);
                         BonusEffect.SetActive(true);
                         Player.Instance.AddCoinAmount(Wave2Bonus);
                         IsBonusGived = true;
@@ -303,14 +313,22 @@ public class EnemySponManerger : MonoBehaviour
                 G3W4 -= Time.deltaTime;
                 if (G3W4 < 0f)
                 {
-                    currectcounter = 18;
+                    currectcounter = 15;
                 }
                 break;
             case 15:
                 if (CheckEnemyClear() == true)
                 {
+                    
+                    
                     Main.m_Instance.GetPlayer().GetComponent<unitychanControl>().PlayWinPose();
                     StartCoroutine(WaitWin());
+                    if (IsBonusGived == false)
+                    {
+                        StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
+                        SoundManager.Instance.PlaySound(SoundManager.Sound.Win);
+                        IsBonusGived = true;
+                    }
                     Debug.Log("通關選單打開");
                 }
                 break;

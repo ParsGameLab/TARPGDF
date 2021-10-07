@@ -220,7 +220,7 @@ public class WeaponController : MonoBehaviour
         //Ray r = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 1.0f));
         //GameObject goMagicSpell = GameObject.Instantiate(pfmagicspell, firePoint.position, Quaternion.identity,SpellParent);
         Transform CameraTrans = Camera.main.transform;
-        
+        SoundManager.Instance.PlaySound(SoundManager.Sound.PlayerAtk);
         RaycastHit rh;
         GameObject goMagicSpell = GameObject.Instantiate(pfmagicspell);
         MagicSpell magicspellsp = goMagicSpell.GetComponent<MagicSpell>();
