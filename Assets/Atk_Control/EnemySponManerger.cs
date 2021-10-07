@@ -98,7 +98,7 @@ public class EnemySponManerger : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.G))
             {
                 BonusEffect.SetActive(false);
-                EnemyAmount = 4;
+                EnemyAmount = 5;
                 currectcounter++;
                 Gnumber += 1;
                 if (Gnumber == 3)
@@ -180,7 +180,7 @@ public class EnemySponManerger : MonoBehaviour
                 G1W1 -= Time.deltaTime;
                 if (G1W1 < 0f)
                 {
-                    EnemyAmount = 5;
+                    EnemyAmount = 8;
                     currectcounter =2;
                 }
                 
@@ -190,7 +190,7 @@ public class EnemySponManerger : MonoBehaviour
                 G1W2 -= Time.deltaTime;
                 if (G1W2 < 0f)
                 {
-                    EnemyAmount = 4;
+                    EnemyAmount = 6;
                     currectcounter =3;
                 }
                 break;
@@ -199,7 +199,7 @@ public class EnemySponManerger : MonoBehaviour
                 G1W3 -= Time.deltaTime;
                 if (G1W3 < 0f)
                 {
-                    EnemyAmount = 6;
+                    EnemyAmount = 9;
                     currectcounter = 4;
                 }
                 break;
@@ -208,7 +208,7 @@ public class EnemySponManerger : MonoBehaviour
                 G1W4 -= Time.deltaTime;
                 if (G1W4 < 0f)
                 {
-                    currectcounter=5;
+                    currectcounter=7;
                 }
                 break;
             case 5:
@@ -228,7 +228,7 @@ public class EnemySponManerger : MonoBehaviour
                 G2W1 -= Time.deltaTime;
                 if (G2W1 < 0f)
                 {
-                    EnemyAmount = 11;
+                    EnemyAmount = 15;
                     currectcounter =7;
                 }
                 break;
@@ -237,7 +237,7 @@ public class EnemySponManerger : MonoBehaviour
                 G2W2 -= Time.deltaTime;
                 if (G2W2 < 0f)
                 {
-                    EnemyAmount = 7;
+                    EnemyAmount = 9;
                     currectcounter =8;
                 }
                 break;
@@ -246,7 +246,7 @@ public class EnemySponManerger : MonoBehaviour
                 G2W3 -= Time.deltaTime;
                 if (G2W3 < 0f)
                 {
-                    EnemyAmount = 9;
+                    EnemyAmount = 10;
                     currectcounter = 9;
                 }
                 break;
@@ -256,7 +256,7 @@ public class EnemySponManerger : MonoBehaviour
                 if (G2W4 < 0f)
                 {
                     
-                    currectcounter = 10;
+                    currectcounter = 11;
                 }
                 break;
             case 10:
@@ -276,7 +276,7 @@ public class EnemySponManerger : MonoBehaviour
                 G3W1 -= Time.deltaTime;
                 if (G3W1 < 0f)
                 {
-                    EnemyAmount = 10;
+                    EnemyAmount = 12;
                     currectcounter = 12;
                 }
                 break;
@@ -285,7 +285,7 @@ public class EnemySponManerger : MonoBehaviour
                 G3W2 -= Time.deltaTime;
                 if (G3W2 < 0f)
                 {
-                    EnemyAmount = 12;
+                    EnemyAmount = 13;
                     currectcounter = 13;
                 }
                 break;
@@ -294,7 +294,7 @@ public class EnemySponManerger : MonoBehaviour
                 G3W3 -= Time.deltaTime;
                 if (G3W3 < 0f)
                 {
-                    EnemyAmount = 13;
+                    EnemyAmount = 16;
                     currectcounter = 14;
                 }
                 break;
@@ -303,14 +303,14 @@ public class EnemySponManerger : MonoBehaviour
                 G3W4 -= Time.deltaTime;
                 if (G3W4 < 0f)
                 {
-                    currectcounter = 15;
+                    currectcounter = 18;
                 }
                 break;
             case 15:
                 if (CheckEnemyClear() == true)
                 {
-                    //通關選單打開
-                    S1Clear = true;
+                    Main.m_Instance.GetPlayer().GetComponent<unitychanControl>().PlayWinPose();
+                    StartCoroutine(WaitWin());
                     Debug.Log("通關選單打開");
                 }
                 break;
@@ -326,6 +326,11 @@ public class EnemySponManerger : MonoBehaviour
             currectcounter = 15;
         }
         
+    }
+    IEnumerator WaitWin()
+    {
+        yield return new WaitForSeconds(4f);
+        S1Clear = true;
     }
     IEnumerator lastWaveDispear()
     {

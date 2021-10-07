@@ -32,7 +32,11 @@ public class unitychanControl : MonoBehaviour
     public bool CanPort;
     public Vector3 PortPos;
 
-    
+    public GameObject weapon;
+
+    private bool InWinPose;
+
+
 
     /// <summary>
     /// ATk¥Î°Ñ¼Æ
@@ -43,6 +47,7 @@ public class unitychanControl : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        InWinPose = false;
         manimater = GetComponent<Animator>();
         mControl = GetComponent<CharacterController>();
     }
@@ -164,6 +169,16 @@ public class unitychanControl : MonoBehaviour
     //    CanPort = CantelePort;
     //    PortPos = target;
     //}
+    public void PlayWinPose()
+    {
+        if (InWinPose == false)
+        { 
+            weapon.SetActive(false);
+            manimater.SetTrigger("Win");
+            InWinPose = true;
+        }
+       
+    }
     public void PlayHit()
     {
         if (statHandler_UnityChan.IsDeath == true)

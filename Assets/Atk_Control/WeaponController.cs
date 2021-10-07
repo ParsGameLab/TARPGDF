@@ -112,11 +112,20 @@ public class WeaponController : MonoBehaviour
         {
             SkillChargeSet();
             manimater.SetInteger("WpState", 0);
-            if (manimater.GetCurrentAnimatorStateInfo(1).IsName("AtkIde"))
+            if (manimater.GetCurrentAnimatorStateInfo(0).IsName("Win") == false)
             {
-                weapon.gameObject.SetActive(true);
+                if (manimater.GetCurrentAnimatorStateInfo(1).IsName("AtkIde"))
+                {
+                    weapon.gameObject.SetActive(true);
+
+                }
 
             }
+            else
+            {
+                weapon.gameObject.SetActive(false);
+            }
+            
             
             if (Input.GetMouseButton(0))
             { 
