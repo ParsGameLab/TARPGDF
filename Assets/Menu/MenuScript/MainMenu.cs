@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     public GameObject Canvas2;
     public GameObject FadeScreen;
     public GameObject VictoryMenu;
+    public GameObject VictoryMenuFinal;
     public GameObject FailMenu;
     public GameObject Level_1_Button;
     public GameObject Level_2_Button;
@@ -116,6 +117,16 @@ public class MainMenu : MonoBehaviour
         GameObject.Find("Camera").GetComponent<TPScontt>().enabled = false;
     }
 
+    public void FinalWin()
+    {
+        Cursor.visible = true;
+        Time.timeScale = 0f;
+        Crosshair.SetActive(false);
+        VictoryMenuFinal.SetActive(true);
+        pauseMenuSwitch = true;
+        GameObject.Find("Camera").GetComponent<TPScontt>().enabled = false;        
+    }
+
     public void LOSE()
     {
         Cursor.visible = true;
@@ -165,24 +176,23 @@ public class MainMenu : MonoBehaviour
         {
             ResumeGame();
         }
-        else if (GameObject.Find("EnemySpot") != null &&seance12==1)
+        else if (GameObject.Find("EnemySpot") != null && seance12 == 1)
         {
-            if(EnemySponManerger.Instance.IsS1Clear == true)
+            if (EnemySponManerger.Instance.IsS1Clear == true)
             {
                 WIN();
-            
+
                 seance12 = 2;
 
             }
-            
-        }else if (GameObject.Find("EnemySpownPosS2") != null && seance12 == 2)
+
+        } else if (GameObject.Find("EnemySpownPosS2") != null && seance12 == 2)
         {
             if (EnemySpawnManagerS2.Instance.IsS2Clear == true)
             {
-                WIN();
-
+                FinalWin();
             }
-        }else if(IsLose == true)
+        } else if (IsLose == true)
         {
             LOSE();
         }
@@ -194,8 +204,5 @@ public class MainMenu : MonoBehaviour
         {
             LOSE();
         }
-
-
-
     }
 }

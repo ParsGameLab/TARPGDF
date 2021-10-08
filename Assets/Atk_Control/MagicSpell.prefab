@@ -19652,12 +19652,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fmagicspeed: 15
   spellDecal: {fileID: 3035790168469330547, guid: 51ff3fbd54c85d34e8d3785af41f1de9, type: 3}
-  Dmg: 30
+  Dmg: 1000
   hitLayer:
     serializedVersion: 2
     m_Bits: 512
-  Spells_Explode: {fileID: 8786520910863158284}
-  Spell_Pos: {fileID: 3100062632074183651}
 --- !u!1 &3100266790014392543
 GameObject:
   m_ObjectHideFlags: 0
@@ -34346,11 +34344,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 815b44f798113a04aab8058debf45306, type: 3}
---- !u!1 &8786520910863158284 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5299675308915988658, guid: 815b44f798113a04aab8058debf45306, type: 3}
-  m_PrefabInstance: {fileID: 3486846772873188542}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8786520910863388716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5299675308916409490, guid: 815b44f798113a04aab8058debf45306, type: 3}
