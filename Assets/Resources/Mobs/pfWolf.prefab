@@ -1965,6 +1965,7 @@ GameObject:
   - component: {fileID: 6412284569883525514}
   - component: {fileID: 1371635228801371639}
   - component: {fileID: 1841221957}
+  - component: {fileID: 227971563}
   m_Layer: 0
   m_Name: WerewolfMesh
   m_TagString: Untagged
@@ -2132,6 +2133,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5e5f5f25b03bd489e3f221643b39ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &227971563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412284569880415516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8cd77307c1ef0b4bb0ac2a4a430dbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 1.3
 --- !u!1 &6412284569880415518
 GameObject:
   m_ObjectHideFlags: 0

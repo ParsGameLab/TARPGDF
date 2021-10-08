@@ -210,8 +210,12 @@ public class AINormalMob : MonoBehaviour
             }
             
             m_Collider.enabled = false;
+
             this.gameObject.GetComponentInChildren<DissolveSphere>().enabled = true;
+            
+
             Destroy(this.gameObject, 5f);
+             
 
         }
 

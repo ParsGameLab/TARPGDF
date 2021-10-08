@@ -13,6 +13,9 @@ public class MagicSpell : MonoBehaviour
     public Vector3 target { get; set; }
     public bool hit {get;set;}
     public LayerMask hitLayer;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,9 +73,8 @@ public class MagicSpell : MonoBehaviour
             {
                 other.GetComponentInParent<IEnemy_Base>().PlayGetHit();
             }
-           
+
             Destroy(gameObject);
-        
             
         }
             

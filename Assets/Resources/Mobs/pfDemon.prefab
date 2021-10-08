@@ -417,7 +417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6048635207075259573}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7346481527881555043}
@@ -1821,6 +1821,7 @@ GameObject:
   - component: {fileID: 7346481527885024591}
   - component: {fileID: 7346481527881908302}
   - component: {fileID: 2464932968436267371}
+  - component: {fileID: 3581035550877434069}
   m_Layer: 0
   m_Name: DemonMesh
   m_TagString: Untagged
@@ -1987,6 +1988,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5e5f5f25b03bd489e3f221643b39ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DissolveWeapon1: {fileID: 0}
+  DissolveWeapon2: {fileID: 0}
+--- !u!114 &3581035550877434069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7346481527881908301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8cd77307c1ef0b4bb0ac2a4a430dbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 1.3
 --- !u!1 &7346481527881908303
 GameObject:
   m_ObjectHideFlags: 0
@@ -3410,14 +3426,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89d17f54331eea34eb22c85aaaed6778, type: 3}
---- !u!1 &2823794691656430662 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1780148961469446483, guid: 89d17f54331eea34eb22c85aaaed6778, type: 3}
-  m_PrefabInstance: {fileID: 4576921951393156373}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2823794691656853606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1780148961469605235, guid: 89d17f54331eea34eb22c85aaaed6778, type: 3}
+  m_PrefabInstance: {fileID: 4576921951393156373}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2823794691656430662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1780148961469446483, guid: 89d17f54331eea34eb22c85aaaed6778, type: 3}
   m_PrefabInstance: {fileID: 4576921951393156373}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7452919855448454076
