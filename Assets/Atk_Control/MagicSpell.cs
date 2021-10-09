@@ -14,7 +14,7 @@ public class MagicSpell : MonoBehaviour
     public bool hit {get;set;}
     public LayerMask hitLayer;
 
-    
+    public GameObject SpellExplode;
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +72,9 @@ public class MagicSpell : MonoBehaviour
             if (Random.Range(1, 10) < 4)
             {
                 other.GetComponentInParent<IEnemy_Base>().PlayGetHit();
-            }
+            }           
+
+            Instantiate(SpellExplode, transform.position, transform.rotation);
 
             Destroy(gameObject);
             

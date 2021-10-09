@@ -10,6 +10,8 @@ public class SawTrapAtk : MonoBehaviour
     private bool bOnTrigger;
     public float fbuffspeed = 1.0f;
 
+    public GameObject SawTrapEffect;    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,9 +43,10 @@ public class SawTrapAtk : MonoBehaviour
             other.GetComponentInParent<IEnemy_Base>().PlayGetHit();
             bOnTrigger = true;
 
-
-            //Destroy(other.gameObject);
-
+            
+            var collisionPoint = other.ClosestPoint(transform.position);
+            Instantiate(SawTrapEffect, new Vector3(collisionPoint.x, collisionPoint.y + 1, collisionPoint.z), transform.rotation);
+             
 
         }
     }

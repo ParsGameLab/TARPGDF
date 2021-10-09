@@ -8,6 +8,8 @@ public class MagicBallTriger : MonoBehaviour
     public float dmg=50.0f;
     private float fTime;
     public float fmagicspeed = 10.0f;
+    public GameObject MagicBallEffect;
+
     void Start()
     {
         fTime = 0.0f;
@@ -49,7 +51,10 @@ public class MagicBallTriger : MonoBehaviour
                 other.GetComponentInParent<IEnemy_Base>().UnderAttack(dmg);
                 other.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.slowdown;
 
+                var collisionPoint = other.ClosestPoint(transform.position);
+                Instantiate(MagicBallEffect, new Vector3(collisionPoint.x, collisionPoint.y, collisionPoint.z), transform.rotation);
+
             }
 
-        }
+    }
 }

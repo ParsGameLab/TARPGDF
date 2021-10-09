@@ -6,7 +6,7 @@ public class EnemyAppear : MonoBehaviour
 {
     Material mat;
     float t;
-    public float x;
+    private float x = 2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +18,11 @@ public class EnemyAppear : MonoBehaviour
     void Update()
     {
         t += x * Time.deltaTime;
-        mat.SetFloat("_AdvancedDissolveCutoutStandardClip", (1 - Mathf.Lerp(0f, 1f, t)));
+        float DissolveValue = 1 - Mathf.Lerp(0f, 0.7f, t);
+
+        mat.SetFloat("_AdvancedDissolveCutoutStandardClip", (DissolveValue));
+
+        if(DissolveValue == 0.3f)       
+            mat.SetFloat("_AdvancedDissolveCutoutStandardClip",(1 - Mathf.Lerp(0.7f, 1f, t/4)));
     }
 }

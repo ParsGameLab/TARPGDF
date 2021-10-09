@@ -10,6 +10,9 @@ public class NeedleTrapAtk : MonoBehaviour
     private bool bOnTrigger;
     public Animator NeedleTrapAnime;
     public float NeedleAtkDmg = 30f;
+
+    public GameObject TrapNeedleEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,8 +47,9 @@ public class NeedleTrapAtk : MonoBehaviour
 
             bOnTrigger = true;
             //Destroy(other.gameObject);
-            
 
+            var collisionPoint = other.ClosestPoint(transform.position); 
+            Instantiate(TrapNeedleEffect,new Vector3(collisionPoint.x,collisionPoint.y+1, collisionPoint.z), transform.rotation);
         }
     }
 }

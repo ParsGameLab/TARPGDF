@@ -17,6 +17,12 @@ public class KnifeTrapAtk : MonoBehaviour
 
     private float AtkCdTimer = 7.0f;
     public float fbuffspeed = 1.0f;
+    
+
+    public GameObject TrapKnifeEffect;
+    public GameObject BigTrapKnifeEffect;
+    public bool AtkAnimation;
+    int x = 0;
 
     void Start()
     {
@@ -32,20 +38,41 @@ public class KnifeTrapAtk : MonoBehaviour
         {
             KnifeAtk();
             AtkCdTimer = 7.0f;
+            AtkAnimation = true;
         }
 
     }
     private void OnTriggerStay(Collider other)
     {
+        
+
         if (other.gameObject.CompareTag("EnemyHit"))
         {
             
             other.GetComponentInParent<IEnemy_Base>().UnderAttack(KnifeAtkDmg);
             other.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.smallslowdown;
 
+                           
+                //Destroy(other.gameObject);
+            if (x == 30)
+            {
+                if (AtkAnimation == true)
+                {
+                    var collisionPoint = other.ClosestPoint(transform.position);
+                    Instantiate(BigTrapKnifeEffect, new Vector3(collisionPoint.x, collisionPoint.y + 1, collisionPoint.z), transform.rotation);
+                    x = 0;
+                    AtkAnimation = false;
+                }
+                else
+                {
+                    var collisionPoint = other.ClosestPoint(transform.position);
+                    Instantiate(TrapKnifeEffect, new Vector3(collisionPoint.x, collisionPoint.y + 1, collisionPoint.z), transform.rotation);
+                    x = 0;
+                }
 
-            //Destroy(other.gameObject);
-
+            }
+            else
+                x++;
 
         }
     }
@@ -65,7 +92,7 @@ public class KnifeTrapAtk : MonoBehaviour
     public void KnifeAtk()
     {
         var instance = Instantiate(Effect, StartPositionRotation.position, Quaternion.identity);
-        Destroy(instance, DestroyAfter);
+        Destroy(instance, DestroyAfter);        
     }
 
 }
