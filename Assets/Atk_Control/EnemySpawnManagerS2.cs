@@ -120,6 +120,12 @@ public class EnemySpawnManagerS2 : MonoBehaviour
             Gbutton.SetActive(true);
             if (Input.GetKeyDown(KeyCode.G))
             {
+                if (Gnumber == 0)
+                {
+                    BattleBGM.Instance.PlaySound();
+
+                }
+                StartCoroutine(BattleBGM.Instance.FadeMusic(2f, 0.15f));
                 BonusEffect.SetActive(false);
                 EnemyAmountL = 10;
                 EnemyAmountR = 10;
@@ -191,6 +197,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                 {
                     if (IsBonusGived == false)
                     {
+                        StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
                         BonusEffect.SetActive(true);
                         Player.Instance.AddCoinAmount(Wave1Bonus);
                         IsBonusGived = true;
@@ -257,6 +264,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                 {
                     if (IsBonusGived == false)
                     {
+                        StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
                         BonusEffect.SetActive(true);
                         Player.Instance.AddCoinAmount(Wave2Bonus);
                         IsBonusGived = true;
@@ -333,7 +341,9 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                 {
                     if (IsBonusGived == false)
                     {
+                        StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
                         BonusEffect.SetActive(true);
+                        SoundManager.Instance.PlaySound(SoundManager.Sound.Horn);
                         Player.Instance.AddCoinAmount(Wave3Bonus);
                         SupportCannonUI.SetActive(true);
                         GameObject c1 = Cannon[0];
@@ -415,7 +425,9 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                 {
                     if (IsBonusGived == false)
                     {
+                        StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
                         BonusEffect.SetActive(true);
+                        SoundManager.Instance.PlaySound(SoundManager.Sound.Horn);
                         Player.Instance.AddCoinAmount(Wave4Bonus);
                         GameObject c1 = Cannon[2];
                         GameObject c2 = Cannon[3];
@@ -508,6 +520,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                     if (IsBonusGived == false)
                     {
                         StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
+                       
                         SoundManager.Instance.PlaySound(SoundManager.Sound.Win);
                         IsBonusGived = true;
                     }

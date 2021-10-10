@@ -17,9 +17,17 @@ public class MusicManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public IEnumerator FadeMusic(float duration, float targetVolume)//StartCoroutine(FadeMusic(audioSource, 2, 0));
     {
-
+        float currentTime = 0;
+        float start = audiosource.volume;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            audiosource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+            yield return null;
+        }
+        yield break;
     }
     public void PlaySound()
     {

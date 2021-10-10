@@ -98,8 +98,13 @@ public class EnemySponManerger : MonoBehaviour
             Gbutton.SetActive(true);
             if (Input.GetKeyDown(KeyCode.G))
             {
-                BattleBGM.Instance.PlaySound();
-                MusicManager.Instance.StopSound();
+                if (Gnumber == 0)
+                {
+                    BattleBGM.Instance.PlaySound();
+
+                }
+                StartCoroutine(BattleBGM.Instance.FadeMusic(2f, 0.15f));
+                StartCoroutine(MusicManager.Instance.FadeMusic(1.5f, 0));
                 BonusEffect.SetActive(false);
                 EnemyAmount = 5;
                 currectcounter++;
@@ -107,6 +112,7 @@ public class EnemySponManerger : MonoBehaviour
                 if (Gnumber == 3)
                 {
                     lastUI.SetActive(true);
+                   
                     StartCoroutine(lastWaveDispear());
                 }
                 CanStart = false;
@@ -220,8 +226,9 @@ public class EnemySponManerger : MonoBehaviour
                     
                     if (IsBonusGived == false)
                     {
-                        StartCoroutine(BattleBGM.Instance.FadeMusic(2f, 0));
-                        MusicManager.Instance.WaitAndPlaySound(2f);
+                        StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
+                        StartCoroutine(MusicManager.Instance.FadeMusic(2f, 0.1f));
+                        
                         BonusEffect.SetActive(true);
                         Player.Instance.AddCoinAmount(Wave1Bonus);
                         IsBonusGived = true;
@@ -252,7 +259,7 @@ public class EnemySponManerger : MonoBehaviour
                 G2W3 -= Time.deltaTime;
                 if (G2W3 < 0f)
                 {
-                    EnemyAmount = 10;
+                    EnemyAmount = 9;
                     currectcounter = 9;
                 }
                 break;
@@ -268,12 +275,12 @@ public class EnemySponManerger : MonoBehaviour
             case 10:
                 if (CheckEnemyClear() == true)
                 {
-                    StartCoroutine(BattleBGM.Instance.FadeMusic(3f, 0));
-                    MusicManager.Instance.WaitAndPlaySound(2f);
+                    
                     if (IsBonusGived == false)
                     {
-                        StartCoroutine(BattleBGM.Instance.FadeMusic(3f, 0));
-                        MusicManager.Instance.WaitAndPlaySound(2f);
+                        StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
+                        StartCoroutine(MusicManager.Instance.FadeMusic(2f, 0.1f));
+                       
                         BonusEffect.SetActive(true);
                         Player.Instance.AddCoinAmount(Wave2Bonus);
                         IsBonusGived = true;
@@ -326,7 +333,8 @@ public class EnemySponManerger : MonoBehaviour
                     if (IsBonusGived == false)
                     {
                         StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
-                        SoundManager.Instance.PlaySound(SoundManager.Sound.Win);
+                        
+                       
                         IsBonusGived = true;
                     }
                     Debug.Log("通關選單打開");
@@ -354,6 +362,7 @@ public class EnemySponManerger : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         lastUI.SetActive(false);
+        
     }
 
     public void EnemyGenerater(string mob)

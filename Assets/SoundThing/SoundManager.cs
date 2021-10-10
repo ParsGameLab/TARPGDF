@@ -18,6 +18,8 @@ public class SoundManager : MonoBehaviour
         HitHead,
         Skill,
         fire,
+        lastwave,
+        Horn,
     }
     private AudioSource audioSource;
     private Dictionary<Sound, AudioClip> soundAudioClipDictionary;

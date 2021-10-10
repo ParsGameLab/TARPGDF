@@ -114,6 +114,7 @@ public class MainMenu : MonoBehaviour
         VictoryMenu.SetActive(true);
         pauseMenuSwitch = true;
         GameObject.Find("Camera").GetComponent<TPScontt>().enabled = false;
+        SoundManager.Instance.PlaySound(SoundManager.Sound.Win);
     }
 
     public void LOSE()
@@ -180,6 +181,7 @@ public class MainMenu : MonoBehaviour
             if (EnemySpawnManagerS2.Instance.IsS2Clear == true)
             {
                 WIN();
+                
 
             }
         }else if(IsLose == true)
