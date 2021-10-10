@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 793245551194437961}
   - component: {fileID: 793245551195830569}
   - component: {fileID: 793245551196863337}
-  - component: {fileID: 2219414974531957926}
+  - component: {fileID: 1082908970436996625}
   m_Layer: 0
   m_Name: SawBlade
   m_TagString: Untagged
@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793245551194729769}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2219414974531957926
+--- !u!114 &1082908970436996625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 793245551194729769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff544d93ad81261459dddff026420692, type: 3}
+  m_Script: {fileID: 11500000, guid: cdaa05e7cf538a24fbc451f5fed1e129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &793245551194729771
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 793245551194437963}
   - component: {fileID: 793245551195830571}
   - component: {fileID: 793245551196863339}
-  - component: {fileID: 5467101329671019432}
+  - component: {fileID: 306365520276898030}
   m_Layer: 0
   m_Name: SawBladeFrameBar
   m_TagString: Untagged
@@ -143,7 +143,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793245551194729771}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -176,7 +176,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5467101329671019432
+--- !u!114 &306365520276898030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 793245551194729771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff544d93ad81261459dddff026420692, type: 3}
+  m_Script: {fileID: 11500000, guid: cdaa05e7cf538a24fbc451f5fed1e129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &793245551194729773
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 793245551194437965}
   - component: {fileID: 793245551195830573}
   - component: {fileID: 793245551196863341}
-  - component: {fileID: 4777788022391167287}
+  - component: {fileID: 6080808913400591772}
   m_Layer: 0
   m_Name: SawBladeFrameCap
   m_TagString: Untagged
@@ -237,7 +237,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793245551194729773}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -270,7 +270,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4777788022391167287
+--- !u!114 &6080808913400591772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 793245551194729773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff544d93ad81261459dddff026420692, type: 3}
+  m_Script: {fileID: 11500000, guid: cdaa05e7cf538a24fbc451f5fed1e129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &793245551194729775
@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 793245551194437967}
   - component: {fileID: 793245551195830575}
   - component: {fileID: 793245551196863343}
-  - component: {fileID: 6367666166740509291}
+  - component: {fileID: 5915033101495526424}
   m_Layer: 0
   m_Name: SawBladeFrameBar
   m_TagString: Untagged
@@ -331,7 +331,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793245551194729775}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -364,7 +364,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6367666166740509291
+--- !u!114 &5915033101495526424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 793245551194729775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff544d93ad81261459dddff026420692, type: 3}
+  m_Script: {fileID: 11500000, guid: cdaa05e7cf538a24fbc451f5fed1e129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &793245551194729777
@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 793245551194437971}
   - component: {fileID: 793245551195830579}
   - component: {fileID: 793245551196863347}
-  - component: {fileID: 2677390636448737901}
+  - component: {fileID: 8887354968494694551}
   m_Layer: 0
   m_Name: SawBladeFrameCap
   m_TagString: Untagged
@@ -477,7 +477,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793245551194729779}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -510,7 +510,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2677390636448737901
+--- !u!114 &8887354968494694551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -519,7 +519,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 793245551194729779}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff544d93ad81261459dddff026420692, type: 3}
+  m_Script: {fileID: 11500000, guid: cdaa05e7cf538a24fbc451f5fed1e129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3410344918469150875

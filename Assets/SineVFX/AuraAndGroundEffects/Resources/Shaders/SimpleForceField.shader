@@ -4,6 +4,10 @@ Shader "SimpleForceField"
 {
 	Properties
 	{
+		_MainTex("Texture", 2D) = "white" {}
+		_MainColor("Main Color", Color) = (1,1,1,1)
+		
+
 		_FresnelExp("Fresnel Exp", Range( 0.2 , 4)) = 1
 		_DepthFadeDistance("Depth Fade Distance", Float) = 0.25
 		_DepthFadeExp("Depth Fade Exp", Range( 0.2 , 10)) = 4
@@ -15,12 +19,15 @@ Shader "SimpleForceField"
 		Tags{ "RenderType" = "Transparent"  "Queue" = "Transparent+0" "IgnoreProjector" = "True" "IsEmissive" = "true"  }
 		Cull Off
 		Blend SrcAlpha OneMinusSrcAlpha
-		CGPROGRAM
+		CGPROGRAM	    
 		#include "UnityCG.cginc"
 		#pragma target 3.0
+		//#pragma surface surf Lambert addshadow	
 		#pragma surface surf Unlit alpha:fade keepalpha noshadow noambient novertexlights nolightmap  nodynlightmap nodirlightmap nometa noforwardadd 
 		struct Input
 		{
+			float2 uv_MainTex;
+			float4 vertexColor : COLOR;
 			float3 worldPos;
 			float3 worldNormal;
 			INTERNAL_DATA
@@ -28,6 +35,8 @@ Shader "SimpleForceField"
 			float4 screenPos;
 		};
 
+		sampler2D _MainTex;		
+		uniform float4 _MainColor;
 		uniform float _FresnelExp;
 		uniform sampler2D _CameraDepthTexture;
 		uniform float _DepthFadeDistance;
@@ -40,9 +49,10 @@ Shader "SimpleForceField"
 
 		void surf( Input i , inout SurfaceOutput o )
 		{
-			o.Normal = float3(0,0,1);
-			float3 temp_cast_0 = (1.0).xxx;
-			o.Emission = temp_cast_0;
+			fixed4 col = tex2D(_MainTex, i.uv_MainTex);
+
+			
+			//float3 temp_cast_0 = (1.0).xxx;			
 			float3 ase_worldPos = i.worldPos;
 			float3 ase_worldViewDir = normalize( UnityWorldSpaceViewDir( ase_worldPos ) );
 			float3 switchResult27 = (((i.ASEVFace>0)?(float3(0,0,1)):(float3(0,0,-1))));
@@ -54,7 +64,12 @@ Shader "SimpleForceField"
 			float distanceDepth11 = abs( ( screenDepth11 - LinearEyeDepth( ase_screenPosNorm.z ) ) / ( _DepthFadeDistance ) );
 			float clampResult19 = clamp( ( 1.0 - distanceDepth11 ) , 0.0 , 1.0 );
 			float clampResult17 = clamp( max( pow( ( 1.0 - dotResult1 ) , _FresnelExp ) , pow( clampResult19 , _DepthFadeExp ) ) , 0.0 , 1.0 );
-			o.Alpha = clampResult17;
+			
+			//o.Albedo = col.rgb;
+			o.Emission = col.rgb*_MainColor;
+			o.Alpha = clampResult17*col.rgb;
+			o.Normal = float3(0, 0, 1);
+			
 		}
 
 		ENDCG
