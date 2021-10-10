@@ -125,7 +125,8 @@ public class MainMenu : MonoBehaviour
         Crosshair.SetActive(false);
         VictoryMenuFinal.SetActive(true);
         pauseMenuSwitch = true;
-        GameObject.Find("Camera").GetComponent<TPScontt>().enabled = false;        
+        GameObject.Find("Camera").GetComponent<TPScontt>().enabled = false;
+        SoundManager.Instance.PlaySound(SoundManager.Sound.Win);
     }
 
     public void LOSE()
