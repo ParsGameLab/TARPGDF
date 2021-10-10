@@ -12,6 +12,7 @@ public class AIData  {
         slowdown,
         dizzy,
         smallslowdown,
+        death,
     }
     public eMobState m_MobState;
 

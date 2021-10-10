@@ -1,3 +1,4 @@
+using iii_UMVR06_TPSDefenseGame_Subroutines_2;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class AINormalMob : MonoBehaviour
     Collider m_Collider;
     private float ftimer;
     private float smallftimer;
+    private float dizzytimer;
     private Animation anim;
     public GameObject slowFX;
     public GameObject debuff;
@@ -27,6 +29,10 @@ public class AINormalMob : MonoBehaviour
     private float normaxspeed;
     private bool inslowdown;
     public Collider EXcollider;
+
+    private IEnemy_Base mobbase;
+    private bool Isdeath;
+    private bool IsDizzy;
 
 
     //public static AINormalMob Create(Vector3 position)
@@ -42,6 +48,9 @@ public class AINormalMob : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        IsDizzy = false;
+        Isdeath = false;
+        mobbase = transform.GetComponent<IEnemy_Base>();
         CountAlready = false;
         m_FSM = new FSMSystem(m_Data);
         m_Data.m_Go = this.gameObject;
@@ -117,6 +126,7 @@ public class AINormalMob : MonoBehaviour
 
         normaxspeed = m_Data.m_fMaxSpeed;
         inslowdown = false;
+        dizzytimer = 0;
     }
 
     // Update is called once per frame
@@ -130,14 +140,33 @@ public class AINormalMob : MonoBehaviour
         //}
         if(m_Data.State == AIData.eMobState.dizzy)
         {
-            m_Data.m_Am.SetTrigger("Dizzy");
-            
+            if (mobbase.IsDeath == true) {
+                m_Data.State = AIData.eMobState.death;
+                return; }
+            if (IsDizzy == false)
+            {
+                m_Data.m_Am.SetTrigger("Dizzy");
+                IsDizzy = true;
+            }
+            dizzytimer+= Time.deltaTime;
+            if (dizzytimer > 2f)
+            {
+                m_Data.State = AIData.eMobState.normal;
+                dizzytimer = 0;
+            }
+
+            if (m_Data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("Dizzy"))
+            {
+                m_Data.m_fMaxSpeed = 0;
+            }
         }
-
-        
-
-        if (m_Data.State == AIData.eMobState.slowdown)
+        else if (m_Data.State == AIData.eMobState.slowdown)
         {
+            if (mobbase.IsDeath == true)
+            {
+                m_Data.State = AIData.eMobState.death;
+                return;
+            }
             inslowdown = true;
             slowFX.SetActive(true);
             m_Data.m_Am.SetFloat("Speed", 0.5f);
@@ -160,29 +189,24 @@ public class AINormalMob : MonoBehaviour
             ftimer += Time.deltaTime;
         }else if (m_Data.State == AIData.eMobState.smallslowdown&&!inslowdown)
         {
+            if (mobbase.IsDeath == true)
+            {
+                m_Data.State = AIData.eMobState.death;
+                return;
+            }
             debuff.SetActive(true);
             float smallslowspeed = normaxspeed * 0.3f;
             if (smallslowspeed <= 0.05) { smallslowspeed = 0.05f; }
             m_Data.m_fMaxSpeed = smallslowspeed;
             m_Data.m_Am.SetFloat("Speed", 0.3f);
-        }else
+        }else if (m_Data.State == AIData.eMobState.death)//m_Data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("Die")
         {
-            debuff.SetActive(false);
-            m_Data.m_fMaxSpeed = normaxspeed;
-            m_Data.m_Am.SetFloat("Speed", 1f);
-            slowFX.SetActive(false);
-            m_Data.State = AIData.eMobState.normal;
-
-        }
-
-        if (m_Data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("Dizzy"))
-        {
-            m_Data.m_fMaxSpeed = 0;
-        }
-        
-
-        if (m_Data.m_Am.GetCurrentAnimatorStateInfo(0).IsName("Die"))
-        {
+            if (Isdeath == false)
+            {
+                m_Data.m_Am.SetTrigger("death");
+                Isdeath = true;
+            }
+            
             EXcollider.enabled = false;
             m_FSM.PerformGlobalTransition(eFSMTransition.Go_Dead);
 
@@ -190,7 +214,9 @@ public class AINormalMob : MonoBehaviour
             if (CountAlready==false)
             {
                 Player.Instance.AddCoinAmount(coinAmount);
-                UiMainforCoin.Instance().SpawnFloatingText(transform, coinAmount.ToString());
+                //UiMainforCoin.Instance().SpawnFloatingText(transform, coinAmount.ToString());
+                GameObject pfcoin = Resources.Load<GameObject>("Coin");
+                GameObject coin = Instantiate(pfcoin,this.transform.position+new Vector3(0,0.4f,0),Quaternion.identity);
                 CountAlready = true;
 
             }
@@ -217,6 +243,16 @@ public class AINormalMob : MonoBehaviour
             Destroy(this.gameObject, 5f);
              
 
+        }
+        else
+        {
+            if (mobbase.IsDeath == true) { return; }
+            debuff.SetActive(false);
+            m_Data.m_fMaxSpeed = normaxspeed;
+            m_Data.m_Am.SetFloat("Speed", 1f);
+            slowFX.SetActive(false);
+            m_Data.State = AIData.eMobState.normal;
+            IsDizzy = false;
         }
 
     }

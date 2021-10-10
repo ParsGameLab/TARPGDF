@@ -96,7 +96,8 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
         #region event
         private void Reference_HealthSystem_OnHealthEmpty(object sender, System.EventArgs e) {
             if(isDeath) { return; }
-            myAnimations.OnDeath();
+            //myAnimations.OnDeath();
+            transform.GetComponent<AINormalMob>().m_Data.State = AIData.eMobState.death;
             OnEnemyDeath?.Invoke(this, EventArgs.Empty);
             isDeath = true;
         }
