@@ -17,8 +17,7 @@ public class LevelLoad : MonoBehaviour
 
     public void LoadLevel (int sceneIndex)
     {
-        StartCoroutine(LoadAsyncScene(sceneIndex));
-        
+        StartCoroutine(LoadAsyncScene(sceneIndex));        
     }
 
     IEnumerator LoadAsyncScene(int sceneIndex)
