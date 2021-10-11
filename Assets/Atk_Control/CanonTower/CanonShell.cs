@@ -11,10 +11,12 @@ public class CanonShell : MonoBehaviour
 
     public GameObject EffectExplo;
     public bool exp;
+    private AudioSource audioSource;
     void Start()
     {
         exp = false;
         fTime = 0.0f;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,14 +39,15 @@ public class CanonShell : MonoBehaviour
     {
         if (exp == false)
         {
-            SoundManager.Instance.PlaySound(SoundManager.Sound.Expolsion);
+            audioSource.Play();
+            //SoundManager.Instance.PlaySound(SoundManager.Sound.Expolsion);
             exp = true;
         }
         
 
         if (other.gameObject.CompareTag("EnemyHit"))
         {
-
+            
             other.GetComponentInParent<IEnemy_Base>().UnderAttack(dmg);
             other.GetComponentInParent<IEnemy_Base>().PlayGetHit();
 

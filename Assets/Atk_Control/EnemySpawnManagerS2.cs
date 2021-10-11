@@ -175,7 +175,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                 }
                 break;
             case 4:
-                EnemyGeneraterL(PathNameListElite[0]);
+                EnemyGeneraterL(PathNameListElite[1]);
                 G1W4 -= Time.deltaTime;
                 if (G1W4 < 0f)
                 {

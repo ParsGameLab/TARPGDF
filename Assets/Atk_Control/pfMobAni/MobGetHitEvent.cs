@@ -8,9 +8,17 @@ public class MobGetHitEvent : MonoBehaviour
     public Transform[] bleedposition;
     public GameObject[] Effect;
     public float DestroyAfter = 1.5f;
+    public bool BigMobs;
     public void GetHit()
     {
-        SoundManager.Instance.PlaySound(SoundManager.Sound.HitBody);
+        if (BigMobs == true)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Sound.HitBigMob);
+        }
+        else
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Sound.HitBody);
+        }
         Transform sposition = bleedposition[Random.Range(0, bleedposition.Length)];
         GameObject effect = Effect[Random.Range(0, Effect.Length)];
         GameObject instane=Instantiate(effect, sposition.position, Quaternion.identity);

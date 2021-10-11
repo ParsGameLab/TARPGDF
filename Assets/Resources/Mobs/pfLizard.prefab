@@ -307,7 +307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8cd77307c1ef0b4bb0ac2a4a430dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 1.3
 --- !u!114 &9153869432777527715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1186,7 +1185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8cd77307c1ef0b4bb0ac2a4a430dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 1.3
 --- !u!1 &2824624712314351674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,7 +1959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8cd77307c1ef0b4bb0ac2a4a430dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 1.3
 --- !u!114 &6872234640814027431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2840,6 +2837,36 @@ Transform:
   m_Father: {fileID: 5724957681585259045}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4151945161445378654
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6367265289834543536}
+  m_Layer: 0
+  m_Name: eyePos
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6367265289834543536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4151945161445378654}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.793, z: 1.621}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5724957681585259045}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5120162122146309622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2973,6 +3000,7 @@ Transform:
   - {fileID: 5715435134792024788}
   - {fileID: 316734561171214702}
   - {fileID: 3795556681124254077}
+  - {fileID: 6367265289834543536}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3031,6 +3059,7 @@ MonoBehaviour:
     m_fRot: 0
     m_fMaxRot: 0.25
     m_Go: {fileID: 0}
+    eye: {fileID: 6367265289834543536}
     m_fSight: 5
     m_fAttackRange: 2
     m_fAttackTime: 0

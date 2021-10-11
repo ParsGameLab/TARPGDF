@@ -23,6 +23,7 @@ public class AIData  {
     public float m_fRot;
     public float m_fMaxRot;
     public GameObject m_Go;
+    public Transform eye;
 
 
     public float m_fSight;
@@ -54,6 +55,8 @@ public class AIData  {
     public GameObject m_player;
     [HideInInspector]
     public GameObject m_core;
+    
+    
 
     [HideInInspector]
     public bool m_bCol;
@@ -84,15 +87,32 @@ public class AIFunction
 {
     public static GameObject CheckEnemyInSight(AIData data, ref bool bAttack)
     {
+        //bool Haswell;
+        //Haswell = false;
+
         GameObject go = data.GetPlayer();
         Vector3 v = go.transform.position - data.m_Go.transform.position;
+
+        
+        //Ray DetectRay = new Ray(data.eye.position, go.transform.position);
+        //Debug.DrawLine(data.m_Go.transform.position, go.transform.position,Color.red);
+        //bool Haswell = Physics.Raycast(DetectRay,1000f,1<<LayerMask.NameToLayer("PlayerUnderAtk"));
+        //Debug.LogWarning("Haswell" + Haswell);
+        //if (Physics.Raycast(DetectRay, out hitInfo, data.m_fSight))
+        //{
+        //    if (hitInfo.collider == go)
+        //    {
+        //        Haswell = true;
+        //    }
+        //}
+
         float fDist = v.magnitude;
-        if (fDist < data.m_fAttackRange)//攻擊範圍內
+        if (fDist < data.m_fAttackRange /*&& Haswell == true*/)//攻擊範圍內
         {
             bAttack = true;
             return go;
         }
-        else if (fDist < data.m_fSight)//追擊範圍內
+        else if (fDist < data.m_fSight /*&& Haswell == true*/)//追擊範圍內
         {
             bAttack = false;
             return go;
@@ -102,15 +122,32 @@ public class AIFunction
 
     public static bool CheckTargetEnemyInSight(AIData data, GameObject target, ref bool bAttack)
     {
+        //bool Haswell;
+        //Haswell = false;
         GameObject go = target;
         Vector3 v = go.transform.position - data.m_Go.transform.position;
+
+        //Ray DetectRay = new Ray(data.eye.position, go.transform.position);
+        //bool Haswell = Physics.Raycast(DetectRay, 1000f, 1 << LayerMask.NameToLayer("PlayerUnderAtk"));
+        //RaycastHit hitInfo;
+        //Ray DetectRay = new Ray(data.m_Go.transform.position, data.m_Go.transform.position- go.transform.position);
+        //if (Physics.Raycast(DetectRay, out hitInfo, data.m_fSight))
+        //{
+        //    if (hitInfo.collider == go)
+        //    {
+        //        Haswell = true;
+        //    }
+        //}
+
+
+
         float fDist = v.magnitude;
-        if (fDist < data.m_fAttackRange)
+        if (fDist < data.m_fAttackRange /*&& Haswell == true)*/)
         {
             bAttack = true;
             return true;
         }
-        else if (fDist < data.m_fSight)
+        else if (fDist < data.m_fSight/* && Haswell == true*/)
         {
             bAttack = false;
             return true;
@@ -119,8 +156,22 @@ public class AIFunction
     } 
     public static GameObject CheckCoreInSight(AIData data, ref bool bAttack)
     {
+        //bool Haswell;
+        //Haswell = false;
+
         GameObject go = data.m_core;
         Vector3 v = go.transform.position - data.m_Go.transform.position;
+
+        //RaycastHit hitInfo;
+        //Ray DetectRay = new Ray(data.m_Go.transform.position, v.normalized * data.m_fSight);
+        //if (Physics.Raycast(DetectRay, out hitInfo, data.m_fSight))
+        //{
+        //    if (hitInfo.transform == go.transform)
+        //    {
+        //        Haswell = true;
+        //    }
+        //}
+
         float fDist = v.magnitude;
         if (fDist < data.m_fSight)//攻擊範圍內
         {

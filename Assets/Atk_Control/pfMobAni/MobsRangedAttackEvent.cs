@@ -11,11 +11,12 @@ public class MobsRangedAttackEvent : MonoBehaviour
     public LayerMask hitEnemy;
     public AINormalMob AIMob;
 
+
     public void SkillAtkBall()
     {
         
         Vector3 targetposition = AIMob.GetTagetPosition();
-        SoundManager.Instance.PlaySound(SoundManager.Sound.fire);
+        //SoundManager.Instance.PlaySound(SoundManager.Sound.fire);
         RaycastHit rh;
         //GameObject pfgo = Resources.Load<GameObject>("FloatingCoin");
         GameObject goMagicBall = GameObject.Instantiate(Effect);

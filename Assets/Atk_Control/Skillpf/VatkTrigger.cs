@@ -6,6 +6,10 @@ using UnityEngine;
 public class VatkTrigger : MonoBehaviour
 {
     public float dmg = 20.0f;
+    private void OnEnable()
+    {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.MagicSlash);
+    }
     private void OnTriggerEnter(Collider other)
     {
 

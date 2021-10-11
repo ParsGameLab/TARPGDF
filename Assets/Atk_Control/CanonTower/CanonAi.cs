@@ -19,12 +19,15 @@ public class CanonAi : MonoBehaviour
 
     private Vector3 updown;
 
+    private AudioSource audioSource;
+
 
     // Start is called before the first frame update
     void Start()
     {
         bAttack = false;
         fCurrentTime = 0.0f;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,7 +39,8 @@ public class CanonAi : MonoBehaviour
             if (fCurrentTime > fAttackTime)
             {
                 fCurrentTime = 0.0f;
-                SoundManager.Instance.PlaySound(SoundManager.Sound.Cannon);
+                //SoundManager.Instance.PlaySound(SoundManager.Sound.Cannon);
+                audioSource.Play();
                 CanonAttack(go);
             }
             fCurrentTime += Time.deltaTime;

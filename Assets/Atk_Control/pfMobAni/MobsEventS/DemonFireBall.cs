@@ -9,9 +9,12 @@ public class DemonFireBall : MonoBehaviour
     public float dmg = 40.0f;
     private float fTime;
     public float fmagicspeed = 15.0f;
+    private AudioSource audioSource;
     void Start()
     {
         fTime = 0.0f;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
     }
 
     // Update is called once per frame
@@ -36,7 +39,9 @@ public class DemonFireBall : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-
+            audioSource.clip= SoundManager.Instance.GetSoundClip(SoundManager.Sound.fireimpact);
+            audioSource.Play();
+            audioSource.loop = false;
             other.GetComponent<_2_StatHandler_UnityChan>().UnderEnemyAttack(dmg);
             other.GetComponent<MobGetHitEvent>().GetHit();
             //other.GetComponent<unitychanControl>().PlayHit();

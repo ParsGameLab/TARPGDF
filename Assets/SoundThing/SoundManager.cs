@@ -26,6 +26,8 @@ public class SoundManager : MonoBehaviour
         MagicSlash,
         MagicBall,
         earthimpact,
+        fireimpact,
+        UltStrike,
     }
     private AudioSource audioSource;
     private Dictionary<Sound, AudioClip> soundAudioClipDictionary;
