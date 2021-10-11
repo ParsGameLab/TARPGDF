@@ -15,6 +15,8 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
         private _2_Subroutines subroutinesCommander;
 
+        public GameObject CoreGetHitEffect;
+
         private void Awake() {
             if (GameObject.Find("CoreCanvas_Level-1") != null) {
                 levelCoreListener = GameObject.Find("CoreCanvas_Level-1").
@@ -74,6 +76,15 @@ namespace iii_UMVR06_TPSDefenseGame_Subroutines_2 {
 
         private void HealthSystem_OnHealthEmpty(object sender, System.EventArgs e) {
             DefendFailure_GameLoss();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == 11)
+            {
+                var collisionPoint = other.ClosestPoint(transform.position);
+                Instantiate(CoreGetHitEffect, new Vector3(collisionPoint.x, collisionPoint.y+0.5f, collisionPoint.z), transform.rotation);
+            }
         }
 
     }
