@@ -234,7 +234,7 @@ public class AINormalMob : MonoBehaviour
                 EnemySpawnManagerS2.Instance.enemylistR.Remove(this.transform);
                 EnemySpawnManagerS2.Instance.allenemylist.Remove(this.transform);
             }
-            
+
             m_Collider.enabled = false;
 
             this.gameObject.GetComponentInChildren<DissolveSphere>().enabled = true;

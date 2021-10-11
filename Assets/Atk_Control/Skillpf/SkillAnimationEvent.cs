@@ -34,7 +34,7 @@ public class SkillAnimationEvent : MonoBehaviour
         {
             Debug.LogError("Incorrect effect number or effect is null");
         }
-
+        SoundManager.Instance.PlaySound(SoundManager.Sound.MagicSlash);
         var instance = Instantiate(Effects[EffectNumber].Effect, Effects[EffectNumber].StartPositionRotation.position, Effects[EffectNumber].StartPositionRotation.rotation);
 
         if (Effects[EffectNumber].UseLocalPosition)

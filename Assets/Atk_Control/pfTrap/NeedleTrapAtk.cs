@@ -13,10 +13,13 @@ public class NeedleTrapAtk : MonoBehaviour
 
     public GameObject TrapNeedleEffect;
 
+    public AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         bOnTrigger = false;
+        //audioSource = GetComponentInChildren<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,6 +45,7 @@ public class NeedleTrapAtk : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyHit") && !bOnTrigger)
         {
             NeedleTrapAnime.SetTrigger("NeedleAtk");
+            audioSource.Play();
             other.GetComponentInParent<IEnemy_Base>().UnderAttack(NeedleAtkDmg);
             other.GetComponentInParent<IEnemy_Base>().PlayGetHit();
 

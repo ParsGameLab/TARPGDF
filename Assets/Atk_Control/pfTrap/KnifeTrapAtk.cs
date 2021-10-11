@@ -24,14 +24,33 @@ public class KnifeTrapAtk : MonoBehaviour
     public bool AtkAnimation;
     int x = 0;
 
+    public AudioSource audioSource;
+    bool EnemyInSide;
+
     void Start()
     {
         iTween.RotateTo(gocutter, iTween.Hash("y",180,"time",0.45f,"easetype",easeType,"looptype",loopType));
+        //audioSource = GetComponentInChildren<AudioSource>();
+        audioSource.clip = SoundManager.Instance.GetSoundClip(SoundManager.Sound.KnifeTrapNor);
+        audioSource.Play();
+        EnemyInSide = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (EnemyInSide == false)
+        {
+            audioSource.clip = SoundManager.Instance.GetSoundClip(SoundManager.Sound.KnifeTrapNor);
+            if (audioSource.isPlaying) { return; }
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.clip = SoundManager.Instance.GetSoundClip(SoundManager.Sound.KnifeTrapAtk);
+            if (audioSource.isPlaying) { return; }
+            audioSource.Play();
+        }
         iTween.RotateTo(gocutter, iTween.Hash("y", 180, "time", 0.45f, "easetype", easeType, "looptype", loopType));
         AtkCdTimer -= fbuffspeed * Time.deltaTime;
         if (AtkCdTimer < 0f)
@@ -48,7 +67,9 @@ public class KnifeTrapAtk : MonoBehaviour
 
         if (other.gameObject.CompareTag("EnemyHit"))
         {
+            EnemyInSide = true;
             
+
             other.GetComponentInParent<IEnemy_Base>().UnderAttack(KnifeAtkDmg);
             other.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.smallslowdown;
 
@@ -75,15 +96,19 @@ public class KnifeTrapAtk : MonoBehaviour
                 x++;
 
         }
+        else
+        {
+            EnemyInSide = false;
+        }
     }
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)//
     {
         if (other.gameObject.CompareTag("EnemyHit"))
         {
-
+            EnemyInSide = false;
             other.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.normal;
 
-
+           
             //Destroy(other.gameObject);
 
 

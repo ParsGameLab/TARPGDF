@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8082180017002847042}
+  - component: {fileID: 1249722962101791099}
   m_Layer: 0
   m_Name: pfKnifeTrap
   m_TagString: Untagged
@@ -31,6 +32,120 @@ Transform:
   m_Father: {fileID: 6589846016507431948}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1249722962101791099
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279202063234097365}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.7116272
+      value: 1
+      inSlope: -0.026142603
+      outSlope: -0.026142603
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.40814665
+    - serializedVersion: 3
+      time: 0.8883575
+      value: 0.8959923
+      inSlope: -1.6338747
+      outSlope: -1.6338747
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3256959
+      outWeight: 0.9966599
+    - serializedVersion: 3
+      time: 0.97276
+      value: 0.5091095
+      inSlope: -8.208679
+      outSlope: -8.208679
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3940077
+      outWeight: 0.86930275
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -21.043161
+      outSlope: -21.043161
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3267432
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6070467407453483856
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +239,7 @@ MonoBehaviour:
   TrapKnifeEffect: {fileID: 2849680211048075904, guid: b1a090a5dadc00a458bda7eb25aa4dd5, type: 3}
   BigTrapKnifeEffect: {fileID: 9082417073474181331, guid: 3393a5add26d373409d7252020f76034, type: 3}
   AtkAnimation: 0
+  audioSource: {fileID: 1249722962101791099}
 --- !u!65 &4387095766957179685
 BoxCollider:
   m_ObjectHideFlags: 0

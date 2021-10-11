@@ -19,7 +19,7 @@ public class HammerAtkTrigger : MonoBehaviour
         //}
         if (other.gameObject.CompareTag("EnemyHit"))
         {
-
+            
             other.GetComponentInParent<IEnemy_Base>().UnderAttack(Dmg);
             other.GetComponentInParent<AINormalMob>().m_Data.State = AIData.eMobState.dizzy;
 
