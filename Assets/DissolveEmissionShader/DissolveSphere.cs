@@ -15,7 +15,7 @@ public class DissolveSphere : MonoBehaviour {
     private void Start() 
     {
         Invoke("Die_Smoke", 0.7f);
-        Invoke("Dissolve_Particle", 1.5f);
+        Invoke("Dissolve_Particle", 1.2f);
 
         mat = GetComponent<Renderer>().material;
         mat.SetFloat("_AdvancedDissolveEdgeBaseWidthStandard", 0.1f);

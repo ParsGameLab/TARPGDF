@@ -11,7 +11,7 @@ public class ForceFieldContral : MonoBehaviour
     void Start()
     {       
         mat = GetComponent<Renderer>().material;
-        mat.SetFloat("_AllPower", Mathf.PingPong(Time.time * 15, 10));
+        mat.SetFloat("_AllPower", (2+Mathf.PingPong(Time.time * 15, 10)));
     }
 
     // Update is called once per frame

@@ -30,7 +30,7 @@ public class UTchanPortAnimationEvent : MonoBehaviour
         transform.position = targetdoor.transform.position;
         CCC.enabled = true;
         var instance = Instantiate(targetPortEffect, targetdoor.position, targetdoor.rotation);
-        Destroy(instance, 2f);
+        //Destroy(instance, 5f);
         circleEffect.SetActive(false);
 
     }

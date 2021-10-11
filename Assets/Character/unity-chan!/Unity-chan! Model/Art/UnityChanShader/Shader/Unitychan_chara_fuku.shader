@@ -27,7 +27,7 @@ Shader "UnityChan/Clothing"
 		Pass
 		{
 			Cull Back
-			ZTest LEqual
+			ZTest Always
 CGPROGRAM
 #pragma multi_compile_fwdbase
 #pragma vertex vert
