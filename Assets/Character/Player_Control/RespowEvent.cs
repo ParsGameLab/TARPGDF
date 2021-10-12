@@ -11,6 +11,7 @@ public class RespowEvent : MonoBehaviour
 
     public void Respown()
     {
+        SoundManager.Instance.PlaySound(SoundManager.Sound.Respown);
         var instance = Instantiate(Effect, StartPositionRotation.position, StartPositionRotation.rotation);
         Destroy(instance, DestroyAfter);
     }

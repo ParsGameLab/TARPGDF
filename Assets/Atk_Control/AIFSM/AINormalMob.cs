@@ -195,6 +195,7 @@ public class AINormalMob : MonoBehaviour
                 return;
             }
             debuff.SetActive(true);
+
             float smallslowspeed = normaxspeed * 0.3f;
             if (smallslowspeed <= 0.05) { smallslowspeed = 0.05f; }
             m_Data.m_fMaxSpeed = smallslowspeed;
@@ -206,7 +207,8 @@ public class AINormalMob : MonoBehaviour
                 m_Data.m_Am.SetTrigger("death");
                 Isdeath = true;
             }
-            
+            slowFX.SetActive(false);
+            debuff.SetActive(false);
             EXcollider.enabled = false;
             m_FSM.PerformGlobalTransition(eFSMTransition.Go_Dead);
 

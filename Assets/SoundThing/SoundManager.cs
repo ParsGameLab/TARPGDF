@@ -28,6 +28,8 @@ public class SoundManager : MonoBehaviour
         earthimpact,
         fireimpact,
         UltStrike,
+        TelePortGO,
+        TelePortF,
     }
     private AudioSource audioSource;
     private Dictionary<Sound, AudioClip> soundAudioClipDictionary;

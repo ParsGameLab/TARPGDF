@@ -33,8 +33,10 @@ public class PortalFun2 : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 CCC.enabled = false;
+                SoundManager.Instance.PlaySound(SoundManager.Sound.TelePortF);
                 //player.transform.position = targetdoor.transform.position;
                 m_player.transform.position = targetdoor.transform.position;
+                //SoundManager.Instance.PlaySound(SoundManager.Sound.TelePortGO);
                 CCC.enabled = true;
                 //Player.Instance.PortCharacter(targetdoor.transform.position);
                 var instance = Instantiate(targetPortEffect, targetdoor.position, targetdoor.rotation);

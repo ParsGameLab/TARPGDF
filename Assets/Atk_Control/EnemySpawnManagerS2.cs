@@ -68,34 +68,28 @@ public class EnemySpawnManagerS2 : MonoBehaviour
 
     public bool S2Clear;
 
-    private float G1W1 = 5f;
-    private float G1W2 = 5f;
-    private float G1W3 = 5f;
-    private float G1W4 = 4f;
+    private float G1W1 = 9f;
+    private float G1W2 = 9f;
+    private float G1W3 = 10f;
+    private float G1W4 = 10f;
+    private float G1W5 = 12f;
+    private float G1W6 = 15f;
 
-    private float G2W1 = 5f;
-    private float G2W2 = 6f;
+    private float G2W1 = 10f;
+    private float G2W2 = 10f;
     private float G2W3 = 10f;
-    private float G2W4 = 6f;
-    private float G2W5 = 10f;
+    private float G2W4 = 12f;
+    private float G2W5 = 9f;
+    private float G2W6 = 15f;
 
-    private float G3W1 = 8f;
-    private float G3W2 = 8f;
-    private float G3W3 = 8f;
-    private float G3W4 = 8f;
+    private float G3W1 = 11f;
+    private float G3W2 = 14f;
+    private float G3W3 = 11f;
+    private float G3W4 = 14f;
+    private float G3W5 = 10f;
+    private float G3W6 = 14f; 
+    private float G3W7 = 14f;
 
-    private float G4W1 = 6f;
-    private float G4W2 = 8f;
-    private float G4W3 = 15f;
-    private float G4W4 = 15f;
-    private float G4W5 = 8f;
-
-    private float G5W1 = 9f;
-    private float G5W2 = 9f;
-    private float G5W3 = 8f;
-    private float G5W4 = 7f;
-    private float G5W5 = 15f;
-    private float G5W6 = 9f;
 
     private void Awake()
     {
@@ -134,16 +128,6 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                 LatkUI.SetActive(true);
                 RatkUI.SetActive(true);
             }
-            if (Gnumber == 3)
-            {
-                LatkUI.SetActive(true);
-                RatkUI.SetActive(true);
-            }
-            if (Gnumber == 4)
-            {
-                LatkUI.SetActive(true);
-                RatkUI.SetActive(true);
-            }
             Gbutton.SetActive(true);
             if (Input.GetKeyDown(KeyCode.G))
             {
@@ -152,14 +136,27 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                     BattleBGM.Instance.PlaySound();
                     
                 }
-                
+                StartCoroutine(MusicManager.Instance.FadeMusic(1.5f, 0));
                 StartCoroutine(BattleBGM.Instance.FadeMusic(2f, 0.15f));
                 BonusEffect.SetActive(false);
-                EnemyAmountL = 10;
-                EnemyAmountR = 10;
+                if (Gnumber == 0)
+                {
+                    EnemyAmountL = 15;
+                    
+                }
+                if (Gnumber == 1)
+                {
+                    EnemyAmountR = 17;
+                }
+                if (Gnumber == 2)
+                {
+                    EnemyAmountL = 20;
+                    EnemyAmountR = 20;
+                }
+                
                 currectcounter++;
                 Gnumber += 1;
-                if (Gnumber == 5)
+                if (Gnumber == 3)
                 {
                     lastUI.SetActive(true);
                     StartCoroutine(lastWaveDispear());
@@ -194,152 +191,53 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                 G1W2 -= Time.deltaTime;
                 if (G1W2 < 0f)
                 {
-                    EnemyAmountL = 6;
+                    EnemyAmountL = 3;
                     currectcounter = 3;
                 }
                 break;
             case 3:
-                EnemyGeneraterL(PathNameListElite[1], UnityEngine.Random.Range(1f, 3.5f));
+                EnemyGeneraterL(PathNameListElite[1], UnityEngine.Random.Range(1.5f, 3.5f));
                 G1W3 -= Time.deltaTime;
                 if (G1W3 < 0f)
                 {
-                    EnemyAmountL = 13;
+                    EnemyAmountL = 17;
                     currectcounter = 4;
                 }
                 break;
             case 4:
-                EnemyGeneraterL(PathNameList[1], UnityEngine.Random.Range(0.2f, 0.7f));
+                EnemyGeneraterL(PathNameList[2], UnityEngine.Random.Range(0.3f, 0.7f));
                 G1W4 -= Time.deltaTime;
                 if (G1W4 < 0f)
                 {
+                    EnemyAmountL = 15;
                     currectcounter = 5;
                 }
                 break;
-
             case 5:
-                if (CheckEnemyClear() == true)
+                EnemyGeneraterL(PathNameList[1], UnityEngine.Random.Range(0.3f, 0.7f));
+                G1W5 -= Time.deltaTime;
+                if (G1W5 < 0f)
                 {
-                    if (IsBonusGived == false)
-                    {
-                        StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
-                        BonusEffect.SetActive(true);
-                        Player.Instance.AddCoinAmount(Wave1Bonus);
-                        IsBonusGived = true;
-                    }
-                    CanStart = true;
+                    EnemyAmountL = 5;
+                    currectcounter = 6;
                 }
                 break;
             case 6:
-                EnemyGeneraterR(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
-                G2W1 -= Time.deltaTime;
-                if (G2W1 < 0f)
+                EnemyGeneraterL(PathNameListElite[1], UnityEngine.Random.Range(2.5f, 3.5f));
+                G1W6 -= Time.deltaTime;
+                if (G1W6 < 0f)
                 {
-                    EnemyAmountR = 20;
                     currectcounter = 7;
                 }
                 break;
             case 7:
-                EnemyGeneraterR(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
-                G2W2 -= Time.deltaTime;
-                if (G2W2 < 0f)
-                {
-                    EnemyAmountR = 6;
-                    currectcounter = 8;
-                }
-                break;
-            case 8:
-                EnemyGeneraterR(PathNameListElite[0], UnityEngine.Random.Range(2.5f, 4.5f));
-                G2W3 -= Time.deltaTime;
-                if (G2W3 < 0f)
-                {
-                    EnemyAmountR = 12;
-                    currectcounter = 9;
-                }
-                break;
-            case 9:
-                EnemyGeneraterR(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.7f));
-                G2W4 -= Time.deltaTime;
-                if (G2W4 < 0f)
-                {
-                    EnemyAmountR = 7;
-                    currectcounter = 10;
-                }
-                break;
-            case 10:
-                EnemyGeneraterR(PathNameListElite[1], UnityEngine.Random.Range(1f, 3.5f));
-                G2W5 -= Time.deltaTime;
-                if (G2W5 < 0f)
-                {
-                 
-                    currectcounter = 11;
-                }
-                break;
-       
-            case 11:
                 if (CheckEnemyClear() == true)
                 {
                     if (IsBonusGived == false)
                     {
                         StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
                         BonusEffect.SetActive(true);
-                        Player.Instance.AddCoinAmount(Wave2Bonus);
-                        IsBonusGived = true;
-                    }
-                    CanStart = true;
-                }
-                break;
-            case 12:
-
-                EnemyGeneraterR(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.7f));
-                G3W1 -= Time.deltaTime;
-                if (G3W1 < 0f)
-                {
-                    EnemyAmountR = 20;
-
-                    currectcounter = 13;
-                }
-                break;
-            case 13:
-
-                EnemyGeneraterR(PathNameList[1],UnityEngine.Random.Range(0.2f, 0.7f));
-                G3W2 -= Time.deltaTime;
-                if (G3W2 < 0f)
-                {
-
-                    EnemyAmountL = 20;
-                    currectcounter = 14;
-                }
-                break;
-            case 14:
-                EnemyGeneraterL(PathNameList[0],UnityEngine.Random.Range(0.2f, 0.7f));
-
-                G3W3 -= Time.deltaTime;
-                if (G3W3 < 0f)
-                {
-
-                    EnemyAmountL = 19;
-                    currectcounter = 15;
-                }
-                break;
-            case 15:
-                EnemyGeneraterL(PathNameList[2],UnityEngine.Random.Range(0.2f, 0.7f));
-
-                G3W4 -= Time.deltaTime;
-                if (G3W4 < 0f)
-                {
-                    EnemyAmountR = 15;
-                    EnemyAmountL = 15;
-                    currectcounter = 16;
-                }
-                break;
-         
-            case 16:
-                if (CheckEnemyClear() == true)
-                {
-                    if (IsBonusGived == false)
-                    {
-                        StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
-                        BonusEffect.SetActive(true);
+                        StartCoroutine(MusicManager.Instance.FadeMusic(2f, 0.35f));
                         SoundManager.Instance.PlaySound(SoundManager.Sound.Horn);
                         Player.Instance.AddCoinAmount(Wave3Bonus);
                         SupportCannonUI.SetActive(true);
@@ -353,68 +251,68 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                     CanStart = true;
                 }
                 break;
-            case 17:
-                EnemyGeneraterL(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.7f));
-                EnemyGeneraterR(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.7f));
-                G4W1 -= Time.deltaTime;
-                if (G4W1 < 0f)
-                {
-                    EnemyAmountR = 16;
-                    EnemyAmountL = 18;
-                    currectcounter = 18;
-                }
-                break;
-            case 18:
-                EnemyGeneraterL(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
+            case 8:
                 EnemyGeneraterR(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
-                G4W2 -= Time.deltaTime;
-                if (G4W2 < 0f)
-                {
-                    EnemyAmountR = 6;
-                    EnemyAmountL = 20;
-                    currectcounter = 19;
-                }
-                break;
-            case 19:
-                EnemyGeneraterL(PathNameList[3], UnityEngine.Random.Range(0.2f, 0.7f));
-                EnemyGeneraterR(PathNameListElite[0], UnityEngine.Random.Range(1.5f, 3.5f));
-                G4W3 -= Time.deltaTime;
-                if (G4W3 < 0f)
+                G2W1 -= Time.deltaTime;
+                if (G2W1 < 0f)
                 {
                     EnemyAmountR = 20;
-                    EnemyAmountL = 8;
-                    currectcounter = 20;
+                    currectcounter = 9;
                 }
                 break;
-            case 20:
-                EnemyGeneraterL(PathNameListElite[1], UnityEngine.Random.Range(1.5f, 3.5f));
-                EnemyGeneraterR(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.9f));
-                G4W4 -= Time.deltaTime;
-                if (G4W4 < 0f)
-                {
-                    EnemyAmountR = 9;
-                    EnemyAmountL = 20;
-                    currectcounter = 21;
-                }
-                break;
-            case 21:
-                EnemyGeneraterL(PathNameList[3], UnityEngine.Random.Range(0.2f, 0.7f));
+            case 9:
                 EnemyGeneraterR(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
-                G4W5 -= Time.deltaTime;
-                if (G4W5 < 0f)
+                G2W2 -= Time.deltaTime;
+                if (G2W2 < 0f)
                 {
-                    EnemyAmountR = 10;
-                    EnemyAmountL = 20;
-                    currectcounter = 22;
+                    EnemyAmountR = 3;
+                    currectcounter = 10;
                 }
                 break;
-            case 22:
+            case 10:
+                EnemyGeneraterR(PathNameListElite[0], UnityEngine.Random.Range(2f, 3.5f));
+                G2W3 -= Time.deltaTime;
+                if (G2W3 < 0f)
+                {
+                    EnemyAmountR = 18;
+                    currectcounter = 11;
+                }
+                break;
+            case 11:
+                EnemyGeneraterR(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.7f));
+                G2W4 -= Time.deltaTime;
+                if (G2W4 < 0f)
+                {
+                    EnemyAmountR = 19;
+                    currectcounter = 12;
+                }
+                break;
+            case 12:
+                EnemyGeneraterR(PathNameList[3], UnityEngine.Random.Range(0.2f, 0.7f));
+                G2W5 -= Time.deltaTime;
+                if (G2W5 < 0f)
+                {
+                    EnemyAmountR = 7;
+                    currectcounter = 13;
+                }
+                break;
+            case 13:
+                EnemyGeneraterR(PathNameListElite[1], UnityEngine.Random.Range(2.5f, 3.5f));
+                G2W6 -= Time.deltaTime;
+                if (G2W6 < 0f)
+                {
+
+                    currectcounter = 14;
+                }
+                break;
+            case 14:
                 if (CheckEnemyClear() == true)
                 {
                     if (IsBonusGived == false)
                     {
                         StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
                         BonusEffect.SetActive(true);
+                        StartCoroutine(MusicManager.Instance.FadeMusic(2f, 0.35f));
                         SoundManager.Instance.PlaySound(SoundManager.Sound.Horn);
                         Player.Instance.AddCoinAmount(Wave4Bonus);
                         GameObject c1 = Cannon[2];
@@ -427,60 +325,81 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                     CanStart = true;
                 }
                 break;
-            case 23:
-                EnemyGeneraterL(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.9f));
-                EnemyGeneraterR(PathNameListElite[1], UnityEngine.Random.Range(1.5f, 3.5f));
-                G5W1 -= Time.deltaTime;
-                if (G5W1 < 0f)
+            case 15:
+
+                EnemyGeneraterR(PathNameList[0], UnityEngine.Random.Range(0.3f, 0.9f));
+                G3W1 -= Time.deltaTime;
+                if (G3W1 < 0f)
                 {
-                    EnemyAmountR = 20;
-                    EnemyAmountL = 23;
-                    currectcounter = 24;
+                    EnemyAmountR = 25;
+                    currectcounter = 16;
                 }
                 break;
-            case 24:
-                EnemyGeneraterL(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.9f));
-                EnemyGeneraterR(PathNameList[3], UnityEngine.Random.Range(0.2f, 0.9f));
-                G5W2 -= Time.deltaTime;
-                if (G5W2 < 0f)
+            case 16:
+
+                EnemyGeneraterR(PathNameList[3],UnityEngine.Random.Range(0.3f, 0.9f));
+                G3W2 -= Time.deltaTime;
+                if (G3W2 < 0f)
                 {
-                    EnemyAmountR = 10;
+
+                    EnemyAmountL = 26;
+                    currectcounter = 17;
+                }
+                break;
+            case 17:
+                EnemyGeneraterL(PathNameList[1],UnityEngine.Random.Range(0.2f, 0.7f));
+
+                G3W3 -= Time.deltaTime;
+                if (G3W3 < 0f)
+                {
+
                     EnemyAmountL = 25;
-                    currectcounter = 25;
+                    currectcounter = 18;
                 }
                 break;
-            case 25:
-                EnemyGeneraterL(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.9f));
-                EnemyGeneraterR(PathNameListElite[1], UnityEngine.Random.Range(1.5f, 3.5f));
-                G5W3 -= Time.deltaTime;
-                if (G5W3 < 0f)
+            case 18:
+                EnemyGeneraterL(PathNameList[2],UnityEngine.Random.Range(0.2f, 0.7f));
+
+                G3W4 -= Time.deltaTime;
+                if (G3W4 < 0f)
                 {
-                    EnemyAmountR = 29;
-                    EnemyAmountL = 23;
-                    currectcounter = 26;
+                    EnemyAmountR = 5;
+                    EnemyAmountL = 25;
+                    currectcounter = 19;
                 }
                 break;
-            case 26:
-                EnemyGeneraterL(PathNameList[2], UnityEngine.Random.Range(0.3f, 0.9f));
-                EnemyGeneraterR(PathNameList[3], UnityEngine.Random.Range(0.3f, 0.9f));
-                G5W4 -= Time.deltaTime;
-                if (G5W4 < 0f)
+            case 19:
+                EnemyGeneraterL(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
+                EnemyGeneraterR(PathNameListElite[1], UnityEngine.Random.Range(2f, 3.5f));
+                G3W5 -= Time.deltaTime;
+                if (G3W5 < 0f)
                 {
-                    EnemyAmountR = 10;
-                    EnemyAmountL = 10;
-                    currectcounter = 27;
+                    EnemyAmountR = 25;
+                    EnemyAmountL = 5;
+                    currectcounter = 20;
                 }
                 break;
-            case 27:
-                EnemyGeneraterL(PathNameListElite[1], UnityEngine.Random.Range(1.5f, 3.5f));
-                EnemyGeneraterR(PathNameListElite[0], UnityEngine.Random.Range(1.5f, 3.5f));
-                G5W5 -= Time.deltaTime;
-                if (G5W5 < 0f)
+            case 20:
+                EnemyGeneraterL(PathNameListElite[0], UnityEngine.Random.Range(2f, 3.5f));
+                EnemyGeneraterR(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
+                G3W6 -= Time.deltaTime;
+                if (G3W6 < 0f)
                 {
-                    currectcounter = 28;
+                    EnemyAmountR = 7;
+                    EnemyAmountL = 7;
+                    currectcounter = 21;
                 }
                 break;
-            case 28:
+            case 21:
+                EnemyGeneraterL(PathNameListElite[1], UnityEngine.Random.Range(1f, 3.5f));
+                EnemyGeneraterR(PathNameListElite[0], UnityEngine.Random.Range(1f, 3.5f));
+                G3W7 -= Time.deltaTime;
+                if (G3W7 < 0f)
+                {
+                    currectcounter = 22;
+                }
+                break;
+            case 22:
                 if (CheckEnemyClear() == true)
                 {
                     Main.m_Instance.GetPlayer().GetComponent<unitychanControl>().PlayWinPose();
@@ -490,21 +409,18 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                         StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
                         IsBonusGived = true;
                     }
-                    
+
 
                 }
                 break;
-
-
-
-            // 此為預設 當上面的case都沒達成時則會判斷
+            
             default:
                 Debug.Log("生完ㄌ");
                 break;
         }
         if (Input.GetKeyDown(KeyCode.F10))
         {
-            currectcounter = 11;
+            currectcounter = 22;
         }
 
     }

@@ -55,18 +55,18 @@ public class EnemySponManerger : MonoBehaviour
 
     public bool S1Clear;
 
-    private float G1W1 = 3f;
-    private float G1W2 = 4f;
-    private float G1W3 = 5f;
+    private float G1W1 = 4f;
+    private float G1W2 = 5f;
+    private float G1W3 = 6f;
     private float G1W4 = 6f;
-    private float G2W1 = 3f;
-    private float G2W2 = 4f;
-    private float G2W3 = 5f;
+    private float G2W1 = 4f;
+    private float G2W2 = 5f;
+    private float G2W3 = 6f;
     private float G2W4 = 6f;
-    private float G3W1 = 3f;
-    private float G3W2 = 2f;
-    private float G3W3 = 4f;
-    private float G3W4 = 8f;
+    private float G3W1 = 4f;
+    private float G3W2 = 5f;
+    private float G3W3 = 6f;
+    private float G3W4 = 7f;
 
     private void Awake()
     {

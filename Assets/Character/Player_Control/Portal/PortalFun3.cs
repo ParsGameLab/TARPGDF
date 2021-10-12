@@ -34,8 +34,9 @@ public class PortalFun3 : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 CCC.enabled = false;
-
+                SoundManager.Instance.PlaySound(SoundManager.Sound.TelePortF);
                 player.position = targetdoor.transform.position;
+                //SoundManager.Instance.PlaySound(SoundManager.Sound.TelePortGO);
                 CCC.enabled = true;
                 //m_player.transform.position= targetdoor.transform.position;
                 //Player.Instance.PortCharacter(targetdoor.transform.position);
