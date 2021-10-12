@@ -60,39 +60,42 @@ public class EnemySpawnManagerS2 : MonoBehaviour
     public List<GameObject> Cannon = new List<GameObject>();
     public GameObject BuildCannonEffect;
 
-    
+    public GameObject LatkUI;
+    public GameObject RatkUI;
+
+
+
 
     public bool S2Clear;
 
-    private float G1W1 = 8f;
-    private float G1W2 = 9f;
-    private float G1W3 = 10f;
-    private float G1W4 = 8f;
-    private float G1W5 = 8f;
-    private float G2W1 = 10f;
-    private float G2W2 = 10f;
+    private float G1W1 = 5f;
+    private float G1W2 = 5f;
+    private float G1W3 = 5f;
+    private float G1W4 = 4f;
+
+    private float G2W1 = 5f;
+    private float G2W2 = 6f;
     private float G2W3 = 10f;
-    private float G2W4 = 19f;
-    private float G2W5 = 12f;
-    private float G2W6 = 12f;
-    private float G3W1 = 19f;
-    private float G3W2 = 16f;
-    private float G3W3 = 12f;
-    private float G3W4 = 19f;
-    private float G3W5 = 17f;
-    private float G4W1 = 10f;
-    private float G4W2 = 16f;
+    private float G2W4 = 6f;
+    private float G2W5 = 10f;
+
+    private float G3W1 = 8f;
+    private float G3W2 = 8f;
+    private float G3W3 = 8f;
+    private float G3W4 = 8f;
+
+    private float G4W1 = 6f;
+    private float G4W2 = 8f;
     private float G4W3 = 15f;
-    private float G4W4 = 12f; 
-    private float G4W5 = 19f;
-    private float G4W6 = 18f;
-    private float G5W1 = 22f;
-    private float G5W2 = 21f;
-    private float G5W3 = 23f;
-    private float G5W4 = 21f;
-    private float G5W5 = 20f;
-    private float G5W6 = 10f;
-    private float G5W7 = 20f;
+    private float G4W4 = 15f;
+    private float G4W5 = 8f;
+
+    private float G5W1 = 9f;
+    private float G5W2 = 9f;
+    private float G5W3 = 8f;
+    private float G5W4 = 7f;
+    private float G5W5 = 15f;
+    private float G5W6 = 9f;
 
     private void Awake()
     {
@@ -117,14 +120,39 @@ public class EnemySpawnManagerS2 : MonoBehaviour
     {
         if (CanStart)
         {
+            if (Gnumber == 0)
+            {
+                LatkUI.SetActive(true);
+
+            }
+            if (Gnumber == 1)
+            {
+                RatkUI.SetActive(true);
+            }
+            if (Gnumber == 2)
+            {
+                LatkUI.SetActive(true);
+                RatkUI.SetActive(true);
+            }
+            if (Gnumber == 3)
+            {
+                LatkUI.SetActive(true);
+                RatkUI.SetActive(true);
+            }
+            if (Gnumber == 4)
+            {
+                LatkUI.SetActive(true);
+                RatkUI.SetActive(true);
+            }
             Gbutton.SetActive(true);
             if (Input.GetKeyDown(KeyCode.G))
             {
                 if (Gnumber == 0)
                 {
                     BattleBGM.Instance.PlaySound();
-
+                    
                 }
+                
                 StartCoroutine(BattleBGM.Instance.FadeMusic(2f, 0.15f));
                 BonusEffect.SetActive(false);
                 EnemyAmountL = 10;
@@ -143,56 +171,52 @@ public class EnemySpawnManagerS2 : MonoBehaviour
             }
 
         }
+        else
+        {
+            LatkUI.SetActive(false);
+            RatkUI.SetActive(false);
+        }
 
         switch (currectcounter)
         {
             case 1:
-                EnemyGeneraterL(PathNameList[0]);
+                EnemyGeneraterL(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.7f));
                 G1W1 -= Time.deltaTime;
                 if (G1W1 < 0f)
                 {
-                    EnemyAmountL = 15;
+                    EnemyAmountL = 10;
                     currectcounter = 2;
                 }
 
                 break;
             case 2:
-                EnemyGeneraterL(PathNameList[3]);
+                EnemyGeneraterL(PathNameList[3], UnityEngine.Random.Range(0.2f, 0.7f));
                 G1W2 -= Time.deltaTime;
                 if (G1W2 < 0f)
                 {
-                    EnemyAmountL = 16;
+                    EnemyAmountL = 6;
                     currectcounter = 3;
                 }
                 break;
             case 3:
-                EnemyGeneraterL(PathNameList[1]);
+                EnemyGeneraterL(PathNameListElite[1], UnityEngine.Random.Range(1f, 3.5f));
                 G1W3 -= Time.deltaTime;
                 if (G1W3 < 0f)
                 {
-                    EnemyAmountL = 6;
+                    EnemyAmountL = 13;
                     currectcounter = 4;
                 }
                 break;
             case 4:
-                EnemyGeneraterL(PathNameListElite[1]);
+                EnemyGeneraterL(PathNameList[1], UnityEngine.Random.Range(0.2f, 0.7f));
                 G1W4 -= Time.deltaTime;
                 if (G1W4 < 0f)
                 {
-                    EnemyAmountL = 10;
                     currectcounter = 5;
                 }
                 break;
-            case 5:
-                EnemyGeneraterL(PathNameList[0]);
-                G1W5 -= Time.deltaTime;
-                if (G1W5 < 0f)
-                {
-                    currectcounter = 6;
-                }
-                break;
 
-            case 6:
+            case 5:
                 if (CheckEnemyClear() == true)
                 {
                     if (IsBonusGived == false)
@@ -205,61 +229,53 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                     CanStart = true;
                 }
                 break;
-            case 7:
-                EnemyGeneraterR(PathNameList[2]);
+            case 6:
+                EnemyGeneraterR(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
                 G2W1 -= Time.deltaTime;
                 if (G2W1 < 0f)
                 {
                     EnemyAmountR = 20;
-                    currectcounter = 8;
+                    currectcounter = 7;
                 }
                 break;
-            case 8:
-                EnemyGeneraterR(PathNameList[2]);
+            case 7:
+                EnemyGeneraterR(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
                 G2W2 -= Time.deltaTime;
                 if (G2W2 < 0f)
                 {
                     EnemyAmountR = 6;
-                    currectcounter = 9;
+                    currectcounter = 8;
                 }
                 break;
-            case 9:
-                EnemyGeneraterR(PathNameListElite[0]);
+            case 8:
+                EnemyGeneraterR(PathNameListElite[0], UnityEngine.Random.Range(2.5f, 4.5f));
                 G2W3 -= Time.deltaTime;
                 if (G2W3 < 0f)
                 {
                     EnemyAmountR = 12;
-                    currectcounter = 10;
+                    currectcounter = 9;
                 }
                 break;
-            case 10:
-                EnemyGeneraterR(PathNameList[0]);
+            case 9:
+                EnemyGeneraterR(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.7f));
                 G2W4 -= Time.deltaTime;
                 if (G2W4 < 0f)
                 {
                     EnemyAmountR = 7;
-                    currectcounter = 11;
+                    currectcounter = 10;
                 }
                 break;
-            case 11:
-                EnemyGeneraterR(PathNameListElite[1]);
+            case 10:
+                EnemyGeneraterR(PathNameListElite[1], UnityEngine.Random.Range(1f, 3.5f));
                 G2W5 -= Time.deltaTime;
                 if (G2W5 < 0f)
                 {
-                    EnemyAmountR = 17;
-                    currectcounter = 12;
+                 
+                    currectcounter = 11;
                 }
                 break;
-            case 12:
-                EnemyGeneraterR(PathNameList[3]);
-                G2W6 -= Time.deltaTime;
-                if (G2W6 < 0f)
-                {
-
-                    currectcounter = 13;
-                }
-                break;
-            case 13:
+       
+            case 11:
                 if (CheckEnemyClear() == true)
                 {
                     if (IsBonusGived == false)
@@ -272,71 +288,52 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                     CanStart = true;
                 }
                 break;
-            case 14:
+            case 12:
 
-                EnemyGeneraterR(PathNameList[0]);
+                EnemyGeneraterR(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.7f));
                 G3W1 -= Time.deltaTime;
                 if (G3W1 < 0f)
                 {
                     EnemyAmountR = 20;
 
-                    currectcounter = 15;
+                    currectcounter = 13;
                 }
                 break;
-            case 15:
+            case 13:
 
-                EnemyGeneraterR(PathNameList[1]);
+                EnemyGeneraterR(PathNameList[1],UnityEngine.Random.Range(0.2f, 0.7f));
                 G3W2 -= Time.deltaTime;
                 if (G3W2 < 0f)
                 {
 
                     EnemyAmountL = 20;
-                    currectcounter = 16;
+                    currectcounter = 14;
                 }
                 break;
-            case 16:
-                EnemyGeneraterL(PathNameList[0]);
+            case 14:
+                EnemyGeneraterL(PathNameList[0],UnityEngine.Random.Range(0.2f, 0.7f));
 
                 G3W3 -= Time.deltaTime;
                 if (G3W3 < 0f)
                 {
 
                     EnemyAmountL = 19;
-                    currectcounter = 17;
+                    currectcounter = 15;
                 }
                 break;
-            case 17:
-                EnemyGeneraterL(PathNameList[2]);
+            case 15:
+                EnemyGeneraterL(PathNameList[2],UnityEngine.Random.Range(0.2f, 0.7f));
 
                 G3W4 -= Time.deltaTime;
                 if (G3W4 < 0f)
                 {
                     EnemyAmountR = 15;
                     EnemyAmountL = 15;
-                    currectcounter = 18;
+                    currectcounter = 16;
                 }
                 break;
-            case 18:
-                EnemyGeneraterL(PathNameList[3]);
-                EnemyGeneraterR(PathNameList[3]);
-                G3W5 -= Time.deltaTime;
-                if (G3W5 < 0f)
-                {
-                    EnemyAmountR = 7;
-                    EnemyAmountL = 8;
-                    currectcounter = 19;
-                }
-                break;
-            case 19:
-                EnemyGeneraterL(PathNameListElite[0]);
-                EnemyGeneraterR(PathNameListElite[1]);
-                G3W5 -= Time.deltaTime;
-                if (G3W5 < 0f)
-                {
-                    currectcounter = 20;
-                }
-                break;
-            case 20:
+         
+            case 16:
                 if (CheckEnemyClear() == true)
                 {
                     if (IsBonusGived == false)
@@ -356,71 +353,62 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                     CanStart = true;
                 }
                 break;
-            case 21:
-                EnemyGeneraterL(PathNameList[0]);
-                EnemyGeneraterR(PathNameList[0]);
+            case 17:
+                EnemyGeneraterL(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.7f));
+                EnemyGeneraterR(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.7f));
                 G4W1 -= Time.deltaTime;
                 if (G4W1 < 0f)
                 {
                     EnemyAmountR = 16;
                     EnemyAmountL = 18;
-                    currectcounter = 22;
+                    currectcounter = 18;
                 }
                 break;
-            case 22:
-                EnemyGeneraterL(PathNameList[2]);
-                EnemyGeneraterR(PathNameList[2]);
+            case 18:
+                EnemyGeneraterL(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
+                EnemyGeneraterR(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
                 G4W2 -= Time.deltaTime;
                 if (G4W2 < 0f)
                 {
                     EnemyAmountR = 6;
                     EnemyAmountL = 20;
-                    currectcounter = 23;
+                    currectcounter = 19;
                 }
                 break;
-            case 23:
-                EnemyGeneraterL(PathNameList[3]);
-                EnemyGeneraterR(PathNameListElite[0]);
+            case 19:
+                EnemyGeneraterL(PathNameList[3], UnityEngine.Random.Range(0.2f, 0.7f));
+                EnemyGeneraterR(PathNameListElite[0], UnityEngine.Random.Range(1.5f, 3.5f));
                 G4W3 -= Time.deltaTime;
                 if (G4W3 < 0f)
                 {
                     EnemyAmountR = 20;
                     EnemyAmountL = 8;
-                    currectcounter = 24;
+                    currectcounter = 20;
                 }
                 break;
-            case 24:
-                EnemyGeneraterL(PathNameListElite[1]);
-                EnemyGeneraterR(PathNameList[0]);
+            case 20:
+                EnemyGeneraterL(PathNameListElite[1], UnityEngine.Random.Range(1.5f, 3.5f));
+                EnemyGeneraterR(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.9f));
                 G4W4 -= Time.deltaTime;
                 if (G4W4 < 0f)
                 {
                     EnemyAmountR = 9;
                     EnemyAmountL = 20;
-                    currectcounter = 25;
+                    currectcounter = 21;
                 }
                 break;
-            case 25:
-                EnemyGeneraterL(PathNameList[3]);
-                EnemyGeneraterR(PathNameListElite[0]);
+            case 21:
+                EnemyGeneraterL(PathNameList[3], UnityEngine.Random.Range(0.2f, 0.7f));
+                EnemyGeneraterR(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.7f));
                 G4W5 -= Time.deltaTime;
                 if (G4W5 < 0f)
                 {
                     EnemyAmountR = 10;
                     EnemyAmountL = 20;
-                    currectcounter = 26;
+                    currectcounter = 22;
                 }
                 break;
-            case 26:
-                EnemyGeneraterL(PathNameList[2]);
-                EnemyGeneraterR(PathNameListElite[1]);
-                G4W6 -= Time.deltaTime;
-                if (G4W6 < 0f)
-                {
-                    currectcounter = 27;
-                }
-                break;
-            case 27:
+            case 22:
                 if (CheckEnemyClear() == true)
                 {
                     if (IsBonusGived == false)
@@ -439,92 +427,70 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                     CanStart = true;
                 }
                 break;
-            case 28:
-                EnemyGeneraterL(PathNameList[2]);
-                EnemyGeneraterR(PathNameListElite[1]);
+            case 23:
+                EnemyGeneraterL(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.9f));
+                EnemyGeneraterR(PathNameListElite[1], UnityEngine.Random.Range(1.5f, 3.5f));
                 G5W1 -= Time.deltaTime;
                 if (G5W1 < 0f)
                 {
                     EnemyAmountR = 20;
                     EnemyAmountL = 23;
-                    currectcounter = 29;
+                    currectcounter = 24;
                 }
                 break;
-            case 29:
-                EnemyGeneraterL(PathNameList[2]);
-                EnemyGeneraterR(PathNameList[3]);
+            case 24:
+                EnemyGeneraterL(PathNameList[2], UnityEngine.Random.Range(0.2f, 0.9f));
+                EnemyGeneraterR(PathNameList[3], UnityEngine.Random.Range(0.2f, 0.9f));
                 G5W2 -= Time.deltaTime;
                 if (G5W2 < 0f)
                 {
                     EnemyAmountR = 10;
-                    EnemyAmountL = 26;
-                    currectcounter = 30;
+                    EnemyAmountL = 25;
+                    currectcounter = 25;
                 }
                 break;
-            case 30:
-                EnemyGeneraterL(PathNameList[0]);
-                EnemyGeneraterR(PathNameListElite[1]);
+            case 25:
+                EnemyGeneraterL(PathNameList[0], UnityEngine.Random.Range(0.2f, 0.9f));
+                EnemyGeneraterR(PathNameListElite[1], UnityEngine.Random.Range(1.5f, 3.5f));
                 G5W3 -= Time.deltaTime;
                 if (G5W3 < 0f)
                 {
                     EnemyAmountR = 29;
                     EnemyAmountL = 23;
-                    currectcounter = 31;
+                    currectcounter = 26;
                 }
                 break;
-            case 31:
-                EnemyGeneraterL(PathNameList[2]);
-                EnemyGeneraterR(PathNameList[3]);
+            case 26:
+                EnemyGeneraterL(PathNameList[2], UnityEngine.Random.Range(0.3f, 0.9f));
+                EnemyGeneraterR(PathNameList[3], UnityEngine.Random.Range(0.3f, 0.9f));
                 G5W4 -= Time.deltaTime;
                 if (G5W4 < 0f)
                 {
                     EnemyAmountR = 10;
                     EnemyAmountL = 10;
-                    currectcounter = 32;
+                    currectcounter = 27;
                 }
                 break;
-            case 32:
-                EnemyGeneraterL(PathNameListElite[1]);
-                EnemyGeneraterR(PathNameListElite[0]);
+            case 27:
+                EnemyGeneraterL(PathNameListElite[1], UnityEngine.Random.Range(1.5f, 3.5f));
+                EnemyGeneraterR(PathNameListElite[0], UnityEngine.Random.Range(1.5f, 3.5f));
                 G5W5 -= Time.deltaTime;
                 if (G5W5 < 0f)
                 {
-                    EnemyAmountR = 26;
-                    EnemyAmountL = 20;
-                    currectcounter = 33;
+                    currectcounter = 28;
                 }
                 break;
-            case 33:
-                EnemyGeneraterL(PathNameList[2]);
-                EnemyGeneraterR(PathNameList[2]);
-                G5W6 -= Time.deltaTime;
-                if (G5W6 < 0f)
-                {
-                    EnemyAmountR = 10;
-                    EnemyAmountL = 10;
-                    currectcounter = 34;
-                }
-                break;
-            case 34:
-                EnemyGeneraterL(PathNameListElite[1]);
-                EnemyGeneraterR(PathNameListElite[0]);
-                G5W7 -= Time.deltaTime;
-                if (G5W7 < 0f)
-                {
-                    currectcounter = 35;
-                }
-                break;
-            case 35:
+            case 28:
                 if (CheckEnemyClear() == true)
                 {
+                    Main.m_Instance.GetPlayer().GetComponent<unitychanControl>().PlayWinPose();
+                    StartCoroutine(WaitWin());
                     if (IsBonusGived == false)
                     {
                         StartCoroutine(BattleBGM.Instance.FadeMusic(1f, 0));
-                       
-                        SoundManager.Instance.PlaySound(SoundManager.Sound.Win);
                         IsBonusGived = true;
                     }
-                    S2Clear = true;
+                    
 
                 }
                 break;
@@ -538,9 +504,14 @@ public class EnemySpawnManagerS2 : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F10))
         {
-            currectcounter = 20;
+            currectcounter = 11;
         }
 
+    }
+    IEnumerator WaitWin()
+    {
+        yield return new WaitForSeconds(4f);
+        S2Clear = true;
     }
     IEnumerator lastWaveDispear()
     {
@@ -561,14 +532,55 @@ public class EnemySpawnManagerS2 : MonoBehaviour
     {
         get { return S2Clear; }
     }
-    public void EnemyGeneraterL(string mob)
+    //public void EnemyGeneraterL(string mob)
+    //{
+    //    if (EnemyAmountL > 0)
+    //    {
+    //        nextMobSpawTimer -= Time.deltaTime;
+    //        if (nextMobSpawTimer < 0f)
+    //        {
+    //            nextMobSpawTimer = UnityEngine.Random.Range(0.2f, 0.9f);
+
+    //            CreateL(mob);
+    //            EnemyAmountL--;
+
+    //        }
+
+    //    }
+    //    else
+    //    {
+    //        EnemyAmountL = 0;
+    //    }
+
+    //}
+    //public void EnemyGeneraterR(string mob)
+    //{
+    //    if (EnemyAmountR > 0)
+    //    {
+    //        nextMobSpawTimer2 -= Time.deltaTime;
+    //        if (nextMobSpawTimer2 < 0f)
+    //        {
+    //            nextMobSpawTimer2 = UnityEngine.Random.Range(0.1f, 0.7f);
+    //            CreateR(mob);
+    //            EnemyAmountR--;
+
+    //        }
+
+    //    }
+    //    else
+    //    {
+    //        EnemyAmountR = 0;
+    //    }
+
+    //}
+    public void EnemyGeneraterL(string mob, float timer)
     {
         if (EnemyAmountL > 0)
         {
             nextMobSpawTimer -= Time.deltaTime;
             if (nextMobSpawTimer < 0f)
             {
-                nextMobSpawTimer = UnityEngine.Random.Range(0.2f, 0.9f);
+                nextMobSpawTimer = timer; /*UnityEngine.Random.Range(0.2f, 0.9f);*/
 
                 CreateL(mob);
                 EnemyAmountL--;
@@ -582,14 +594,14 @@ public class EnemySpawnManagerS2 : MonoBehaviour
         }
 
     }
-    public void EnemyGeneraterR(string mob)
+    public void EnemyGeneraterR(string mob, float timer)
     {
         if (EnemyAmountR > 0)
         {
             nextMobSpawTimer2 -= Time.deltaTime;
             if (nextMobSpawTimer2 < 0f)
             {
-                nextMobSpawTimer2 = UnityEngine.Random.Range(0.1f, 0.7f);
+                nextMobSpawTimer2 = timer;
                 CreateR(mob);
                 EnemyAmountR--;
 

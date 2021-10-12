@@ -55,18 +55,18 @@ public class EnemySponManerger : MonoBehaviour
 
     public bool S1Clear;
 
-    private float G1W1 = 5f;
-    private float G1W2 = 6f;
-    private float G1W3 = 7f;
-    private float G1W4 = 8f;
+    private float G1W1 = 3f;
+    private float G1W2 = 4f;
+    private float G1W3 = 5f;
+    private float G1W4 = 6f;
     private float G2W1 = 3f;
-    private float G2W2 = 7f;
-    private float G2W3 = 6f;
-    private float G2W4 = 8f;
-    private float G3W1 = 6f;
-    private float G3W2 = 10f;
-    private float G3W3 = 7f;
-    private float G3W4 = 9f;
+    private float G2W2 = 4f;
+    private float G2W3 = 5f;
+    private float G2W4 = 6f;
+    private float G3W1 = 3f;
+    private float G3W2 = 2f;
+    private float G3W3 = 4f;
+    private float G3W4 = 8f;
 
     private void Awake()
     {
@@ -241,7 +241,7 @@ public class EnemySponManerger : MonoBehaviour
                 G2W1 -= Time.deltaTime;
                 if (G2W1 < 0f)
                 {
-                    EnemyAmount = 10;
+                    EnemyAmount = 9;
                     currectcounter =7;
                 }
                 break;
@@ -259,7 +259,7 @@ public class EnemySponManerger : MonoBehaviour
                 G2W3 -= Time.deltaTime;
                 if (G2W3 < 0f)
                 {
-                    EnemyAmount = 9;
+                    EnemyAmount = 5;
                     currectcounter = 9;
                 }
                 break;
@@ -293,7 +293,7 @@ public class EnemySponManerger : MonoBehaviour
                 G3W1 -= Time.deltaTime;
                 if (G3W1 < 0f)
                 {
-                    EnemyAmount = 12;
+                    EnemyAmount = 10;
                     currectcounter = 12;
                 }
                 break;
@@ -302,7 +302,7 @@ public class EnemySponManerger : MonoBehaviour
                 G3W2 -= Time.deltaTime;
                 if (G3W2 < 0f)
                 {
-                    EnemyAmount = 13;
+                    EnemyAmount = 11;
                     currectcounter = 13;
                 }
                 break;
@@ -311,7 +311,7 @@ public class EnemySponManerger : MonoBehaviour
                 G3W3 -= Time.deltaTime;
                 if (G3W3 < 0f)
                 {
-                    EnemyAmount = 16;
+                    EnemyAmount = 13;
                     currectcounter = 14;
                 }
                 break;

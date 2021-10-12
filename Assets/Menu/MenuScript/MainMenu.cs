@@ -29,6 +29,8 @@ public class MainMenu : MonoBehaviour
 
     public bool IsLose;
 
+    bool IsS2Win;
+
     //private void Awake()
     //{
     //    DontDestroyOnLoad(this);
@@ -37,6 +39,7 @@ public class MainMenu : MonoBehaviour
     {
         seance12 = 1;
         IsLose = false;
+        IsS2Win = false;
     }
 
     public void PlayGame()
@@ -125,7 +128,13 @@ public class MainMenu : MonoBehaviour
         Crosshair.SetActive(false);
         VictoryMenuFinal.SetActive(true);
         pauseMenuSwitch = true;
-        GameObject.Find("Camera").GetComponent<TPScontt>().enabled = false;        
+        GameObject.Find("Camera").GetComponent<TPScontt>().enabled = false;
+        if (IsS2Win == false)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Sound.Win);
+            IsS2Win = true;
+        }
+        
     }
 
     public void LOSE()
