@@ -10,6 +10,8 @@ public class DemonFireBall : MonoBehaviour
     private float fTime;
     public float fmagicspeed = 15.0f;
     private AudioSource audioSource;
+    
+
     void Start()
     {
         fTime = 0.0f;
