@@ -6,9 +6,11 @@ using UnityEngine;
 public class NorMobsAtk : MonoBehaviour
 {
     public float dmg = 20.0f;
+    public GameObject EnemyEffect;
+
     private void OnTriggerEnter(Collider other)
     {
-
+        EnemyEffect.SetActive(true);
 
         if (other.gameObject.CompareTag("Player"))
         {
