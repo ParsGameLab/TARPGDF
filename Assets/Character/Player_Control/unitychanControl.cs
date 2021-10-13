@@ -36,6 +36,8 @@ public class unitychanControl : MonoBehaviour
 
     private bool InWinPose;
 
+    public bool Portal_CD;
+
 
 
     /// <summary>
@@ -121,7 +123,12 @@ public class unitychanControl : MonoBehaviour
 
         //}
         if (Input.GetKey(KeyCode.B)){
-            manimater.SetTrigger("BackCore");
+            if (Portal_CD == false)
+            {
+                manimater.SetTrigger("BackCore");
+                Portal_CD = true;
+            }
+            Invoke("PortalCD_End", 5f);
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -236,6 +243,11 @@ public class unitychanControl : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(tpsCamera.position, tpsCamera.forward*1000.0f);
+    }
+
+    public void PortalCD_End()
+    {
+        Portal_CD = false;
     }
 
 

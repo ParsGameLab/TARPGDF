@@ -35,5 +35,7 @@ public class UTchanPortAnimationEvent : MonoBehaviour
         Destroy(instance, 2f);
         circleEffect.SetActive(false);
 
+        this.gameObject.GetComponentInChildren<UnityChan_ShaderContral>().enabled = true;
+        this.gameObject.GetComponentInChildren<UnityChan_ShaderContral>().Portal_SW();
     }
 }
