@@ -9,10 +9,11 @@ public class MagicBallTriger : MonoBehaviour
     private float fTime;
     public float fmagicspeed = 10.0f;
     public GameObject MagicBallEffect;
-
+    public GameObject MagicBallSmoke;
     void Start()
     {
         fTime = 0.0f;
+        Instantiate(MagicBallSmoke, new Vector3(transform.position.x, transform.position.y-1.3f, transform.position.z), transform.rotation);
     }
 
     // Update is called once per frame

@@ -8,7 +8,7 @@ Shader "ForceField"
 		_InnerColorPower("Inner Color Power", Range(0.0,1.0)) = 0.5
 		_RimPower("Rim Power", Range(0.0,5.0)) = 2.5 
 		_AlphaPower("Alpha Rim Power", Range(0.0,8.0)) = 4.0 
-		_AllPower("All Power", Range(0.0, 10.0)) = 1.0 
+		_AllPower("All Power", Range(0.0, 10.0)) = 1.0	  
 	} 
 	SubShader
 	{ Tags { "Queue" = "Transparent" } 

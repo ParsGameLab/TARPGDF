@@ -317,6 +317,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
                         Player.Instance.AddCoinAmount(Wave4Bonus);
                         GameObject c1 = Cannon[2];
                         GameObject c2 = Cannon[3];
+                        SupportCannonUI.SetActive(true);
                         GameObject Buildsmoke1 = GameObject.Instantiate(BuildCannonEffect, Cannon[2].transform.position, Quaternion.identity);
                         GameObject Buildsmoke2 = GameObject.Instantiate(BuildCannonEffect, Cannon[3].transform.position, Quaternion.identity);
                         StartCoroutine(BuildCannon(c1, c2, Buildsmoke1, Buildsmoke2));
@@ -420,7 +421,7 @@ public class EnemySpawnManagerS2 : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F10))
         {
-            currectcounter = 22;
+            currectcounter = 14;
         }
 
     }
